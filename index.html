@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Festa das Crianças 2026</title>
-<meta name="description" content="Dashboard executivo da pesquisa de satisfação da Festa das Crianças 2026 da Associação Volvo.">
+<title>Pesquisas de Satisfação — Associação Volvo</title>
+<meta name="description" content="Portal das pesquisas de satisfação dos eventos da Associação Volvo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,71 +18,9 @@
   --ink-2: #6b7183;
   --ink-3: #a3a8b6;
   --hairline: #e4e6ee;
-  --grid: #edeef3;
-  --sombra: 0 10px 34px rgba(12, 88, 104, .09);
   --navy: #0c5868;   /* teal institucional Associação Volvo */
   --navy-2: #157d93;
-  --hero-ink: #ffffff;
-  --s1: #0c5868; /* categórico 1 (teal da marca) */
-  --s2: #eb6834; /* categórico 2 */
-  --s3: #7fb3bf; /* categórico 3 (teal claro) */
-  --s-neutro: #a3a8b6;
-  --d10: #0c5868; /* distribuição nota 10 */
-  --d9:  #157d93;
-  --d8:  #8fc4d1;
-  --d7:  #d03b3b; /* status crítico: notas <= 7 */
-  --bar: #0c5868;
-  --good: #0ca30c;
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --page: #111214;
-  --surface: #1a1b1e;
-  --surface-2: #202125;
-  --ink: #f4f4f4;
-  --ink-2: #c3c2b7;
-  --ink-3: #898781;
-  --hairline: #33343a;
-  --grid: #2c2d31;
-  --sombra: 0 10px 34px rgba(0, 0, 0, .35);
-  --navy: #083d47;
-  --navy-2: #3fa7bd;
-  --hero-ink: #ffffff;
-  --s1: #2f97ad;
-  --s2: #d95926;
-  --s3: #8fc4d1;
-  --d10: #3fa7bd;
-  --d9:  #2f97ad;
-  --d8:  #1c6475;
-  --d7:  #e66767;
-  --bar: #3fa7bd;
-  --good: #0ca30c;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --page: #111214;
-    --surface: #1a1b1e;
-    --surface-2: #202125;
-    --ink: #f4f4f4;
-    --ink-2: #c3c2b7;
-    --ink-3: #898781;
-    --hairline: #33343a;
-    --grid: #2c2d31;
-    --sombra: 0 10px 34px rgba(0, 0, 0, .35);
-    --navy: #083d47;
-    --navy-2: #3fa7bd;
-    --hero-ink: #ffffff;
-    --s1: #2f97ad;
-    --s2: #d95926;
-    --s3: #8fc4d1;
-    --d10: #3fa7bd;
-    --d9:  #2f97ad;
-    --d8:  #1c6475;
-    --d7:  #e66767;
-    --bar: #3fa7bd;
-    --good: #0ca30c;
-  }
+  --sombra: 0 10px 34px rgba(12, 88, 104, .09);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -91,8 +29,11 @@ body {
   font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 14.5px;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; width: 100%; }
 
 /* ---------- cortina de abertura ---------- */
 body.cortina-ativa { overflow: hidden; }
@@ -117,241 +58,57 @@ body.cortina-ativa { overflow: hidden; }
 
 /* ---------- hero ---------- */
 .hero {
-  position: relative;
   background: radial-gradient(1200px 460px at 50% -120px, #14788c 0%, var(--navy) 48%, #06313a 100%);
-  color: var(--hero-ink);
-  padding: 58px 0 62px;
+  color: #fff;
+  padding: 64px 0 72px;
   text-align: center;
 }
-.hero-logo { height: clamp(78px, 12vw, 112px); width: auto; margin-bottom: 22px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
+.hero-logo { height: clamp(66px, 10vw, 92px); width: auto; margin-bottom: 22px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
 .hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .82; margin-bottom: 14px; }
-.hero h1 { font-size: clamp(28px, 4.6vw, 44px); font-weight: 800; letter-spacing: -.01em; line-height: 1.12; }
-.hero .sub { margin: 14px auto 0; font-size: 15.5px; font-weight: 400; opacity: .85; max-width: 640px; }
+.hero h1 { font-size: clamp(30px, 5vw, 48px); font-weight: 800; letter-spacing: -.01em; line-height: 1.1; }
+.hero .sub { margin: 14px auto 0; font-size: 16px; font-weight: 400; opacity: .88; max-width: 560px; }
 
-/* ---------- animações ao rolar (entra quando aparece na tela) ---------- */
-.reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
-.reveal.visivel { opacity: 1; transform: none; }
-.reveal.r2 { transition-delay: .12s; }
-.reveal.r3 { transition-delay: .24s; }
-.kpi { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1); }
-.kpis.visivel .kpi { opacity: 1; transform: none; transition-delay: calc(.08s + var(--i,0) * .14s); }
-/* ---------- seções ---------- */
-section { padding: 34px 0 6px; }
-.sec-head { margin-bottom: 18px; }
-.sec-head h2 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+/* ---------- conteúdo ---------- */
+main { flex: 1; padding: 46px 0 20px; }
+.sec-head { margin-bottom: 22px; }
+.sec-head h2 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
 .sec-head p { color: var(--ink-2); font-size: 13.5px; margin-top: 3px; }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--hairline);
-  border-radius: 16px;
-  padding: 26px 28px;
-  box-shadow: var(--sombra);
-}
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
 
-/* ---------- KPIs ---------- */
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 16px; margin-top: -38px; position: relative; z-index: 5; }
-.kpi {
-  --acc: var(--navy);
+/* ---------- card de evento ---------- */
+.ev-card {
+  display: flex; flex-direction: column;
   background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px;
-  padding: 20px 22px 18px; box-shadow: var(--sombra); position: relative; overflow: hidden;
+  box-shadow: var(--sombra); overflow: hidden; text-decoration: none; color: inherit;
+  transition: box-shadow .22s, transform .22s;
+  opacity: 0; transform: translateY(26px);
 }
-.kpi::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--acc); }
-.kpi::after { content: ""; position: absolute; right: -40px; top: -40px; width: 120px; height: 120px; border-radius: 50%;
-  background: var(--acc); opacity: .06; }
-.kpi .rotulo { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-.kpi .valor { font-size: 40px; font-weight: 800; line-height: 1.12; margin-top: 8px; color: var(--acc); font-variant-numeric: tabular-nums; }
-.kpi .apoio { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; position: relative; }
-.kpi .ico { position: absolute; top: 18px; right: 18px; width: 30px; height: 30px; opacity: .9; color: var(--acc); }
-.kpi .ico svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.9; }
-.kpi.k-atencao .valor { color: var(--d7); }
-.kpi.k-atencao { --acc: var(--d7); }
-.kpi { cursor: pointer; transition: box-shadow .2s, transform .2s; }
-.kpi:hover { box-shadow: 0 14px 40px rgba(12,88,104,.14); transform: translateY(-3px); }
-.kpi .ver-kpi { font-size: 11px; font-weight: 700; color: var(--acc); margin-top: 10px; display: flex; align-items: center; gap: 5px; position: relative; }
-.kpi .ver-kpi svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.4; transition: transform .25s; }
-.kpi.aberto .ver-kpi svg { transform: rotate(180deg); }
-
-/* ---------- grid de 2 colunas ---------- */
-.duo { display: grid; grid-template-columns: 1.65fr 1fr; gap: 14px; }
-@media (max-width: 900px) { .duo { grid-template-columns: 1fr; } }
-
-/* ---------- distribuição por pergunta ---------- */
-.legenda { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--ink-2); margin-bottom: 16px; }
-.legenda span { display: inline-flex; align-items: center; gap: 6px; }
-.chip { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
-.qrow { display: grid; grid-template-columns: 220px 1fr 52px; gap: 14px; align-items: center; padding: 9px 8px; border-radius: 10px; transition: background .18s; }
-.qrow:hover { background: var(--surface-2); }
-@media (max-width: 680px) { .qrow { grid-template-columns: 1fr 52px; } .qrow .qbar-wrap { grid-column: 1 / -1; } }
-.qrow .qlabel { font-size: 13.5px; font-weight: 600; color: var(--ink); text-align: left; }
-.qrow .qlabel small { display: block; color: var(--ink-3); font-size: 11px; font-weight: 400; }
-.qbar-wrap { background: var(--surface-2); border-radius: 6px; padding: 3px; }
-.qbar { display: flex; height: 20px; border-radius: 4px; overflow: hidden; gap: 2px; background: transparent;
-  transform: scaleX(0); transform-origin: left; transition: transform 1.3s cubic-bezier(.22,1,.36,1); }
-.reveal.visivel .qbar { transform: scaleX(1); }
-.seg { height: 100%; min-width: 2px; cursor: default; transition: filter .15s; }
-.seg:hover { filter: brightness(1.12); }
-.seg.s10 { background: var(--d10); border-radius: 4px 0 0 4px; }
-.seg.s9 { background: var(--d9); }
-.seg.s8 { background: var(--d8); }
-.seg.s7 { background: var(--d7); border-radius: 0 4px 4px 0; }
-.qmedia { font-size: 16px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; color: var(--navy); }
-
-/* ---------- donut ---------- */
-.donut-flex { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
-.donut-box { position: relative; width: 190px; height: 190px; flex: 0 0 auto; }
-.donut-centro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.donut-centro b { font-size: 30px; font-weight: 700; }
-.donut-centro span { font-size: 11.5px; color: var(--ink-2); letter-spacing: .08em; text-transform: uppercase; }
-.donut-leg { flex: 1; min-width: 190px; display: flex; flex-direction: column; gap: 9px; }
-.donut-leg .item { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
-.donut-leg .item b { margin-left: auto; font-variant-numeric: tabular-nums; }
-.donut-leg .item small { color: var(--ink-2); }
-
-/* ---------- temas (acordeão) ---------- */
-.tema-item { border-bottom: 1px solid var(--grid); }
-.tema-item:last-child { border-bottom: none; }
-.tema-row { display: grid; grid-template-columns: 230px 1fr 30px 18px; gap: 12px; align-items: center; padding: 10px 6px; cursor: pointer; border-radius: 8px; transition: background .15s; }
-.tema-row:hover { background: var(--surface-2); }
-.tema-item.aberto .tema-row { background: var(--surface-2); }
-@media (max-width: 680px) { .tema-row { grid-template-columns: 1fr 30px 18px; } .tema-row .tbar-out { grid-column: 1 / -1; } }
-.tema-row .tlabel { font-size: 13.5px; font-weight: 600; }
-.tbar-out { height: 16px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
-.tema-item.aberto .tbar-out, .tema-row:hover .tbar-out { background: color-mix(in srgb, var(--navy) 10%, var(--surface)); }
-.tbar { height: 100%; background: var(--bar); border-radius: 999px; min-width: 4px; transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(.22,1,.36,1); }
-.reveal.visivel .tbar { transform: scaleX(1); }
-.tema-row .tn { font-weight: 800; font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; color: var(--navy); }
-.tema-row .seta { width: 16px; height: 16px; color: var(--ink-3); transition: transform .25s; justify-self: center; }
-.tema-item.aberto .tema-row .seta { transform: rotate(180deg); color: var(--navy-2); }
-.tema-painel { display: none; }
-.tema-item.aberto .tema-painel { display: block; animation: abrePainel .35s cubic-bezier(.22,1,.36,1); }
-.tema-painel-in { padding: 4px 6px 14px; }
-.tema-painel-in .resumo { font-size: 12px; color: var(--ink-2); margin-bottom: 10px; }
-.tema-painel-in .resumo a { color: var(--navy-2); font-weight: 600; cursor: pointer; text-decoration: none; }
-.tema-painel-in .resumo a:hover { text-decoration: underline; }
-.tema-coment { max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 7px; padding-right: 4px; }
-.tema-coment::-webkit-scrollbar { width: 6px; }
-.tema-coment::-webkit-scrollbar-thumb { background: var(--navy-2); border-radius: 999px; }
-.tema-coment .tc { font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--hairline); border-left: 3px solid var(--navy-2); border-radius: 8px; padding: 9px 12px; line-height: 1.45; }
-.tema-coment .tc span { display: block; margin-top: 4px; font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
-
-/* ---------- prioridades (executivo) ---------- */
-.prio { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 16px; }
-.prio .pcard {
-  background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px; box-shadow: var(--sombra);
-  padding: 22px 22px 20px; position: relative; display: flex; flex-direction: column;
-}
-.prio .pcard .rank {
-  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-  font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px;
-  background: linear-gradient(145deg, var(--navy-2), var(--navy));
-}
-.prio .pcard.p2 .rank { background: linear-gradient(145deg, #e88a4f, var(--s2)); }
-.prio .pcard.p3 .rank { background: linear-gradient(145deg, #9bc6d0, #5c97a4); }
-.prio .pcard .tema { font-size: 16px; font-weight: 800; letter-spacing: -.01em; line-height: 1.25; }
-.prio .pcard .mencoes { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-top: 3px; }
-.prio .pcard .acao-rot { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-2); margin: 15px 0 5px; }
-.prio .pcard .acao { font-size: 13.5px; color: var(--ink); line-height: 1.5; font-weight: 500; }
-.prio .pcard .cita { margin-top: auto; padding-top: 14px; font-size: 12px; color: var(--ink-2); line-height: 1.5; border-top: 1px solid var(--hairline); margin-top: 16px; }
-.prio .pcard .cita::before { content: "\201C"; color: var(--navy-2); font-weight: 800; }
-
-/* ---------- termômetro (limpo) ---------- */
-.termo-item { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--grid); }
-.termo-item:last-child { border-bottom: none; padding-bottom: 0; }
-.termo-item:first-child { padding-top: 0; }
-.termo-ico { width: 42px; height: 42px; border-radius: 12px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
-.termo-ico svg { width: 21px; height: 21px; stroke-width: 2; fill: none; }
-.termo-ico.bom { background: color-mix(in srgb, var(--good) 14%, var(--surface)); color: var(--good); }
-.termo-ico.baixo { background: color-mix(in srgb, var(--d7) 14%, var(--surface)); color: var(--d7); }
-.termo-ico.coment { background: color-mix(in srgb, var(--navy-2) 14%, var(--surface)); color: var(--navy-2); }
-.termo-txt { min-width: 0; }
-.termo-txt .rot { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
-.termo-txt .nome { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-top: 2px; }
-.termo-txt .det { font-size: 12.5px; color: var(--ink-2); margin-top: 1px; }
-.termo-val { margin-left: auto; font-size: 22px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
-
-/* prioridade e termômetro clicáveis (abrem painel com a origem dos dados) */
-.prio .pcard { cursor: pointer; transition: box-shadow .2s, transform .2s; }
-.prio .pcard:hover { box-shadow: 0 14px 40px rgba(12,88,104,.14); transform: translateY(-3px); }
-.prio .pcard .ver { margin-top: 14px; font-size: 11.5px; font-weight: 700; color: var(--navy-2); display: flex; align-items: center; gap: 5px; }
-.prio .pcard .ver svg { width: 14px; height: 14px; transition: transform .25s; }
-.prio .pcard.aberto .ver svg { transform: rotate(180deg); }
-.termo-item { cursor: pointer; border-radius: 10px; transition: background .15s; padding-left: 8px; padding-right: 8px; margin: 0 -8px; }
-.termo-item:hover { background: var(--surface-2); }
-.termo-item .termo-seta { width: 16px; height: 16px; color: var(--ink-3); flex: 0 0 auto; transition: transform .25s; margin-left: 6px; }
-.termo-item.aberto .termo-seta { transform: rotate(180deg); color: var(--navy-2); }
-.painel-origem { display: none; }
-.painel-origem.escancara { display: block; animation: abrePainel .35s cubic-bezier(.22,1,.36,1); }
-@keyframes abrePainel { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-.painel-origem-in { padding: 12px 14px; margin-top: 12px; background: var(--surface-2); border-radius: 12px; border: 1px solid var(--hairline); }
-.painel-origem-in .po-tit { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-2); margin-bottom: 9px; }
-.po-lista { display: flex; flex-direction: column; gap: 6px; max-height: 240px; overflow-y: auto; padding-right: 4px; }
-.po-lista::-webkit-scrollbar { width: 6px; }
-.po-lista::-webkit-scrollbar-thumb { background: var(--navy-2); border-radius: 999px; }
-.po-lista .po-linha { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; padding: 5px 0; border-bottom: 1px solid var(--grid); }
-.po-lista .po-linha:last-child { border-bottom: none; }
-.po-lista .po-linha b { font-variant-numeric: tabular-nums; color: var(--navy); white-space: nowrap; }
-.po-lista .po-c { font-size: 12.5px; color: var(--ink); background: var(--surface); border: 1px solid var(--hairline); border-left: 3px solid var(--navy-2); border-radius: 7px; padding: 7px 10px; line-height: 1.4; }
-.po-lista .po-c em { display: block; margin-top: 3px; font-size: 10px; color: var(--ink-3); text-transform: uppercase; font-style: normal; letter-spacing: .04em; }
-
-/* ---------- botão voltar ao topo ---------- */
-#aoTopo {
-  position: fixed; right: 22px; bottom: 22px; z-index: 50;
-  width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer;
-  background: var(--navy); color: #fff; box-shadow: 0 8px 24px rgba(12,88,104,.35);
+.ev-card.entra { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+.ev-card:hover { box-shadow: 0 18px 50px rgba(12,88,104,.18); transform: translateY(-5px); }
+.ev-capa {
+  position: relative; height: 120px;
+  background: radial-gradient(600px 300px at 30% -40%, #1a8aa2 0%, var(--navy) 60%, #06313a 100%);
   display: flex; align-items: center; justify-content: center;
-  opacity: 0; transform: translateY(14px); pointer-events: none;
-  transition: opacity .3s, transform .3s, background .2s;
 }
-#aoTopo.mostra { opacity: 1; transform: none; pointer-events: auto; }
-#aoTopo:hover { background: var(--navy-2); }
-#aoTopo svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.4; }
+.ev-capa .emoji { font-size: 46px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.3)); }
+.ev-capa .ano { position: absolute; top: 12px; right: 14px; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+  color: #fff; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 3px 11px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.ev-corpo { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.ev-corpo .tipo { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-2); }
+.ev-corpo h3 { font-size: 19px; font-weight: 800; letter-spacing: -.01em; margin-top: 4px; line-height: 1.2; }
+.ev-corpo .data { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
+.ev-mini { display: flex; gap: 22px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+.ev-mini .m .v { font-size: 20px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
+.ev-mini .m .r { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-top: 1px; }
+.ev-abrir { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--navy-2); }
+.ev-abrir svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; transition: transform .2s; }
+.ev-card:hover .ev-abrir svg { transform: translateX(4px); }
 
-/* ---------- comentários ---------- */
-.filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-.filtros input, .filtros select {
-  font: inherit; font-size: 13.5px; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 9px 13px;
-}
-.filtros input:focus, .filtros select:focus { outline: none; border-color: var(--navy-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--navy-2) 16%, transparent); }
-.filtros input { flex: 1; min-width: 200px; }
-.contagem { font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; }
-.com-lista { max-height: 580px; overflow-y: auto; display: flex; flex-direction: column; gap: 9px; padding-right: 6px; }
-.com-lista::-webkit-scrollbar { width: 8px; }
-.com-lista::-webkit-scrollbar-thumb { background: var(--navy-2); border-radius: 999px; opacity: .6; }
-.com-lista::-webkit-scrollbar-track { background: var(--surface-2); border-radius: 999px; }
-.com-item { border: 1px solid var(--hairline); border-left: 3px solid var(--navy-2); border-radius: 10px; padding: 13px 16px; background: var(--surface); box-shadow: 0 1px 3px rgba(12,88,104,.05); transition: box-shadow .18s, transform .18s; }
-.com-item:hover { box-shadow: 0 6px 18px rgba(12,88,104,.1); transform: translateX(2px); }
-.com-item .texto { font-size: 14px; color: var(--ink); line-height: 1.5; }
-.com-item .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
-.tagz { font-size: 10.5px; font-weight: 600; letter-spacing: .04em; color: var(--navy); background: color-mix(in srgb, var(--navy-2) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--navy-2) 25%, transparent); border-radius: 999px; padding: 3px 10px; }
-.tagz.tt { color: #fff; background: var(--navy-2); border-color: var(--navy-2); }
-.mais-btn { margin-top: 14px; width: 100%; border: none; background: var(--navy); color: #fff; font: inherit; font-size: 13.5px; font-weight: 600; padding: 12px; border-radius: 10px; cursor: pointer; transition: background .2s; }
-.mais-btn:hover { background: var(--navy-2); }
+.vazio { grid-column: 1 / -1; text-align: center; color: var(--ink-2); padding: 40px 0; font-size: 14px; }
 
-/* ---------- tabela acessível ---------- */
-details.tabela { margin-top: 14px; }
-details.tabela summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
-details.tabela table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-details.tabela th, details.tabela td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
-details.tabela td.num, details.tabela th.num { text-align: right; font-variant-numeric: tabular-nums; }
-
-/* ---------- tooltip ---------- */
-#tip {
-  position: fixed; z-index: 99; pointer-events: none; display: none;
-  background: var(--ink); color: var(--page);
-  font-size: 12.5px; padding: 6px 10px; border-radius: 6px; max-width: 260px;
-}
-
-footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 0 38px; text-align: center; }
-.footer-logo { height: 42px; width: auto; opacity: .9; }
-.footer-logo-escuro { display: none; }
-:root[data-theme="dark"] .footer-logo-claro { display: none; }
-:root[data-theme="dark"] .footer-logo-escuro { display: inline-block; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .footer-logo-claro { display: none; }
-  :root:not([data-theme="light"]) .footer-logo-escuro { display: inline-block; }
-}
+footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align: center; margin-top: 40px; }
+.footer-logo { height: 38px; width: auto; opacity: .9; }
 </style>
 </head>
 <body>
@@ -363,490 +120,81 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
 <div class="hero">
   <div class="wrap">
     <img class="hero-logo" src="img/logo-branco.png" alt="Associação Volvo">
-    <div class="overline" id="heroOverline">Pesquisa de Satisfação</div>
-    <h1 id="heroTitulo">Festa das Crianças 2026</h1>
-    <p class="sub" id="heroSub"></p>
+    <div class="overline">Associação Volvo</div>
+    <h1>Pesquisas de Satisfação</h1>
+    <p class="sub">Resultados das pesquisas de satisfação dos eventos da Associação. Selecione um evento para ver o painel completo.</p>
   </div>
 </div>
 
-<main class="wrap">
-
-  <div class="kpis" id="kpis"></div>
-
-  <section>
-    <div class="duo">
-      <div class="card reveal r1">
-        <div class="sec-head">
-          <h2>Média por pergunta</h2>
-          <p>Distribuição das notas de cada quesito avaliado, ordenado da maior para a menor média.</p>
-        </div>
-        <div class="legenda">
-          <span><i class="chip" style="background:var(--d10)"></i> Nota 10</span>
-          <span><i class="chip" style="background:var(--d9)"></i> Nota 9</span>
-          <span><i class="chip" style="background:var(--d8)"></i> Nota 8</span>
-          <span><i class="chip" style="background:var(--d7)"></i> ⚠ Nota ≤ 7</span>
-        </div>
-        <div id="perguntas"></div>
-        <details class="tabela">
-          <summary>Ver como tabela</summary>
-          <table id="tabelaPerguntas"></table>
-        </details>
-      </div>
-      <div class="card reveal r2">
-        <div class="sec-head">
-          <h2>Perfil dos respondentes</h2>
-          <p>Quem respondeu a pesquisa.</p>
-        </div>
-        <div class="donut-flex">
-          <div class="donut-box">
-            <svg viewBox="0 0 42 42" width="190" height="190" id="donut" role="img" aria-label="Perfil dos respondentes"></svg>
-            <div class="donut-centro"><b id="donutTotal"></b><span>respostas</span></div>
-          </div>
-          <div class="donut-leg" id="donutLeg"></div>
-        </div>
-      </div>
+<main>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Eventos</h2>
+      <p>Clique em um evento para abrir o dashboard da pesquisa.</p>
     </div>
-  </section>
-
-  <section>
-    <div class="sec-head reveal r1">
-      <h2>Prioridades para a próxima edição</h2>
-      <p>Os três temas de crítica mais citados nos comentários, com a ação recomendada para cada um.</p>
-    </div>
-    <div class="prio reveal r2" id="prioridades"></div>
-  </section>
-
-  <section>
-    <div class="duo">
-      <div class="card reveal r1">
-        <div class="sec-head">
-          <h2>Críticas e sugestões recorrentes</h2>
-          <p>Número de comentários que citam cada tema. Clique em um tema para filtrar a caixa de comentários.</p>
-        </div>
-        <div id="temas"></div>
-      </div>
-      <div class="card reveal r2">
-        <div class="sec-head">
-          <h2>Termômetro das notas</h2>
-          <p>Leitura executiva da avaliação.</p>
-        </div>
-        <div id="termometro"></div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="card reveal r1">
-      <div class="sec-head">
-        <h2>Todos os comentários</h2>
-        <p>Caixa aberta com as respostas de texto da pesquisa, com busca e filtros.</p>
-      </div>
-      <div class="filtros">
-        <input type="search" id="fBusca" placeholder="Buscar nos comentários…" aria-label="Buscar nos comentários">
-        <select id="fCampo" aria-label="Filtrar por pergunta"></select>
-        <select id="fTema" aria-label="Filtrar por tema"></select>
-        <select id="fPerfil" aria-label="Filtrar por perfil"></select>
-      </div>
-      <div class="contagem" id="fContagem"></div>
-      <div class="com-lista" id="comentarios"></div>
-      <button class="mais-btn" id="btnMais" type="button">Carregar mais comentários</button>
-    </div>
-  </section>
-
+    <div class="grade" id="grade"></div>
+  </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <img class="footer-logo footer-logo-claro" src="img/logo-teal.png" alt="Associação Volvo">
-    <img class="footer-logo footer-logo-escuro" src="img/logo-branco.png" alt="Associação Volvo">
+    <img class="footer-logo" src="img/logo-teal.png" alt="Associação Volvo">
   </div>
 </footer>
 
-<button id="aoTopo" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">
-  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-</button>
-
-<div id="tip" role="tooltip"></div>
-
-<script src="dados.js"></script>
+<script src="eventos.js"></script>
 <script>
-// começa sempre do topo, mesmo que o navegador tente restaurar o scroll anterior
+// começa sempre do topo
 try { history.scrollRestoration = "manual"; } catch (e) {}
 scrollTo(0, 0);
-addEventListener("load", () => scrollTo(0, 0));
 (function () {
-  const D = window.DADOS;
-  const $ = (s) => document.querySelector(s);
-  const fmt = (x, c) => x.toLocaleString("pt-BR", { minimumFractionDigits: c, maximumFractionDigits: c });
+  const EV = window.EVENTOS || [];
+  const grade = document.getElementById("grade");
+  const SETA = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
-  /* ---------- tooltip ---------- */
-  const tip = $("#tip");
-  function tipOn(el, texto) {
-    el.addEventListener("mousemove", (e) => {
-      tip.style.display = "block";
-      tip.textContent = texto;
-      tip.style.left = Math.min(e.clientX + 14, innerWidth - 270) + "px";
-      tip.style.top = (e.clientY + 14) + "px";
+  if (!EV.length) {
+    grade.innerHTML = '<div class="vazio">Nenhuma pesquisa publicada ainda.</div>';
+  } else {
+    grade.innerHTML = EV.map((e) => {
+      const nome = e.titulo + (e.ano ? " " + e.ano : "");
+      const mini = [];
+      if (e.respostas != null) mini.push('<div class="m"><div class="v">' + Number(e.respostas).toLocaleString("pt-BR") + '</div><div class="r">Respostas</div></div>');
+      if (e.media != null) mini.push('<div class="m"><div class="v">' + e.media + '</div><div class="r">Média geral</div></div>');
+      return '<a class="ev-card" href="' + e.pasta + '/">' +
+        '<div class="ev-capa">' + (e.ano ? '<span class="ano">' + e.ano + '</span>' : "") +
+          '<span class="emoji">' + (e.icone || "📊") + '</span></div>' +
+        '<div class="ev-corpo">' +
+          '<div class="tipo">Pesquisa de Satisfação</div>' +
+          '<h3>' + e.titulo + '</h3>' +
+          '<div class="data">' + (e.data || "") + '</div>' +
+          (mini.length ? '<div class="ev-mini">' + mini.join("") + '</div>' : "") +
+          '<div class="ev-abrir">Ver dashboard ' + SETA + '</div>' +
+        '</div></a>';
+    }).join("");
+  }
+
+  // animação de entrada dos cards em cascata, após a cortina subir
+  function entrarCards() {
+    document.querySelectorAll(".ev-card").forEach((c, i) => {
+      setTimeout(() => c.classList.add("entra"), 80 + i * 110);
     });
-    el.addEventListener("mouseleave", () => { tip.style.display = "none"; });
   }
 
-  /* ---------- hero + rodapé ---------- */
-  $("#heroSub").textContent = D.respostas + " respostas · média geral " + fmt(D.mediaGeral, 2) +
-    " · " + D.entidade;
-
-  /* ---------- KPIs ---------- */
-  const totalAval = D.perguntas.reduce((a, p) => a + p.n, 0);
-  const totalAtencao = D.perguntas.reduce((a, p) => a + p.dist.le7, 0);
-  const ICO = {
-    estrela: '<svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z" stroke-linejoin="round"/></svg>',
-    polegar: '<svg viewBox="0 0 24 24"><path d="M7 10v10H4V10zM7 10l4-7c1.3 0 2 .9 2 2l-.7 4H19c1.1 0 2 .9 2 2l-1.6 6.5c-.2.9-1 1.5-1.9 1.5H7" stroke-linejoin="round"/></svg>',
-    relogio: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>',
-    alerta: '<svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>',
-  };
-  const poLinhas = (pares) => '<div class="po-lista">' +
-    pares.map(([rot, val]) => '<div class="po-linha"><span>' + rot + "</span><b>" + val + "</b></div>").join("") + "</div>";
-  const perguntasOrd = [...D.perguntas].sort((a, b) => b.media - a.media);
-  const origemMediaGeral = '<div class="po-tit">Média de cada quesito</div>' +
-    poLinhas(perguntasOrd.map((p) => [p.label, fmt(p.media, 2)]));
-  const origemRecomendacao = '<div class="po-tit">Como se calcula a recomendação</div>' +
-    poLinhas([["Média das notas (5 a 10)", fmt(D.recomendacao.media, 2)], ["Deram nota 9 ou 10", fmt(D.recomendacao.pctPromotores, 1) + "%"], ["Total de respostas", D.recomendacao.n]]);
-  const origemFila = '<div class="po-tit">Enfrentou fila acima de 5 minutos?</div>' +
-    poLinhas([["Não enfrentou fila", D.filas.nao + " (" + fmt(D.filas.pctSemFila, 1) + "%)"], ["Enfrentou fila", D.filas.sim + " (" + fmt(100 * D.filas.sim / (D.filas.sim + D.filas.nao), 1) + "%)"]]);
-  const origemAtencao = '<div class="po-tit">Avaliações nota ≤ 7 por quesito</div>' +
-    poLinhas(perguntasOrd.filter((p) => p.dist.le7 > 0).sort((a, b) => b.dist.le7 - a.dist.le7).map((p) => [p.label, p.dist.le7]));
-
-  const kpis = [
-    { rotulo: "Média geral", valor: fmt(D.mediaGeral, 2), apoio: totalAval.toLocaleString("pt-BR") + " avaliações em " + D.perguntas.length + " quesitos", acc: "var(--navy)", ico: ICO.estrela, origem: origemMediaGeral },
-    { rotulo: "Recomendação", valor: fmt(D.recomendacao.media, 2), apoio: fmt(D.recomendacao.pctPromotores, 1) + "% deram nota 9 ou 10", acc: "var(--s2)", ico: ICO.polegar, origem: origemRecomendacao },
-    { rotulo: "Sem fila acima de 5 min", valor: fmt(D.filas.pctSemFila, 1) + "%", apoio: D.filas.sim + " relatos de fila em " + (D.filas.sim + D.filas.nao) + " respostas", acc: "var(--good)", ico: ICO.relogio, origem: origemFila },
-    { rotulo: "Avaliações nota ≤ 7", valor: fmt(100 * totalAtencao / totalAval, 1) + "%", apoio: totalAtencao + " avaliações: o ponto de atenção da edição", classe: "k-atencao", ico: ICO.alerta, origem: origemAtencao },
-  ];
-  const SETAK = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
-  $("#kpis").innerHTML = kpis.map((k, i) =>
-    '<div class="kpi ' + (k.classe || "") + '" style="--i:' + i + ';' + (k.acc ? "--acc:" + k.acc : "") + '">' +
-    '<div class="ico">' + k.ico + '</div><div class="rotulo">' + k.rotulo +
-    '</div><div class="valor">' + k.valor + '</div><div class="apoio">' + k.apoio + "</div>" +
-    '<div class="ver-kpi">De onde vem ' + SETAK + "</div>" +
-    '<div class="painel-origem"><div class="painel-origem-in-wrap"><div class="painel-origem-in">' + k.origem + "</div></div></div>" +
-    "</div>").join("");
-  function alternaCard(card, grupoSel) {
-    const abrindo = !card.classList.contains("aberto");
-    document.querySelectorAll(grupoSel + ".aberto").forEach((o) => {
-      if (o !== card) { o.classList.remove("aberto"); const p = o.querySelector(".painel-origem"); if (p) p.classList.remove("escancara"); }
-    });
-    card.classList.toggle("aberto", abrindo);
-    const painel = card.querySelector(".painel-origem");
-    if (painel) painel.classList.toggle("escancara", abrindo);
-  }
-  document.querySelectorAll("#kpis .kpi").forEach((card) => {
-    card.addEventListener("click", () => alternaCard(card, "#kpis .kpi"));
-  });
-
-  /* ---------- médias por pergunta (barras 100% empilhadas) ---------- */
-  const ordenadas = [...D.perguntas].sort((a, b) => b.media - a.media);
-  const boxP = $("#perguntas");
-  ordenadas.forEach((p) => {
-    const row = document.createElement("div");
-    row.className = "qrow";
-    const partes = [["s10", "10", p.dist["10"]], ["s9", "9", p.dist["9"]], ["s8", "8", p.dist["8"]], ["s7", "≤ 7", p.dist.le7]];
-    row.innerHTML = '<div class="qlabel">' + p.label + "<small>" + p.n + ' respostas</small></div>' +
-      '<div class="qbar-wrap"><div class="qbar"></div></div><div class="qmedia">' + fmt(p.media, 2) + "</div>";
-    const bar = row.querySelector(".qbar");
-    partes.forEach(([cls, nome, n]) => {
-      if (!n) return;
-      const seg = document.createElement("div");
-      seg.className = "seg " + cls;
-      seg.style.flex = String(n);
-      tipOn(seg, p.label + " · nota " + nome + ": " + n + " respostas (" + fmt(100 * n / p.n, 0) + "%)");
-      bar.appendChild(seg);
-    });
-    boxP.appendChild(row);
-  });
-  $("#tabelaPerguntas").innerHTML =
-    "<tr><th>Pergunta</th><th class='num'>Média</th><th class='num'>Respostas</th><th class='num'>Nota 10</th><th class='num'>Nota 9</th><th class='num'>Nota 8</th><th class='num'>≤ 7</th></tr>" +
-    ordenadas.map((p) => "<tr><td>" + p.label + "</td><td class='num'>" + fmt(p.media, 2) + "</td><td class='num'>" + p.n +
-      "</td><td class='num'>" + p.dist["10"] + "</td><td class='num'>" + p.dist["9"] + "</td><td class='num'>" + p.dist["8"] +
-      "</td><td class='num'>" + p.dist.le7 + "</td></tr>").join("");
-
-  /* ---------- donut perfil ---------- */
-  const paleta = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s-neutro)"];
-  const perfilPares = Object.entries(D.perfil).sort((a, b) => b[1] - a[1]);
-  const principais = perfilPares.slice(0, 3);
-  const resto = perfilPares.slice(3).reduce((a, p) => a + p[1], 0);
-  const semPerfil = D.respostas - perfilPares.reduce((a, p) => a + p[1], 0);
-  const fatias = [...principais];
-  if (resto + semPerfil > 0) fatias.push(["Outros / não informado", resto + semPerfil]);
-  const totalPerfil = fatias.reduce((a, f) => a + f[1], 0);
-  const svg = $("#donut");
-  const R = 15.9155; const C = 100;
-  let acum = 0;
-  fatias.forEach(([nome, n], i) => {
-    const frac = 100 * n / totalPerfil;
-    const visivel = Math.max(frac - 1.4, 0.5);
-    const el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    el.setAttribute("cx", 21); el.setAttribute("cy", 21); el.setAttribute("r", R);
-    el.setAttribute("fill", "transparent");
-    el.setAttribute("stroke", paleta[i]);
-    el.setAttribute("stroke-width", 5.4);
-    el.setAttribute("stroke-dashoffset", String(25 - acum));
-    el.style.transition = "stroke-dasharray .9s cubic-bezier(.22,1,.36,1) " + (0.15 + i * 0.12) + "s";
-    el.setAttribute("stroke-dasharray", "0 " + C); // começa vazio
-    el.style.transition = "stroke-dasharray 1.2s cubic-bezier(.22,1,.36,1) " + (0.2 + i * 0.18) + "s";
-    tipOn(el, nome + ": " + n + " respostas (" + fmt(frac, 1) + "%)");
-    svg.appendChild(el);
-    // anima quando o card do donut aparece na tela (ao rolar)
-    const aplica = () => el.setAttribute("stroke-dasharray", visivel + " " + (C - visivel));
-    const cardDonut = svg.closest(".reveal") || document.body;
-    const checar = () => { if (cardDonut.classList.contains("visivel")) { aplica(); return true; } return false; };
-    if (!checar()) {
-      const obs = new MutationObserver(() => { if (checar()) obs.disconnect(); });
-      obs.observe(cardDonut, { attributes: true, attributeFilter: ["class"] });
-    }
-    acum += frac;
-  });
-  $("#donutTotal").textContent = totalPerfil;
-  $("#donutLeg").innerHTML = fatias.map(([nome, n], i) =>
-    '<div class="item"><i class="chip" style="background:' + paleta[i] + '"></i> ' + nome +
-    " <b>" + n + "</b>&nbsp;<small>(" + fmt(100 * n / totalPerfil, 1) + "%)</small></div>").join("");
-
-  /* ---------- prioridades (KPI de decisão) ---------- */
-  const citas = {
-    "Fila no açaí / caixa": "“Açaí, meia hora.” · “Caixa, 20 minutos.”",
-    "Preços (comidas, jogos, bingo)": "“Poderia ser mais em conta as comidas.”",
-    "Personagens e fotos": "“Homem Aranha abaixo da expectativa.” · “Faltou princesa pras meninas.”",
-    "Assentos, mesas e sombra": "“Mais cadeiras e mesas na área externa.”",
-    "Playlist / músicas inadequadas": "“As músicas estavam inadequadas. Crianças cantando funk.”",
-    "Comida fria / crua / porção": "“O espetinho estava cru.” · “Churros muito pequeno.”",
-  };
-  const acoes = {
-    "Fila no açaí / caixa": "Reforçar o atendimento do açaí e abrir um caixa extra nos horários de pico.",
-    "Preços (comidas, jogos, bingo)": "Rever a tabela de preços de alimentação, jogos pagos e cartela do bingo.",
-    "Personagens e fotos": "Elevar o padrão dos personagens, incluir princesas e garantir foto para todas as crianças.",
-    "Assentos, mesas e sombra": "Ampliar mesas, cadeiras e pontos de sombra, inclusive perto do campo.",
-    "Playlist / músicas inadequadas": "Definir playlist infantil curada previamente e controlar o volume dos graves.",
-    "Comida fria / crua / porção": "Controlar ponto e temperatura dos espetinhos e padronizar porções.",
-  };
-  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-  const SETA = '<svg class="seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
-  const SETA2 = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
-
-  $("#prioridades").innerHTML = D.temas.slice(0, 3).map((t, i) => {
-    const comentariosTema = D.comentarios.filter((c) => c.temas.includes(t.tema));
-    return '<div class="pcard p' + (i + 1) + '"><div class="rank">' + (i + 1) + "</div>" +
-    '<div class="tema">' + t.tema + "</div>" +
-    '<div class="mencoes">' + t.n + " menções nos comentários</div>" +
-    '<div class="acao-rot">Ação recomendada</div>' +
-    '<div class="acao">' + (acoes[t.tema] || "Tema recorrente nos comentários abertos.") + "</div>" +
-    (citas[t.tema] ? '<div class="cita">' + citas[t.tema].replace(/^“/, "").replace(/”/g, "").replace(/“/g, "") + "</div>" : "") +
-    '<div class="ver">De onde vem este dado ' + SETA2 + "</div>" +
-    '<div class="painel-origem"><div class="painel-origem-in-wrap"><div class="painel-origem-in">' +
-      '<div class="po-tit">' + comentariosTema.length + " comentários que citam este tema</div>" +
-      '<div class="po-lista">' +
-        comentariosTema.slice(0, 30).map((c) => '<div class="po-c">' + esc(c.t) + "<em>" + c.c + " · " + c.p + "</em></div>").join("") +
-      "</div></div></div></div>" +
-    "</div>";
-  }).join("");
-  // clique abre/fecha o painel de origem de cada prioridade
-  document.querySelectorAll("#prioridades .pcard").forEach((card) => {
-    card.addEventListener("click", () => alternaCard(card, "#prioridades .pcard"));
-  });
-
-  /* ---------- temas recorrentes (acordeão com comentários) ---------- */
-  const maxTema = Math.max(...D.temas.map((t) => t.n));
-  const boxT = $("#temas");
-  D.temas.forEach((t) => {
-    const comentariosTema = D.comentarios.filter((c) => c.temas.includes(t.tema));
-    const item = document.createElement("div");
-    item.className = "tema-item";
-    item.innerHTML =
-      '<div class="tema-row">' +
-        '<div class="tlabel">' + t.tema + "</div>" +
-        '<div class="tbar-out"><div class="tbar" style="width:' + (100 * t.n / maxTema) + '%"></div></div>' +
-        '<div class="tn">' + t.n + "</div>" + SETA +
-      "</div>" +
-      '<div class="tema-painel"><div class="tema-painel-in">' +
-        '<div class="resumo">' + comentariosTema.length + " comentário(s) citam este tema. " +
-          '<a data-tema="' + t.tema + '">Ver na lista completa ↓</a></div>' +
-        '<div class="tema-coment">' +
-          comentariosTema.slice(0, 40).map((c) =>
-            '<div class="tc">' + esc(c.t) + "<span>" + c.c + " · " + c.p + "</span></div>").join("") +
-        "</div>" +
-      "</div></div>";
-    const row = item.querySelector(".tema-row");
-    row.addEventListener("click", () => {
-      const abrindo = !item.classList.contains("aberto");
-      document.querySelectorAll(".tema-item.aberto").forEach((o) => { if (o !== item) o.classList.remove("aberto"); });
-      item.classList.toggle("aberto", abrindo);
-    });
-    item.querySelector(".resumo a").addEventListener("click", (ev) => {
-      ev.stopPropagation();
-      fTema.value = t.tema; filtra();
-      $("#comentarios").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    boxT.appendChild(item);
-  });
-
-  /* ---------- termômetro (limpo, clicável) ---------- */
-  const melhor = ordenadas[0]; const pior = ordenadas[ordenadas.length - 1];
-  const icoBom = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  const icoBaixo = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 3l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>';
-  const icoComent = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M21 12a8 8 0 01-11.5 7.2L3 21l1.8-6.5A8 8 0 1121 12z" stroke-linejoin="round"/></svg>';
-  const totalMencoes = D.temas.reduce((a, t) => a + t.n, 0);
-
-  // origem de um quesito: distribuição das notas
-  const origemQuesito = (p) => {
-    const linhas = [["Nota 10", p.dist["10"]], ["Nota 9", p.dist["9"]], ["Nota 8", p.dist["8"]], ["Nota ≤ 7", p.dist.le7]];
-    return '<div class="po-tit">Distribuição das ' + p.n + " notas de " + p.label + "</div><div class='po-lista'>" +
-      linhas.map(([rot, n]) => '<div class="po-linha"><span>' + rot + "</span><b>" + n + " (" + fmt(100 * n / p.n, 0) + "%)</b></div>").join("") +
-      "</div>";
-  };
-  // origem dos comentários: ranking de temas
-  const origemComentarios = '<div class="po-tit">Menções por tema de melhoria</div><div class="po-lista">' +
-    D.temas.map((t) => '<div class="po-linha"><span>' + t.tema + "</span><b>" + t.n + "</b></div>").join("") + "</div>";
-
-  function termoItem(cls, ico, rot, nome, det, val, origem) {
-    return '<div class="termo-item"><div class="termo-ico ' + cls + '">' + ico + "</div>" +
-      '<div class="termo-txt"><div class="rot">' + rot + '</div><div class="nome">' + nome +
-      '</div><div class="det">' + det + "</div></div>" +
-      (val !== null ? '<div class="termo-val">' + val + "</div>" : "") +
-      '<svg class="termo-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>' +
-      '<div class="painel-origem" style="flex-basis:100%"><div class="painel-origem-in-wrap"><div class="painel-origem-in">' + origem + "</div></div></div></div>";
-  }
-  $("#termometro").innerHTML =
-    termoItem("bom", icoBom, "Mais bem avaliado", melhor.label, "o quesito de maior aprovação", fmt(melhor.media, 2), origemQuesito(melhor)) +
-    termoItem("baixo", icoBaixo, "Menor média da edição", pior.label, fmt(pior.pctAtencao, 1) + "% das notas ≤ 7", fmt(pior.media, 2), origemQuesito(pior)) +
-    termoItem("coment", icoComent, "Comentários registrados", D.comentarios.length + " respostas de texto", totalMencoes + " menções a temas de melhoria", null, origemComentarios);
-  document.querySelectorAll("#termometro .termo-item").forEach((it) => {
-    it.addEventListener("click", () => alternaCard(it, "#termometro .termo-item"));
-  });
-
-  /* ---------- caixa de comentários ---------- */
-  const fBusca = $("#fBusca"), fCampo = $("#fCampo"), fTema = $("#fTema"), fPerfil = $("#fPerfil");
-  const campos = [...new Set(D.comentarios.map((c) => c.c))];
-  const perfis = [...new Set(D.comentarios.map((c) => c.p))];
-  fCampo.innerHTML = '<option value="">Todas as perguntas</option>' + campos.map((c) => "<option>" + c + "</option>").join("");
-  fTema.innerHTML = '<option value="">Todos os temas</option>' + D.temas.map((t) => "<option>" + t.tema + "</option>").join("");
-  fPerfil.innerHTML = '<option value="">Todos os perfis</option>' + perfis.map((p) => "<option>" + p + "</option>").join("");
-
-  const LOTE = 120;
-  let visiveis = LOTE;
-  let filtrados = D.comentarios;
-
-  function normaliza(t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
-
-  function filtra() {
-    const q = normaliza(fBusca.value.trim());
-    filtrados = D.comentarios.filter((c) =>
-      (!fCampo.value || c.c === fCampo.value) &&
-      (!fTema.value || c.temas.includes(fTema.value)) &&
-      (!fPerfil.value || c.p === fPerfil.value) &&
-      (!q || normaliza(c.t).includes(q)));
-    visiveis = LOTE;
-    pinta();
-  }
-
-  function pinta() {
-    $("#fContagem").textContent = filtrados.length === D.comentarios.length
-      ? D.comentarios.length + " comentários"
-      : filtrados.length + " de " + D.comentarios.length + " comentários";
-    $("#comentarios").innerHTML = filtrados.slice(0, visiveis).map((c) =>
-      '<div class="com-item"><div class="texto">' + c.t.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
-      '</div><div class="meta"><span class="tagz">' + c.c + '</span><span class="tagz">' + c.p + "</span>" +
-      c.temas.map((t) => '<span class="tagz tt">' + t + "</span>").join("") + "</div></div>").join("") ||
-      '<div class="contagem">Nenhum comentário encontrado com esses filtros.</div>';
-    $("#btnMais").style.display = filtrados.length > visiveis ? "block" : "none";
-  }
-
-  [fCampo, fTema, fPerfil].forEach((el) => el.addEventListener("change", () => {
-    if (el === fTema) document.querySelectorAll(".tema-row").forEach((r) => r.classList.remove("ativo"));
-    filtra();
-  }));
-  fBusca.addEventListener("input", filtra);
-  $("#btnMais").addEventListener("click", () => { visiveis += LOTE; pinta(); });
-
-  filtra();
-
-  /* ---------- count-up de um número (mais devagar) ---------- */
-  function countUpEl(el) {
-    if (el.dataset.feito) return;
-    el.dataset.feito = "1";
-    const txt = el.textContent.trim();
-    const m = txt.match(/^([\d.,]+)(%?)$/);
-    if (!m) return;
-    const casas = (m[1].split(",")[1] || "").length;
-    const alvo = parseFloat(m[1].replace(/\./g, "").replace(",", "."));
-    const suf = m[2];
-    const dur = 1400; const t0 = performance.now();
-    function step(t) {
-      const p = Math.min((t - t0) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(alvo * e, casas) + suf;
-      if (p < 1) requestAnimationFrame(step);
-      else el.textContent = fmt(alvo, casas) + suf;
-    }
-    requestAnimationFrame(step);
-  }
-
-  /* ---------- animar cada bloco quando entra na tela (ao rolar) ---------- */
-  const animaveis = document.querySelectorAll(".reveal, .kpis");
-  let ioRef = null;
-  function ativar(el) {
-    if (el.classList.contains("visivel")) return;
-    el.classList.add("visivel");
-    if (el.classList.contains("kpis")) el.querySelectorAll(".kpi .valor").forEach(countUpEl);
-    if (ioRef) ioRef.unobserve(el);
-  }
-  if ("IntersectionObserver" in window) {
-    ioRef = new IntersectionObserver((entradas) => {
-      entradas.forEach((ent) => { if (ent.isIntersecting) ativar(ent.target); });
-    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
-  }
-  // revela o que já está na viewport (primeira dobra) e só então liga o observer para o resto
-  let animacaoIniciada = false;
-  function revelarPrimeiraDobra() {
-    if (animacaoIniciada) return;
-    animacaoIniciada = true;
-    animaveis.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      if (r.top < innerHeight * 0.92 && r.bottom > 0) ativar(el);
-    });
-    if (ioRef) animaveis.forEach((el) => { if (!el.classList.contains("visivel")) ioRef.observe(el); });
-    else animaveis.forEach(ativar);
-  }
-
-  /* ---------- cortina de abertura ---------- */
-  const cortina = $("#cortina");
+  // cortina
+  const cortina = document.getElementById("cortina");
   if (cortina) {
-    // garante que a página sempre comece do topo (o navegador restaura o scroll ao atualizar)
-    try { history.scrollRestoration = "manual"; } catch (e) {}
-    document.body.classList.add("cortina-ativa");  // trava o scroll enquanto a cortina cobre a tela
+    document.body.classList.add("cortina-ativa");
     scrollTo(0, 0);
-    const encerra = () => {
-      cortina.classList.add("fim");
-      document.body.classList.remove("cortina-ativa");  // libera o scroll
-    };
-    // mostra o logo (~2,4s) e depois sobe a cortina revelando o painel
+    const encerra = () => { cortina.classList.add("fim"); document.body.classList.remove("cortina-ativa"); };
     setTimeout(() => {
       scrollTo(0, 0);
       cortina.classList.add("subir");
-      // os KPIs e seções da primeira dobra animam agora, junto com a cortina subindo
-      revelarPrimeiraDobra();
-      // garante o encerramento mesmo se transitionend não disparar (1,3s da transição + folga)
+      entrarCards();
       setTimeout(encerra, 1600);
     }, 2400);
     cortina.addEventListener("transitionend", encerra, { once: true });
   } else {
-    revelarPrimeiraDobra();
-  }
-
-  /* ---------- botão voltar ao topo ---------- */
-  const aoTopo = $("#aoTopo");
-  if (aoTopo) {
-    addEventListener("scroll", () => {
-      aoTopo.classList.toggle("mostra", scrollY > 400);
-    }, { passive: true });
-    aoTopo.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+    entrarCards();
   }
 })();
 </script>

@@ -1,31 +1,33 @@
-# Dashboard — Pesquisa Festa das Crianças 2026
+# Portal de Pesquisas de Satisfação — Associação Volvo
 
-Dashboard executivo da pesquisa de satisfação da **Festa das Crianças 2026** da Associação Volvo, no padrão visual institucional da Volvo Group (tipografia Volvo Novum/Noto Sans, azuis #182871 e #2A609D, layout claro com cartões de borda fina).
+Portal web que reúne as pesquisas de satisfação dos eventos da Associação Volvo. A página inicial lista os eventos em cards; cada card abre o dashboard executivo daquele evento.
 
-**Página publicada:** https://rangeljfs.github.io/dashboard-festa-criancas-2026/
+**No ar:** https://rangeljfs.github.io/dashboard-festa-criancas-2026/
 
-## O que o painel mostra
+## Estrutura
 
-- **KPIs executivos**: média geral (9,69), recomendação (9,77 e % de notas 9–10), % de respostas sem fila acima de 5 minutos e % de avaliações nota ≤ 7 (ponto de atenção).
-- **Média por pergunta**: os 11 quesitos ordenados por média, com a distribuição das notas (10 / 9 / 8 / ≤ 7) em barras empilhadas e tabela acessível.
-- **Perfil dos respondentes**: donut com funcionários, dependentes e convidados.
-- **Prioridades para a próxima edição**: KPI de tomada de decisão com os 3 temas de crítica mais citados, ação sugerida e citações.
-- **Críticas e sugestões recorrentes**: ranking dos 14 temas identificados nos comentários; clicar em um tema filtra a caixa de comentários.
-- **Todos os comentários**: caixa aberta com busca e filtros por pergunta, tema e perfil (974 comentários).
+```
+/
+├─ index.html              → PORTAL (página inicial com os cards de eventos)
+├─ eventos.js              → lista de eventos exibidos no portal
+├─ img/                    → logo da Associação Volvo (usado pelo portal)
+└─ festa-criancas-2026/    → dashboard de um evento
+   ├─ index.html           → dashboard executivo da pesquisa
+   ├─ dados.js             → dados agregados e anonimizados do evento
+   └─ img/                 → logo (usado pelo dashboard)
+```
 
-## Arquivos
+## Como adicionar um evento novo
 
-| Arquivo | Conteúdo |
-|---|---|
-| `index.html` | Página do dashboard (HTML único, sem dependências além de fonte Google) |
-| `dados.js` | Dados agregados e anonimizados gerados da planilha de respostas |
+1. Criar uma pasta nova para o evento (ex: `arraia-2026/`) copiando a estrutura de `festa-criancas-2026/` (index.html + dados.js + img/).
+2. Gerar o `dados.js` da nova planilha com o script de agregação (anonimizado, sem dados pessoais).
+3. Adicionar um objeto do evento em `eventos.js` (título, ano, pasta, data, respostas, média, ícone).
+4. Commit e push: o GitHub Pages publica automaticamente e o card novo aparece no portal.
+
+## O que cada dashboard mostra
+
+KPIs executivos (média geral, recomendação, filas, ponto de atenção), média por pergunta com distribuição das notas, perfil dos respondentes, prioridades de ação, temas recorrentes em acordeão e a caixa completa de comentários com busca e filtros. KPIs, prioridades e termômetro são clicáveis e mostram a origem de cada número.
 
 ## Privacidade
 
-O repositório **não contém dados pessoais**: nome, matrícula, celular e e-mail dos respondentes ficam apenas na planilha original, fora do repositório. `dados.js` carrega somente agregados (médias, contagens) e os textos dos comentários com o tipo de vínculo (funcionário, dependente, convidado).
-
-## Como atualizar
-
-1. Exportar a planilha de respostas do formulário.
-2. Rodar o script de agregação apontando para a planilha (gera `dados.js`).
-3. Commit e push: o GitHub Pages publica automaticamente.
+O repositório **não contém dados pessoais**: nome, matrícula, celular e e-mail dos respondentes ficam apenas nas planilhas originais, fora do repositório. Os arquivos `dados.js` carregam somente agregados e os textos dos comentários com o tipo de vínculo (funcionário, dependente, convidado).
