@@ -790,20 +790,29 @@ addEventListener("load", () => scrollTo(0, 0));
 
   /* ---------- animar cada bloco quando entra na tela (ao rolar) ---------- */
   const animaveis = document.querySelectorAll(".reveal, .kpis");
-  if (!("IntersectionObserver" in window)) {
-    animaveis.forEach((el) => el.classList.add("visivel"));
-    document.querySelectorAll(".kpi .valor").forEach(countUpEl);
-  } else {
-    const io = new IntersectionObserver((entradas) => {
-      entradas.forEach((ent) => {
-        if (!ent.isIntersecting) return;
-        const el = ent.target;
-        el.classList.add("visivel");
-        if (el.classList.contains("kpis")) el.querySelectorAll(".kpi .valor").forEach(countUpEl);
-        io.unobserve(el);
-      });
+  let ioRef = null;
+  function ativar(el) {
+    if (el.classList.contains("visivel")) return;
+    el.classList.add("visivel");
+    if (el.classList.contains("kpis")) el.querySelectorAll(".kpi .valor").forEach(countUpEl);
+    if (ioRef) ioRef.unobserve(el);
+  }
+  if ("IntersectionObserver" in window) {
+    ioRef = new IntersectionObserver((entradas) => {
+      entradas.forEach((ent) => { if (ent.isIntersecting) ativar(ent.target); });
     }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
-    animaveis.forEach((el) => io.observe(el));
+  }
+  // revela o que já está na viewport (primeira dobra) e só então liga o observer para o resto
+  let animacaoIniciada = false;
+  function revelarPrimeiraDobra() {
+    if (animacaoIniciada) return;
+    animacaoIniciada = true;
+    animaveis.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < innerHeight * 0.92 && r.bottom > 0) ativar(el);
+    });
+    if (ioRef) animaveis.forEach((el) => { if (!el.classList.contains("visivel")) ioRef.observe(el); });
+    else animaveis.forEach(ativar);
   }
 
   /* ---------- cortina de abertura ---------- */
@@ -821,10 +830,14 @@ addEventListener("load", () => scrollTo(0, 0));
     setTimeout(() => {
       scrollTo(0, 0);
       cortina.classList.add("subir");
+      // os KPIs e seções da primeira dobra animam agora, junto com a cortina subindo
+      revelarPrimeiraDobra();
       // garante o encerramento mesmo se transitionend não disparar (1,3s da transição + folga)
       setTimeout(encerra, 1600);
     }, 2400);
     cortina.addEventListener("transitionend", encerra, { once: true });
+  } else {
+    revelarPrimeiraDobra();
   }
 
   /* ---------- botão voltar ao topo ---------- */
