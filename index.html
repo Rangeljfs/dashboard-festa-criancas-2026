@@ -19,19 +19,19 @@
   --ink-3: #a3a8b6;
   --hairline: #e4e6ee;
   --grid: #edeef3;
-  --sombra: 0 10px 34px rgba(30, 34, 63, .07);
-  --navy: #182871;
-  --navy-2: #2a609d;
+  --sombra: 0 10px 34px rgba(12, 88, 104, .09);
+  --navy: #0c5868;   /* teal institucional Associação Volvo */
+  --navy-2: #157d93;
   --hero-ink: #ffffff;
-  --s1: #2a609d; /* categórico 1 */
+  --s1: #0c5868; /* categórico 1 (teal da marca) */
   --s2: #eb6834; /* categórico 2 */
-  --s3: #1baf7a; /* categórico 3 */
-  --s-neutro: #898781;
-  --d10: #182871; /* distribuição nota 10 */
-  --d9:  #2a609d;
-  --d8:  #86b6ef;
+  --s3: #7fb3bf; /* categórico 3 (teal claro) */
+  --s-neutro: #a3a8b6;
+  --d10: #0c5868; /* distribuição nota 10 */
+  --d9:  #157d93;
+  --d8:  #8fc4d1;
   --d7:  #d03b3b; /* status crítico: notas <= 7 */
-  --bar: #2a609d;
+  --bar: #0c5868;
   --good: #0ca30c;
 }
 :root[data-theme="dark"] {
@@ -45,17 +45,17 @@
   --hairline: #33343a;
   --grid: #2c2d31;
   --sombra: 0 10px 34px rgba(0, 0, 0, .35);
-  --navy: #0e1a4e;
-  --navy-2: #5598e7;
+  --navy: #083d47;
+  --navy-2: #3fa7bd;
   --hero-ink: #ffffff;
-  --s1: #3987e5;
+  --s1: #2f97ad;
   --s2: #d95926;
-  --s3: #199e70;
-  --d10: #9ec5f4;
-  --d9:  #5598e7;
-  --d8:  #256abf;
+  --s3: #8fc4d1;
+  --d10: #3fa7bd;
+  --d9:  #2f97ad;
+  --d8:  #1c6475;
   --d7:  #e66767;
-  --bar: #5598e7;
+  --bar: #3fa7bd;
   --good: #0ca30c;
 }
 @media (prefers-color-scheme: dark) {
@@ -70,17 +70,17 @@
     --hairline: #33343a;
     --grid: #2c2d31;
     --sombra: 0 10px 34px rgba(0, 0, 0, .35);
-    --navy: #0e1a4e;
-    --navy-2: #5598e7;
+    --navy: #083d47;
+    --navy-2: #3fa7bd;
     --hero-ink: #ffffff;
-    --s1: #3987e5;
+    --s1: #2f97ad;
     --s2: #d95926;
-    --s3: #199e70;
-    --d10: #9ec5f4;
-    --d9:  #5598e7;
-    --d8:  #256abf;
+    --s3: #8fc4d1;
+    --d10: #3fa7bd;
+    --d9:  #2f97ad;
+    --d8:  #1c6475;
     --d7:  #e66767;
-    --bar: #5598e7;
+    --bar: #3fa7bd;
     --good: #0ca30c;
   }
 }
@@ -100,8 +100,15 @@ header.topo {
   border-bottom: 1px solid var(--hairline);
   position: sticky; top: 0; z-index: 30;
 }
-.topo-in { display: flex; align-items: center; justify-content: space-between; height: 58px; }
-.wordmark { font-weight: 500; letter-spacing: .42em; font-size: 14px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.topo-in { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.topo-logo { height: 36px; width: auto; display: block; }
+.topo-logo-escuro { display: none; }
+:root[data-theme="dark"] .topo-logo-claro { display: none; }
+:root[data-theme="dark"] .topo-logo-escuro { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .topo-logo-claro { display: none; }
+  :root:not([data-theme="light"]) .topo-logo-escuro { display: block; }
+}
 .topo-right { display: flex; align-items: center; gap: 18px; }
 .topo-label { color: var(--ink-2); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; }
 .tema-btn {
@@ -112,13 +119,14 @@ header.topo {
 
 /* ---------- hero ---------- */
 .hero {
-  background: radial-gradient(1200px 420px at 50% -80px, #2c4aa0 0%, var(--navy) 46%, #0d1333 100%);
+  background: radial-gradient(1200px 460px at 50% -120px, #14788c 0%, var(--navy) 48%, #06313a 100%);
   color: var(--hero-ink);
-  padding: 64px 0 64px;
+  padding: 52px 0 60px;
   text-align: center;
 }
-.hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .8; margin-bottom: 16px; }
-.hero h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -.01em; line-height: 1.12; }
+.hero-logo { height: clamp(78px, 12vw, 112px); width: auto; margin-bottom: 22px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
+.hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .82; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(28px, 4.6vw, 44px); font-weight: 800; letter-spacing: -.01em; line-height: 1.12; }
 .hero .sub { margin: 14px auto 0; font-size: 15.5px; font-weight: 400; opacity: .85; max-width: 640px; }
 
 /* ---------- seções ---------- */
@@ -224,15 +232,23 @@ details.tabela td.num, details.tabela th.num { text-align: right; font-variant-n
   font-size: 12.5px; padding: 6px 10px; border-radius: 6px; max-width: 260px;
 }
 
-footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 26px 0 36px; text-align: center; }
-footer .wordmark { font-size: 11px; color: var(--ink-2); }
+footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 0 38px; text-align: center; }
+.footer-logo { height: 42px; width: auto; opacity: .9; }
+.footer-logo-escuro { display: none; }
+:root[data-theme="dark"] .footer-logo-claro { display: none; }
+:root[data-theme="dark"] .footer-logo-escuro { display: inline-block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .footer-logo-claro { display: none; }
+  :root:not([data-theme="light"]) .footer-logo-escuro { display: inline-block; }
+}
 </style>
 </head>
 <body>
 
 <header class="topo">
   <div class="wrap topo-in">
-    <div class="wordmark">Associação Volvo</div>
+    <img class="topo-logo topo-logo-claro" src="img/logo-teal.png" alt="Associação Volvo">
+    <img class="topo-logo topo-logo-escuro" src="img/logo-branco.png" alt="Associação Volvo">
     <div class="topo-right">
       <span class="topo-label">Pesquisa de Satisfação</span>
       <button class="tema-btn" id="btnTema" type="button">Modo escuro</button>
@@ -242,6 +258,7 @@ footer .wordmark { font-size: 11px; color: var(--ink-2); }
 
 <div class="hero">
   <div class="wrap">
+    <img class="hero-logo" src="img/logo-branco.png" alt="Associação Volvo">
     <div class="overline" id="heroOverline">Pesquisa de Satisfação</div>
     <h1 id="heroTitulo">Festa das Crianças 2026</h1>
     <p class="sub" id="heroSub"></p>
@@ -336,7 +353,8 @@ footer .wordmark { font-size: 11px; color: var(--ink-2); }
 
 <footer>
   <div class="wrap">
-    <div class="wordmark">Associação Volvo</div>
+    <img class="footer-logo footer-logo-claro" src="img/logo-teal.png" alt="Associação Volvo">
+    <img class="footer-logo footer-logo-escuro" src="img/logo-branco.png" alt="Associação Volvo">
   </div>
 </footer>
 
