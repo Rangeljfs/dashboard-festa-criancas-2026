@@ -62,16 +62,15 @@ header.topo {
   background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--hairline);
 }
-.topo-in { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+.topo-in { display: flex; align-items: center; justify-content: flex-start; height: 60px; }
 .topo-logo { height: 34px; width: auto; display: block; }
-.topo-tag { font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
 
 /* ---------- hero ---------- */
 .hero {
   position: relative; overflow: hidden;
   background: radial-gradient(1100px 500px at 50% -160px, #1a8aa2 0%, var(--navy) 50%, #06313a 100%);
   color: #fff;
-  padding: 72px 0 84px;
+  padding: 84px 0 88px;
   text-align: center;
 }
 .hero::after {
@@ -141,13 +140,11 @@ footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align
 <header class="topo">
   <div class="wrap topo-in">
     <img class="topo-logo" src="img/logo-teal.png" alt="Associação Volvo">
-    <span class="topo-tag">Portal de Pesquisas</span>
   </div>
 </header>
 
 <div class="hero">
   <div class="wrap">
-    <div class="overline">Associação Volvo</div>
     <h1>Pesquisas de Satisfação</h1>
     <p class="sub">Os resultados das pesquisas de satisfação dos nossos eventos, reunidos em um só lugar.</p>
     <div class="stats" id="stats"></div>
