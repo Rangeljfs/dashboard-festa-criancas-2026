@@ -56,37 +56,28 @@ body.cortina-ativa { overflow: hidden; }
   100% { opacity: 1; transform: scale(1); }
 }
 
-/* ---------- barra de topo ---------- */
-header.topo {
-  position: sticky; top: 0; z-index: 40;
-  background: rgba(255,255,255,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--hairline);
-}
-.topo-in { display: flex; align-items: center; justify-content: flex-start; height: 60px; }
-.topo-logo { height: 34px; width: auto; display: block; }
-
 /* ---------- hero ---------- */
 .hero {
   position: relative; overflow: hidden;
-  background: radial-gradient(1100px 500px at 50% -160px, #1a8aa2 0%, var(--navy) 50%, #06313a 100%);
+  background: radial-gradient(1100px 560px at 50% -140px, #1a8aa2 0%, var(--navy) 52%, #06313a 100%);
   color: #fff;
-  padding: 84px 0 88px;
+  padding: 72px 0 80px;
   text-align: center;
 }
 .hero::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
 }
-.hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .36em; text-transform: uppercase; opacity: .78; margin-bottom: 16px; }
-.hero h1 { font-size: clamp(32px, 5.2vw, 52px); font-weight: 800; letter-spacing: -.015em; line-height: 1.08; }
-.hero .sub { margin: 16px auto 0; font-size: 16px; font-weight: 300; opacity: .9; max-width: 560px; }
+.hero-logo { height: clamp(68px, 9vw, 94px); width: auto; margin-bottom: 30px; filter: drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
+.hero h1 { font-size: clamp(30px, 4.8vw, 48px); font-weight: 800; letter-spacing: -.015em; line-height: 1.1; }
+.hero .sub { margin: 15px auto 0; font-size: 15.5px; font-weight: 300; opacity: .88; max-width: 520px; line-height: 1.6; }
 
 /* faixa de resumo (stats) sobre o hero */
-.stats { max-width: 620px; margin: 30px auto 0; display: flex; justify-content: center; gap: 0; }
-.stats .s { flex: 1; padding: 0 20px; }
-.stats .s + .s { border-left: 1px solid rgba(255,255,255,.2); }
-.stats .s .v { font-size: 28px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.stats .s .r { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; opacity: .78; margin-top: 3px; }
+.stats { max-width: 560px; margin: 34px auto 0; display: flex; justify-content: center; align-items: stretch; gap: 0; }
+.stats .s { flex: 1; padding: 0 24px; }
+.stats .s + .s { border-left: 1px solid rgba(255,255,255,.18); }
+.stats .s .v { font-size: 30px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.stats .s .r { font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .72; margin-top: 5px; }
 
 /* ---------- conteúdo ---------- */
 main { flex: 1; padding: 48px 0 20px; }
@@ -107,13 +98,28 @@ main { flex: 1; padding: 48px 0 20px; }
 .ev-card.entra { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
 .ev-card:hover { box-shadow: 0 18px 50px rgba(12,88,104,.18); transform: translateY(-5px); }
 .ev-capa {
-  position: relative; height: 120px;
+  position: relative; height: 128px; overflow: hidden;
   background: radial-gradient(600px 300px at 30% -40%, #1a8aa2 0%, var(--navy) 60%, #06313a 100%);
   display: flex; align-items: center; justify-content: center;
 }
-.ev-capa .emoji { font-size: 46px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.3)); }
-.ev-capa .ano { position: absolute; top: 12px; right: 14px; font-size: 12px; font-weight: 700; letter-spacing: .08em;
-  color: #fff; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: 3px 11px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+/* textura sutil de pontos na capa */
+.ev-capa::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 16px 16px; opacity: .6;
+}
+/* selo circular atrás do ícone */
+.ev-capa .selo {
+  position: relative; width: 70px; height: 70px; border-radius: 50%;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22);
+  display: flex; align-items: center; justify-content: center;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  transition: transform .25s;
+}
+.ev-card:hover .ev-capa .selo { transform: scale(1.06); }
+.ev-capa .emoji { font-size: 34px; line-height: 1; filter: drop-shadow(0 3px 8px rgba(0,0,0,.35)); }
+.ev-capa .ano { position: absolute; top: 12px; right: 14px; z-index: 2; font-size: 11.5px; font-weight: 700; letter-spacing: .1em;
+  color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 3px 11px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
 .ev-corpo { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
 .ev-corpo .tipo { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-2); }
 .ev-corpo h3 { font-size: 19px; font-weight: 800; letter-spacing: -.01em; margin-top: 4px; line-height: 1.2; }
@@ -137,14 +143,9 @@ footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align
   <img src="img/logo-branco.png" alt="Associação Volvo">
 </div>
 
-<header class="topo">
-  <div class="wrap topo-in">
-    <img class="topo-logo" src="img/logo-teal.png" alt="Associação Volvo">
-  </div>
-</header>
-
 <div class="hero">
   <div class="wrap">
+    <img class="hero-logo" src="img/logo-branco.png" alt="Associação Volvo">
     <h1>Pesquisas de Satisfação</h1>
     <p class="sub">Os resultados das pesquisas de satisfação dos nossos eventos, reunidos em um só lugar.</p>
     <div class="stats" id="stats"></div>
@@ -199,7 +200,7 @@ scrollTo(0, 0);
       if (e.media != null) mini.push('<div class="m"><div class="v">' + e.media + '</div><div class="r">Média geral</div></div>');
       return '<a class="ev-card" href="' + e.pasta + '/">' +
         '<div class="ev-capa">' + (e.ano ? '<span class="ano">' + e.ano + '</span>' : "") +
-          '<span class="emoji">' + (e.icone || "📊") + '</span></div>' +
+          '<span class="selo"><span class="emoji">' + (e.icone || "📊") + '</span></span></div>' +
         '<div class="ev-corpo">' +
           '<div class="tipo">Pesquisa de Satisfação</div>' +
           '<h3>' + e.titulo + '</h3>' +
