@@ -134,12 +134,6 @@ body {
 .reveal.r3 { transition-delay: .24s; }
 .kpi { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1); }
 .kpis.visivel .kpi { opacity: 1; transform: none; transition-delay: calc(.08s + var(--i,0) * .14s); }
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .kpi { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .cortina { display: none !important; }
-  .cortina img { animation: none; }
-}
-
 /* ---------- seções ---------- */
 section { padding: 34px 0 6px; }
 .sec-head { margin-bottom: 18px; }
@@ -665,8 +659,6 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
 
   filtra();
 
-  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   /* ---------- count-up de um número (mais devagar) ---------- */
   function countUpEl(el) {
     if (el.dataset.feito) return;
@@ -677,7 +669,6 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     const casas = (m[1].split(",")[1] || "").length;
     const alvo = parseFloat(m[1].replace(/\./g, "").replace(",", "."));
     const suf = m[2];
-    if (reduz) { el.textContent = fmt(alvo, casas) + suf; return; }
     const dur = 1400; const t0 = performance.now();
     function step(t) {
       const p = Math.min((t - t0) / dur, 1);
@@ -691,10 +682,9 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
 
   /* ---------- animar cada bloco quando entra na tela (ao rolar) ---------- */
   const animaveis = document.querySelectorAll(".reveal, .kpis");
-  if (reduz || !("IntersectionObserver" in window)) {
+  if (!("IntersectionObserver" in window)) {
     animaveis.forEach((el) => el.classList.add("visivel"));
     document.querySelectorAll(".kpi .valor").forEach(countUpEl);
-    document.querySelectorAll("#donut circle").forEach((c) => c.dispatchEvent(new Event("animar")));
   } else {
     const io = new IntersectionObserver((entradas) => {
       entradas.forEach((ent) => {
@@ -710,9 +700,7 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
 
   /* ---------- cortina de abertura ---------- */
   const cortina = $("#cortina");
-  if (reduz || !cortina) {
-    if (cortina) cortina.classList.add("fim");
-  } else {
+  if (cortina) {
     // mostra o logo (~2,4s) e depois sobe a cortina revelando o painel
     setTimeout(() => { cortina.classList.add("subir"); }, 2400);
     cortina.addEventListener("transitionend", () => cortina.classList.add("fim"), { once: true });
