@@ -7,18 +7,19 @@
 <meta name="description" content="Dashboard executivo da pesquisa de satisfação da Festa das Crianças 2026 da Associação Volvo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
   color-scheme: light;
-  --page: #ffffff;
+  --page: #fafbfc;
   --surface: #ffffff;
-  --surface-2: #f8f8f8;
-  --ink: #141414;
-  --ink-2: #575757;
-  --ink-3: #898781;
-  --hairline: #d0d0d0;
-  --grid: #e8e8e6;
+  --surface-2: #f4f5f8;
+  --ink: #1c1f2b;
+  --ink-2: #6b7183;
+  --ink-3: #a3a8b6;
+  --hairline: #e4e6ee;
+  --grid: #edeef3;
+  --sombra: 0 10px 34px rgba(30, 34, 63, .07);
   --navy: #182871;
   --navy-2: #2a609d;
   --hero-ink: #ffffff;
@@ -43,6 +44,7 @@
   --ink-3: #898781;
   --hairline: #33343a;
   --grid: #2c2d31;
+  --sombra: 0 10px 34px rgba(0, 0, 0, .35);
   --navy: #0e1a4e;
   --navy-2: #5598e7;
   --hero-ink: #ffffff;
@@ -67,6 +69,7 @@
     --ink-3: #898781;
     --hairline: #33343a;
     --grid: #2c2d31;
+    --sombra: 0 10px 34px rgba(0, 0, 0, .35);
     --navy: #0e1a4e;
     --navy-2: #5598e7;
     --hero-ink: #ffffff;
@@ -85,9 +88,9 @@
 body {
   background: var(--page);
   color: var(--ink);
-  font-family: "Volvo Novum", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 15px;
-  line-height: 1.55;
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
 }
 .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
 
@@ -109,34 +112,36 @@ header.topo {
 
 /* ---------- hero ---------- */
 .hero {
-  background: linear-gradient(135deg, #0d1333 0%, var(--navy) 55%, #27418f 100%);
+  background: radial-gradient(1200px 420px at 50% -80px, #2c4aa0 0%, var(--navy) 46%, #0d1333 100%);
   color: var(--hero-ink);
-  padding: 58px 0 54px;
+  padding: 64px 0 64px;
+  text-align: center;
 }
-.hero .overline { font-size: 12.5px; letter-spacing: .28em; text-transform: uppercase; opacity: .78; margin-bottom: 14px; }
-.hero h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; letter-spacing: -.01em; line-height: 1.12; }
-.hero .sub { margin-top: 12px; font-size: 16px; font-weight: 300; opacity: .88; max-width: 640px; }
+.hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .8; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -.01em; line-height: 1.12; }
+.hero .sub { margin: 14px auto 0; font-size: 15.5px; font-weight: 400; opacity: .85; max-width: 640px; }
 
 /* ---------- seções ---------- */
 section { padding: 34px 0 6px; }
 .sec-head { margin-bottom: 18px; }
-.sec-head h2 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.sec-head h2 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
 .sec-head p { color: var(--ink-2); font-size: 13.5px; margin-top: 3px; }
 
 .card {
   background: var(--surface);
   border: 1px solid var(--hairline);
-  border-radius: 10px;
-  padding: 22px 24px;
+  border-radius: 16px;
+  padding: 26px 28px;
+  box-shadow: var(--sombra);
 }
 
 /* ---------- KPIs ---------- */
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 14px; margin-top: -34px; position: relative; z-index: 5; }
-.kpi { background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 18px 20px 16px; }
-.kpi .rotulo { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
-.kpi .valor { font-size: 38px; font-weight: 700; line-height: 1.15; margin-top: 6px; color: var(--ink); }
+.kpi { background: var(--surface); border: 1px solid var(--hairline); border-radius: 16px; padding: 20px 22px 18px; box-shadow: var(--sombra); }
+.kpi .rotulo { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.kpi .valor { font-size: 38px; font-weight: 800; line-height: 1.15; margin-top: 6px; color: var(--ink); }
 .kpi .apoio { font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
-.kpi.destaque { border-top: 3px solid var(--navy-2); }
+.kpi.destaque { border-top: 3px solid var(--navy-2); background: linear-gradient(180deg, color-mix(in srgb, var(--navy-2) 5%, var(--surface)) 0%, var(--surface) 42%); }
 
 /* ---------- grid de 2 colunas ---------- */
 .duo { display: grid; grid-template-columns: 1.65fr 1fr; gap: 14px; }
@@ -191,17 +196,18 @@ section { padding: 34px 0 6px; }
 .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
 .filtros input, .filtros select {
   font: inherit; font-size: 13.5px; color: var(--ink);
-  background: var(--surface); border: 1px solid var(--hairline); border-radius: 7px; padding: 8px 12px;
+  background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 9px 13px;
 }
+.filtros input:focus, .filtros select:focus { outline: none; border-color: var(--navy-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--navy-2) 16%, transparent); }
 .filtros input { flex: 1; min-width: 200px; }
 .contagem { font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; }
 .com-lista { max-height: 560px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px; }
-.com-item { border: 1px solid var(--hairline); border-radius: 8px; padding: 11px 14px; background: var(--surface); }
+.com-item { border: 1px solid var(--hairline); border-radius: 12px; padding: 12px 15px; background: var(--surface-2); }
 .com-item .texto { font-size: 13.5px; }
 .com-item .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
 .tagz { font-size: 11px; letter-spacing: .04em; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 999px; padding: 2px 9px; }
 .tagz.tt { color: var(--navy-2); border-color: var(--navy-2); }
-.mais-btn { margin-top: 12px; width: 100%; border: 1px solid var(--hairline); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 13.5px; padding: 9px; border-radius: 7px; cursor: pointer; }
+.mais-btn { margin-top: 12px; width: 100%; border: 1px solid var(--hairline); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 600; padding: 10px; border-radius: 10px; cursor: pointer; }
 .mais-btn:hover { border-color: var(--ink-3); }
 
 /* ---------- tabela acessível ---------- */
@@ -218,8 +224,8 @@ details.tabela td.num, details.tabela th.num { text-align: right; font-variant-n
   font-size: 12.5px; padding: 6px 10px; border-radius: 6px; max-width: 260px;
 }
 
-footer { margin-top: 44px; border-top: 1px solid var(--hairline); padding: 22px 0 34px; color: var(--ink-3); font-size: 12.5px; }
-footer .wordmark { font-size: 11px; margin-bottom: 6px; color: var(--ink-2); }
+footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 26px 0 36px; text-align: center; }
+footer .wordmark { font-size: 11px; color: var(--ink-2); }
 </style>
 </head>
 <body>
@@ -331,7 +337,6 @@ footer .wordmark { font-size: 11px; margin-bottom: 6px; color: var(--ink-2); }
 <footer>
   <div class="wrap">
     <div class="wordmark">Associação Volvo</div>
-    <div id="rodape"></div>
   </div>
 </footer>
 
@@ -377,8 +382,6 @@ footer .wordmark { font-size: 11px; margin-bottom: 6px; color: var(--ink-2); }
   /* ---------- hero + rodapé ---------- */
   $("#heroSub").textContent = D.respostas + " respostas · média geral " + fmt(D.mediaGeral, 2) +
     " · " + D.entidade;
-  $("#rodape").textContent = D.titulo + " · " + D.respostas +
-    " respostas coletadas via formulário oficial · dados agregados e anonimizados · atualizado em 06/10/2026.";
 
   /* ---------- KPIs ---------- */
   const totalAval = D.perguntas.reduce((a, p) => a + p.n, 0);
