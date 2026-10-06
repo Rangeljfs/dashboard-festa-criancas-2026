@@ -68,12 +68,11 @@ body.cortina-ativa { overflow: hidden; }
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
 }
-.hero-logo { height: clamp(68px, 9vw, 94px); width: auto; margin-bottom: 30px; filter: drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
+.hero-logo { height: clamp(64px, 8.5vw, 88px); width: auto; margin-bottom: 42px; filter: drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
 .hero h1 { font-size: clamp(30px, 4.8vw, 48px); font-weight: 800; letter-spacing: -.015em; line-height: 1.1; }
-.hero .sub { margin: 15px auto 0; font-size: 15.5px; font-weight: 300; opacity: .88; max-width: 520px; line-height: 1.6; }
 
 /* faixa de resumo (stats) sobre o hero */
-.stats { max-width: 560px; margin: 34px auto 0; display: flex; justify-content: center; align-items: stretch; gap: 0; }
+.stats { max-width: 520px; margin: 40px auto 0; display: flex; justify-content: center; align-items: stretch; gap: 0; }
 .stats .s { flex: 1; padding: 0 24px; }
 .stats .s + .s { border-left: 1px solid rgba(255,255,255,.18); }
 .stats .s .v { font-size: 30px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
@@ -147,7 +146,6 @@ footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align
   <div class="wrap">
     <img class="hero-logo" src="img/logo-branco.png" alt="Associação Volvo">
     <h1>Pesquisas de Satisfação</h1>
-    <p class="sub">Os resultados das pesquisas de satisfação dos nossos eventos, reunidos em um só lugar.</p>
     <div class="stats" id="stats"></div>
   </div>
 </div>
