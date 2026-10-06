@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festa das Crianças 2026</title>
+<meta name="description" content="Dashboard executivo da pesquisa de satisfação da Festa das Crianças 2026 da Associação Volvo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --page: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f8f8f8;
+  --ink: #141414;
+  --ink-2: #575757;
+  --ink-3: #898781;
+  --hairline: #d0d0d0;
+  --grid: #e8e8e6;
+  --navy: #182871;
+  --navy-2: #2a609d;
+  --hero-ink: #ffffff;
+  --s1: #2a609d; /* categórico 1 */
+  --s2: #eb6834; /* categórico 2 */
+  --s3: #1baf7a; /* categórico 3 */
+  --s-neutro: #898781;
+  --d10: #182871; /* distribuição nota 10 */
+  --d9:  #2a609d;
+  --d8:  #86b6ef;
+  --d7:  #d03b3b; /* status crítico: notas <= 7 */
+  --bar: #2a609d;
+  --good: #0ca30c;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #111214;
+  --surface: #1a1b1e;
+  --surface-2: #202125;
+  --ink: #f4f4f4;
+  --ink-2: #c3c2b7;
+  --ink-3: #898781;
+  --hairline: #33343a;
+  --grid: #2c2d31;
+  --navy: #0e1a4e;
+  --navy-2: #5598e7;
+  --hero-ink: #ffffff;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --d10: #9ec5f4;
+  --d9:  #5598e7;
+  --d8:  #256abf;
+  --d7:  #e66767;
+  --bar: #5598e7;
+  --good: #0ca30c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #111214;
+    --surface: #1a1b1e;
+    --surface-2: #202125;
+    --ink: #f4f4f4;
+    --ink-2: #c3c2b7;
+    --ink-3: #898781;
+    --hairline: #33343a;
+    --grid: #2c2d31;
+    --navy: #0e1a4e;
+    --navy-2: #5598e7;
+    --hero-ink: #ffffff;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --d10: #9ec5f4;
+    --d9:  #5598e7;
+    --d8:  #256abf;
+    --d7:  #e66767;
+    --bar: #5598e7;
+    --good: #0ca30c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Volvo Novum", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- topo ---------- */
+header.topo {
+  background: var(--surface);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.topo-in { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+.wordmark { font-weight: 500; letter-spacing: .42em; font-size: 14px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.topo-right { display: flex; align-items: center; gap: 18px; }
+.topo-label { color: var(--ink-2); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; }
+.tema-btn {
+  border: 1px solid var(--hairline); background: var(--surface); color: var(--ink-2);
+  border-radius: 999px; padding: 5px 13px; font: inherit; font-size: 12.5px; cursor: pointer;
+}
+.tema-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+
+/* ---------- hero ---------- */
+.hero {
+  background: linear-gradient(135deg, #0d1333 0%, var(--navy) 55%, #27418f 100%);
+  color: var(--hero-ink);
+  padding: 58px 0 54px;
+}
+.hero .overline { font-size: 12.5px; letter-spacing: .28em; text-transform: uppercase; opacity: .78; margin-bottom: 14px; }
+.hero h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; letter-spacing: -.01em; line-height: 1.12; }
+.hero .sub { margin-top: 12px; font-size: 16px; font-weight: 300; opacity: .88; max-width: 640px; }
+
+/* ---------- seções ---------- */
+section { padding: 34px 0 6px; }
+.sec-head { margin-bottom: 18px; }
+.sec-head h2 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.sec-head p { color: var(--ink-2); font-size: 13.5px; margin-top: 3px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+
+/* ---------- KPIs ---------- */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 14px; margin-top: -34px; position: relative; z-index: 5; }
+.kpi { background: var(--surface); border: 1px solid var(--hairline); border-radius: 10px; padding: 18px 20px 16px; }
+.kpi .rotulo { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.kpi .valor { font-size: 38px; font-weight: 700; line-height: 1.15; margin-top: 6px; color: var(--ink); }
+.kpi .apoio { font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+.kpi.destaque { border-top: 3px solid var(--navy-2); }
+
+/* ---------- grid de 2 colunas ---------- */
+.duo { display: grid; grid-template-columns: 1.65fr 1fr; gap: 14px; }
+@media (max-width: 900px) { .duo { grid-template-columns: 1fr; } }
+
+/* ---------- distribuição por pergunta ---------- */
+.legenda { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12.5px; color: var(--ink-2); margin-bottom: 16px; }
+.legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.chip { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.qrow { display: grid; grid-template-columns: 215px 1fr 56px; gap: 12px; align-items: center; padding: 6px 0; }
+@media (max-width: 680px) { .qrow { grid-template-columns: 1fr 56px; } .qrow .qbar { grid-column: 1 / -1; } }
+.qrow .qlabel { font-size: 13.5px; color: var(--ink); text-align: left; }
+.qrow .qlabel small { display: block; color: var(--ink-3); font-size: 11.5px; }
+.qbar { display: flex; height: 22px; border-radius: 4px; overflow: hidden; gap: 2px; background: transparent; }
+.seg { height: 100%; min-width: 2px; cursor: default; }
+.seg.s10 { background: var(--d10); border-radius: 4px 0 0 4px; }
+.seg.s9 { background: var(--d9); }
+.seg.s8 { background: var(--d8); }
+.seg.s7 { background: var(--d7); border-radius: 0 4px 4px 0; }
+.qmedia { font-size: 15px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- donut ---------- */
+.donut-flex { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+.donut-box { position: relative; width: 190px; height: 190px; flex: 0 0 auto; }
+.donut-centro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.donut-centro b { font-size: 30px; font-weight: 700; }
+.donut-centro span { font-size: 11.5px; color: var(--ink-2); letter-spacing: .08em; text-transform: uppercase; }
+.donut-leg { flex: 1; min-width: 190px; display: flex; flex-direction: column; gap: 9px; }
+.donut-leg .item { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
+.donut-leg .item b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.donut-leg .item small { color: var(--ink-2); }
+
+/* ---------- temas ---------- */
+.tema-row { display: grid; grid-template-columns: 250px 1fr 36px; gap: 12px; align-items: center; padding: 5px 0; cursor: pointer; border-radius: 6px; }
+.tema-row:hover { background: var(--surface-2); }
+.tema-row.ativo { background: var(--surface-2); outline: 1px solid var(--navy-2); }
+@media (max-width: 680px) { .tema-row { grid-template-columns: 1fr 36px; } .tema-row .tbar-out { grid-column: 1 / -1; } }
+.tema-row .tlabel { font-size: 13.5px; }
+.tbar-out { height: 18px; }
+.tbar { height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 3px; }
+.tema-row .tn { font-weight: 700; font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- prioridades ---------- */
+.prio { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.prio .card { border-top: 3px solid var(--d7); }
+.prio .num { font-size: 12px; letter-spacing: .14em; color: var(--ink-3); text-transform: uppercase; }
+.prio h3 { font-size: 16px; margin: 6px 0 4px; font-weight: 700; }
+.prio p { font-size: 13px; color: var(--ink-2); }
+.prio .cita { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); border-left: 2px solid var(--hairline); padding-left: 10px; font-style: italic; }
+
+/* ---------- comentários ---------- */
+.filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.filtros input, .filtros select {
+  font: inherit; font-size: 13.5px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--hairline); border-radius: 7px; padding: 8px 12px;
+}
+.filtros input { flex: 1; min-width: 200px; }
+.contagem { font-size: 12.5px; color: var(--ink-2); margin-bottom: 10px; }
+.com-lista { max-height: 560px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; padding-right: 4px; }
+.com-item { border: 1px solid var(--hairline); border-radius: 8px; padding: 11px 14px; background: var(--surface); }
+.com-item .texto { font-size: 13.5px; }
+.com-item .meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.tagz { font-size: 11px; letter-spacing: .04em; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 999px; padding: 2px 9px; }
+.tagz.tt { color: var(--navy-2); border-color: var(--navy-2); }
+.mais-btn { margin-top: 12px; width: 100%; border: 1px solid var(--hairline); background: var(--surface-2); color: var(--ink); font: inherit; font-size: 13.5px; padding: 9px; border-radius: 7px; cursor: pointer; }
+.mais-btn:hover { border-color: var(--ink-3); }
+
+/* ---------- tabela acessível ---------- */
+details.tabela { margin-top: 14px; }
+details.tabela summary { cursor: pointer; font-size: 13px; color: var(--ink-2); }
+details.tabela table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+details.tabela th, details.tabela td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--grid); }
+details.tabela td.num, details.tabela th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- tooltip ---------- */
+#tip {
+  position: fixed; z-index: 99; pointer-events: none; display: none;
+  background: var(--ink); color: var(--page);
+  font-size: 12.5px; padding: 6px 10px; border-radius: 6px; max-width: 260px;
+}
+
+footer { margin-top: 44px; border-top: 1px solid var(--hairline); padding: 22px 0 34px; color: var(--ink-3); font-size: 12.5px; }
+footer .wordmark { font-size: 11px; margin-bottom: 6px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap topo-in">
+    <div class="wordmark">Associação Volvo</div>
+    <div class="topo-right">
+      <span class="topo-label">Pesquisa de Satisfação</span>
+      <button class="tema-btn" id="btnTema" type="button">Modo escuro</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="overline" id="heroOverline">Pesquisa de Satisfação</div>
+    <h1 id="heroTitulo">Festa das Crianças 2026</h1>
+    <p class="sub" id="heroSub"></p>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <div class="kpis" id="kpis"></div>
+
+  <section>
+    <div class="duo">
+      <div class="card">
+        <div class="sec-head">
+          <h2>Média por pergunta</h2>
+          <p>Distribuição das notas de cada quesito avaliado, ordenado da maior para a menor média.</p>
+        </div>
+        <div class="legenda">
+          <span><i class="chip" style="background:var(--d10)"></i> Nota 10</span>
+          <span><i class="chip" style="background:var(--d9)"></i> Nota 9</span>
+          <span><i class="chip" style="background:var(--d8)"></i> Nota 8</span>
+          <span><i class="chip" style="background:var(--d7)"></i> ⚠ Nota ≤ 7</span>
+        </div>
+        <div id="perguntas"></div>
+        <details class="tabela">
+          <summary>Ver como tabela</summary>
+          <table id="tabelaPerguntas"></table>
+        </details>
+      </div>
+      <div class="card">
+        <div class="sec-head">
+          <h2>Perfil dos respondentes</h2>
+          <p>Quem respondeu a pesquisa.</p>
+        </div>
+        <div class="donut-flex">
+          <div class="donut-box">
+            <svg viewBox="0 0 42 42" width="190" height="190" id="donut" role="img" aria-label="Perfil dos respondentes"></svg>
+            <div class="donut-centro"><b id="donutTotal"></b><span>respostas</span></div>
+          </div>
+          <div class="donut-leg" id="donutLeg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>Prioridades para a próxima edição</h2>
+      <p>KPI de tomada de decisão: os três temas de crítica mais citados nos comentários abertos.</p>
+    </div>
+    <div class="prio" id="prioridades"></div>
+  </section>
+
+  <section>
+    <div class="duo">
+      <div class="card">
+        <div class="sec-head">
+          <h2>Críticas e sugestões recorrentes</h2>
+          <p>Número de comentários que citam cada tema. Clique em um tema para filtrar a caixa de comentários.</p>
+        </div>
+        <div id="temas"></div>
+      </div>
+      <div class="card">
+        <div class="sec-head">
+          <h2>Termômetro das notas</h2>
+          <p>Leitura executiva da avaliação.</p>
+        </div>
+        <div id="termometro"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <div class="sec-head">
+        <h2>Todos os comentários</h2>
+        <p>Caixa aberta com as respostas de texto da pesquisa, com busca e filtros.</p>
+      </div>
+      <div class="filtros">
+        <input type="search" id="fBusca" placeholder="Buscar nos comentários…" aria-label="Buscar nos comentários">
+        <select id="fCampo" aria-label="Filtrar por pergunta"></select>
+        <select id="fTema" aria-label="Filtrar por tema"></select>
+        <select id="fPerfil" aria-label="Filtrar por perfil"></select>
+      </div>
+      <div class="contagem" id="fContagem"></div>
+      <div class="com-lista" id="comentarios"></div>
+      <button class="mais-btn" id="btnMais" type="button">Carregar mais comentários</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="wordmark">Associação Volvo</div>
+    <div id="rodape"></div>
+  </div>
+</footer>
+
+<div id="tip" role="tooltip"></div>
+
+<script src="dados.js"></script>
+<script>
+(function () {
+  const D = window.DADOS;
+  const $ = (s) => document.querySelector(s);
+  const fmt = (x, c) => x.toLocaleString("pt-BR", { minimumFractionDigits: c, maximumFractionDigits: c });
+
+  /* ---------- tema claro/escuro ---------- */
+  const root = document.documentElement;
+  const btnTema = $("#btnTema");
+  function aplicaTema(t) {
+    if (t) root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
+    const escuro = t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches);
+    btnTema.textContent = escuro ? "Modo claro" : "Modo escuro";
+    try { if (t) localStorage.setItem("tema", t); } catch (e) {}
+  }
+  let temaSalvo = null;
+  try { temaSalvo = localStorage.getItem("tema"); } catch (e) {}
+  aplicaTema(temaSalvo);
+  btnTema.addEventListener("click", () => {
+    const atual = root.getAttribute("data-theme");
+    const escuro = atual === "dark" || (!atual && matchMedia("(prefers-color-scheme: dark)").matches);
+    aplicaTema(escuro ? "light" : "dark");
+  });
+
+  /* ---------- tooltip ---------- */
+  const tip = $("#tip");
+  function tipOn(el, texto) {
+    el.addEventListener("mousemove", (e) => {
+      tip.style.display = "block";
+      tip.textContent = texto;
+      tip.style.left = Math.min(e.clientX + 14, innerWidth - 270) + "px";
+      tip.style.top = (e.clientY + 14) + "px";
+    });
+    el.addEventListener("mouseleave", () => { tip.style.display = "none"; });
+  }
+
+  /* ---------- hero + rodapé ---------- */
+  $("#heroSub").textContent = D.respostas + " respostas · média geral " + fmt(D.mediaGeral, 2) +
+    " · " + D.entidade;
+  $("#rodape").textContent = D.titulo + " · " + D.respostas +
+    " respostas coletadas via formulário oficial · dados agregados e anonimizados · atualizado em 06/10/2026.";
+
+  /* ---------- KPIs ---------- */
+  const totalAval = D.perguntas.reduce((a, p) => a + p.n, 0);
+  const totalAtencao = D.perguntas.reduce((a, p) => a + p.dist.le7, 0);
+  const kpis = [
+    { rotulo: "Média geral", valor: fmt(D.mediaGeral, 2), apoio: totalAval.toLocaleString("pt-BR") + " avaliações em " + D.perguntas.length + " quesitos", destaque: true },
+    { rotulo: "Recomendação", valor: fmt(D.recomendacao.media, 2), apoio: fmt(D.recomendacao.pctPromotores, 1) + "% deram nota 9 ou 10" },
+    { rotulo: "Sem fila acima de 5 min", valor: fmt(D.filas.pctSemFila, 1) + "%", apoio: D.filas.sim + " relatos de fila em " + (D.filas.sim + D.filas.nao) + " respostas" },
+    { rotulo: "Avaliações nota ≤ 7", valor: fmt(100 * totalAtencao / totalAval, 1) + "%", apoio: totalAtencao + " avaliações: o ponto de atenção da edição" },
+  ];
+  $("#kpis").innerHTML = kpis.map((k) =>
+    '<div class="kpi' + (k.destaque ? " destaque" : "") + '"><div class="rotulo">' + k.rotulo +
+    '</div><div class="valor">' + k.valor + '</div><div class="apoio">' + k.apoio + "</div></div>").join("");
+
+  /* ---------- médias por pergunta (barras 100% empilhadas) ---------- */
+  const ordenadas = [...D.perguntas].sort((a, b) => b.media - a.media);
+  const boxP = $("#perguntas");
+  ordenadas.forEach((p) => {
+    const row = document.createElement("div");
+    row.className = "qrow";
+    const partes = [["s10", "10", p.dist["10"]], ["s9", "9", p.dist["9"]], ["s8", "8", p.dist["8"]], ["s7", "≤ 7", p.dist.le7]];
+    row.innerHTML = '<div class="qlabel">' + p.label + "<small>" + p.n + ' respostas</small></div>' +
+      '<div class="qbar"></div><div class="qmedia">' + fmt(p.media, 2) + "</div>";
+    const bar = row.querySelector(".qbar");
+    partes.forEach(([cls, nome, n]) => {
+      if (!n) return;
+      const seg = document.createElement("div");
+      seg.className = "seg " + cls;
+      seg.style.flex = String(n);
+      tipOn(seg, p.label + " · nota " + nome + ": " + n + " respostas (" + fmt(100 * n / p.n, 0) + "%)");
+      bar.appendChild(seg);
+    });
+    boxP.appendChild(row);
+  });
+  $("#tabelaPerguntas").innerHTML =
+    "<tr><th>Pergunta</th><th class='num'>Média</th><th class='num'>Respostas</th><th class='num'>Nota 10</th><th class='num'>Nota 9</th><th class='num'>Nota 8</th><th class='num'>≤ 7</th></tr>" +
+    ordenadas.map((p) => "<tr><td>" + p.label + "</td><td class='num'>" + fmt(p.media, 2) + "</td><td class='num'>" + p.n +
+      "</td><td class='num'>" + p.dist["10"] + "</td><td class='num'>" + p.dist["9"] + "</td><td class='num'>" + p.dist["8"] +
+      "</td><td class='num'>" + p.dist.le7 + "</td></tr>").join("");
+
+  /* ---------- donut perfil ---------- */
+  const paleta = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s-neutro)"];
+  const perfilPares = Object.entries(D.perfil).sort((a, b) => b[1] - a[1]);
+  const principais = perfilPares.slice(0, 3);
+  const resto = perfilPares.slice(3).reduce((a, p) => a + p[1], 0);
+  const semPerfil = D.respostas - perfilPares.reduce((a, p) => a + p[1], 0);
+  const fatias = [...principais];
+  if (resto + semPerfil > 0) fatias.push(["Outros / não informado", resto + semPerfil]);
+  const totalPerfil = fatias.reduce((a, f) => a + f[1], 0);
+  const svg = $("#donut");
+  const R = 15.9155; const C = 100;
+  let acum = 0;
+  fatias.forEach(([nome, n], i) => {
+    const frac = 100 * n / totalPerfil;
+    const el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    el.setAttribute("cx", 21); el.setAttribute("cy", 21); el.setAttribute("r", R);
+    el.setAttribute("fill", "transparent");
+    el.setAttribute("stroke", paleta[i]);
+    el.setAttribute("stroke-width", 5.4);
+    el.setAttribute("stroke-dasharray", Math.max(frac - 1.4, 0.5) + " " + (C - Math.max(frac - 1.4, 0.5)));
+    el.setAttribute("stroke-dashoffset", String(25 - acum));
+    tipOn(el, nome + ": " + n + " respostas (" + fmt(frac, 1) + "%)");
+    svg.appendChild(el);
+    acum += frac;
+  });
+  $("#donutTotal").textContent = totalPerfil;
+  $("#donutLeg").innerHTML = fatias.map(([nome, n], i) =>
+    '<div class="item"><i class="chip" style="background:' + paleta[i] + '"></i> ' + nome +
+    " <b>" + n + "</b>&nbsp;<small>(" + fmt(100 * n / totalPerfil, 1) + "%)</small></div>").join("");
+
+  /* ---------- prioridades (KPI de decisão) ---------- */
+  const citas = {
+    "Fila no açaí / caixa": "“Açaí, meia hora.” · “Caixa, 20 minutos.”",
+    "Preços (comidas, jogos, bingo)": "“Poderia ser mais em conta as comidas.”",
+    "Personagens e fotos": "“Homem Aranha abaixo da expectativa.” · “Faltou princesa pras meninas.”",
+    "Assentos, mesas e sombra": "“Mais cadeiras e mesas na área externa.”",
+    "Playlist / músicas inadequadas": "“As músicas estavam inadequadas. Crianças cantando funk.”",
+    "Comida fria / crua / porção": "“O espetinho estava cru.” · “Churros muito pequeno.”",
+  };
+  const acoes = {
+    "Fila no açaí / caixa": "Reforçar o atendimento do açaí e abrir um caixa extra nos horários de pico.",
+    "Preços (comidas, jogos, bingo)": "Rever a tabela de preços de alimentação, jogos pagos e cartela do bingo.",
+    "Personagens e fotos": "Elevar o padrão dos personagens, incluir princesas e garantir foto para todas as crianças.",
+    "Assentos, mesas e sombra": "Ampliar mesas, cadeiras e pontos de sombra, inclusive perto do campo.",
+    "Playlist / músicas inadequadas": "Definir playlist infantil curada previamente e controlar o volume dos graves.",
+    "Comida fria / crua / porção": "Controlar ponto e temperatura dos espetinhos e padronizar porções.",
+  };
+  $("#prioridades").innerHTML = D.temas.slice(0, 3).map((t, i) =>
+    '<div class="card"><div class="num">Prioridade ' + (i + 1) + " · " + t.n + ' menções</div><h3>' + t.tema +
+    "</h3><p>" + (acoes[t.tema] || "Tema recorrente nos comentários abertos.") + "</p>" +
+    (citas[t.tema] ? '<div class="cita">' + citas[t.tema] + "</div>" : "") + "</div>").join("");
+
+  /* ---------- temas recorrentes ---------- */
+  const maxTema = Math.max(...D.temas.map((t) => t.n));
+  const boxT = $("#temas");
+  D.temas.forEach((t) => {
+    const row = document.createElement("div");
+    row.className = "tema-row";
+    row.innerHTML = '<div class="tlabel">' + t.tema + '</div><div class="tbar-out"><div class="tbar" style="width:' +
+      (100 * t.n / maxTema) + '%"></div></div><div class="tn">' + t.n + "</div>";
+    row.addEventListener("click", () => {
+      const ativo = row.classList.contains("ativo");
+      document.querySelectorAll(".tema-row").forEach((r) => r.classList.remove("ativo"));
+      if (!ativo) { row.classList.add("ativo"); fTema.value = t.tema; } else { fTema.value = ""; }
+      filtra();
+      $("#comentarios").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+    tipOn(row, t.n + " comentários citam: " + t.tema);
+    boxT.appendChild(row);
+  });
+
+  /* ---------- termômetro ---------- */
+  const melhor = ordenadas[0]; const pior = ordenadas[ordenadas.length - 1];
+  $("#termometro").innerHTML =
+    '<div class="kpi" style="border:none;padding:0 0 14px"><div class="rotulo">Quesito mais bem avaliado</div>' +
+    '<div class="valor" style="font-size:22px">' + melhor.label + '</div><div class="apoio">média ' + fmt(melhor.media, 2) + "</div></div>" +
+    '<div class="kpi" style="border:none;padding:0 0 14px"><div class="rotulo">Menor média da edição</div>' +
+    '<div class="valor" style="font-size:22px">' + pior.label + '</div><div class="apoio">média ' + fmt(pior.media, 2) +
+    " · " + fmt(pior.pctAtencao, 1) + "% das notas ≤ 7</div></div>" +
+    '<div class="kpi" style="border:none;padding:0"><div class="rotulo">Comentários registrados</div>' +
+    '<div class="valor" style="font-size:22px">' + D.comentarios.length + '</div><div class="apoio">' +
+    D.temas.reduce((a, t) => a + t.n, 0) + " menções a temas de melhoria</div></div>";
+
+  /* ---------- caixa de comentários ---------- */
+  const fBusca = $("#fBusca"), fCampo = $("#fCampo"), fTema = $("#fTema"), fPerfil = $("#fPerfil");
+  const campos = [...new Set(D.comentarios.map((c) => c.c))];
+  const perfis = [...new Set(D.comentarios.map((c) => c.p))];
+  fCampo.innerHTML = '<option value="">Todas as perguntas</option>' + campos.map((c) => "<option>" + c + "</option>").join("");
+  fTema.innerHTML = '<option value="">Todos os temas</option>' + D.temas.map((t) => "<option>" + t.tema + "</option>").join("");
+  fPerfil.innerHTML = '<option value="">Todos os perfis</option>' + perfis.map((p) => "<option>" + p + "</option>").join("");
+
+  const LOTE = 120;
+  let visiveis = LOTE;
+  let filtrados = D.comentarios;
+
+  function normaliza(t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+
+  function filtra() {
+    const q = normaliza(fBusca.value.trim());
+    filtrados = D.comentarios.filter((c) =>
+      (!fCampo.value || c.c === fCampo.value) &&
+      (!fTema.value || c.temas.includes(fTema.value)) &&
+      (!fPerfil.value || c.p === fPerfil.value) &&
+      (!q || normaliza(c.t).includes(q)));
+    visiveis = LOTE;
+    pinta();
+  }
+
+  function pinta() {
+    $("#fContagem").textContent = filtrados.length === D.comentarios.length
+      ? D.comentarios.length + " comentários"
+      : filtrados.length + " de " + D.comentarios.length + " comentários";
+    $("#comentarios").innerHTML = filtrados.slice(0, visiveis).map((c) =>
+      '<div class="com-item"><div class="texto">' + c.t.replace(/&/g, "&amp;").replace(/</g, "&lt;") +
+      '</div><div class="meta"><span class="tagz">' + c.c + '</span><span class="tagz">' + c.p + "</span>" +
+      c.temas.map((t) => '<span class="tagz tt">' + t + "</span>").join("") + "</div></div>").join("") ||
+      '<div class="contagem">Nenhum comentário encontrado com esses filtros.</div>';
+    $("#btnMais").style.display = filtrados.length > visiveis ? "block" : "none";
+  }
+
+  [fCampo, fTema, fPerfil].forEach((el) => el.addEventListener("change", () => {
+    if (el === fTema) document.querySelectorAll(".tema-row").forEach((r) => r.classList.remove("ativo"));
+    filtra();
+  }));
+  fBusca.addEventListener("input", filtra);
+  $("#btnMais").addEventListener("click", () => { visiveis += LOTE; pinta(); });
+
+  filtra();
+})();
+</script>
+</body>
+</html>
