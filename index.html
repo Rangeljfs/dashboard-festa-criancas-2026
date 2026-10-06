@@ -165,6 +165,11 @@ section { padding: 34px 0 6px; }
 .kpi .ico svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.9; }
 .kpi.k-atencao .valor { color: var(--d7); }
 .kpi.k-atencao { --acc: var(--d7); }
+.kpi { cursor: pointer; transition: box-shadow .2s, transform .2s; }
+.kpi:hover { box-shadow: 0 14px 40px rgba(12,88,104,.14); transform: translateY(-3px); }
+.kpi .ver-kpi { font-size: 11px; font-weight: 700; color: var(--acc); margin-top: 10px; display: flex; align-items: center; gap: 5px; position: relative; }
+.kpi .ver-kpi svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.4; transition: transform .25s; }
+.kpi.aberto .ver-kpi svg { transform: rotate(180deg); }
 
 /* ---------- grid de 2 colunas ---------- */
 .duo { display: grid; grid-template-columns: 1.65fr 1fr; gap: 14px; }
@@ -217,8 +222,8 @@ section { padding: 34px 0 6px; }
 .tema-row .tn { font-weight: 800; font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; color: var(--navy); }
 .tema-row .seta { width: 16px; height: 16px; color: var(--ink-3); transition: transform .25s; justify-self: center; }
 .tema-item.aberto .tema-row .seta { transform: rotate(180deg); color: var(--navy-2); }
-.tema-painel { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
-.tema-item.aberto .tema-painel { max-height: 420px; }
+.tema-painel { display: none; }
+.tema-item.aberto .tema-painel { display: block; animation: abrePainel .35s cubic-bezier(.22,1,.36,1); }
 .tema-painel-in { padding: 4px 6px 14px; }
 .tema-painel-in .resumo { font-size: 12px; color: var(--ink-2); margin-bottom: 10px; }
 .tema-painel-in .resumo a { color: var(--navy-2); font-weight: 600; cursor: pointer; text-decoration: none; }
@@ -250,7 +255,7 @@ section { padding: 34px 0 6px; }
 .prio .pcard .cita::before { content: "\201C"; color: var(--navy-2); font-weight: 800; }
 
 /* ---------- termômetro (limpo) ---------- */
-.termo-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--grid); }
+.termo-item { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--grid); }
 .termo-item:last-child { border-bottom: none; padding-bottom: 0; }
 .termo-item:first-child { padding-top: 0; }
 .termo-ico { width: 42px; height: 42px; border-radius: 12px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
@@ -263,6 +268,43 @@ section { padding: 34px 0 6px; }
 .termo-txt .nome { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-top: 2px; }
 .termo-txt .det { font-size: 12.5px; color: var(--ink-2); margin-top: 1px; }
 .termo-val { margin-left: auto; font-size: 22px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
+
+/* prioridade e termômetro clicáveis (abrem painel com a origem dos dados) */
+.prio .pcard { cursor: pointer; transition: box-shadow .2s, transform .2s; }
+.prio .pcard:hover { box-shadow: 0 14px 40px rgba(12,88,104,.14); transform: translateY(-3px); }
+.prio .pcard .ver { margin-top: 14px; font-size: 11.5px; font-weight: 700; color: var(--navy-2); display: flex; align-items: center; gap: 5px; }
+.prio .pcard .ver svg { width: 14px; height: 14px; transition: transform .25s; }
+.prio .pcard.aberto .ver svg { transform: rotate(180deg); }
+.termo-item { cursor: pointer; border-radius: 10px; transition: background .15s; padding-left: 8px; padding-right: 8px; margin: 0 -8px; }
+.termo-item:hover { background: var(--surface-2); }
+.termo-item .termo-seta { width: 16px; height: 16px; color: var(--ink-3); flex: 0 0 auto; transition: transform .25s; margin-left: 6px; }
+.termo-item.aberto .termo-seta { transform: rotate(180deg); color: var(--navy-2); }
+.painel-origem { display: none; }
+.painel-origem.escancara { display: block; animation: abrePainel .35s cubic-bezier(.22,1,.36,1); }
+@keyframes abrePainel { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.painel-origem-in { padding: 12px 14px; margin-top: 12px; background: var(--surface-2); border-radius: 12px; border: 1px solid var(--hairline); }
+.painel-origem-in .po-tit { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-2); margin-bottom: 9px; }
+.po-lista { display: flex; flex-direction: column; gap: 6px; max-height: 240px; overflow-y: auto; padding-right: 4px; }
+.po-lista::-webkit-scrollbar { width: 6px; }
+.po-lista::-webkit-scrollbar-thumb { background: var(--navy-2); border-radius: 999px; }
+.po-lista .po-linha { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; padding: 5px 0; border-bottom: 1px solid var(--grid); }
+.po-lista .po-linha:last-child { border-bottom: none; }
+.po-lista .po-linha b { font-variant-numeric: tabular-nums; color: var(--navy); white-space: nowrap; }
+.po-lista .po-c { font-size: 12.5px; color: var(--ink); background: var(--surface); border: 1px solid var(--hairline); border-left: 3px solid var(--navy-2); border-radius: 7px; padding: 7px 10px; line-height: 1.4; }
+.po-lista .po-c em { display: block; margin-top: 3px; font-size: 10px; color: var(--ink-3); text-transform: uppercase; font-style: normal; letter-spacing: .04em; }
+
+/* ---------- botão voltar ao topo ---------- */
+#aoTopo {
+  position: fixed; right: 22px; bottom: 22px; z-index: 50;
+  width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--navy); color: #fff; box-shadow: 0 8px 24px rgba(12,88,104,.35);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(14px); pointer-events: none;
+  transition: opacity .3s, transform .3s, background .2s;
+}
+#aoTopo.mostra { opacity: 1; transform: none; pointer-events: auto; }
+#aoTopo:hover { background: var(--navy-2); }
+#aoTopo svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.4; }
 
 /* ---------- comentários ---------- */
 .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
@@ -419,6 +461,10 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
   </div>
 </footer>
 
+<button id="aoTopo" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">
+  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <div id="tip" role="tooltip"></div>
 
 <script src="dados.js"></script>
@@ -453,16 +499,44 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     relogio: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>',
     alerta: '<svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>',
   };
+  const poLinhas = (pares) => '<div class="po-lista">' +
+    pares.map(([rot, val]) => '<div class="po-linha"><span>' + rot + "</span><b>" + val + "</b></div>").join("") + "</div>";
+  const perguntasOrd = [...D.perguntas].sort((a, b) => b.media - a.media);
+  const origemMediaGeral = '<div class="po-tit">Média de cada quesito</div>' +
+    poLinhas(perguntasOrd.map((p) => [p.label, fmt(p.media, 2)]));
+  const origemRecomendacao = '<div class="po-tit">Como se calcula a recomendação</div>' +
+    poLinhas([["Média das notas (5 a 10)", fmt(D.recomendacao.media, 2)], ["Deram nota 9 ou 10", fmt(D.recomendacao.pctPromotores, 1) + "%"], ["Total de respostas", D.recomendacao.n]]);
+  const origemFila = '<div class="po-tit">Enfrentou fila acima de 5 minutos?</div>' +
+    poLinhas([["Não enfrentou fila", D.filas.nao + " (" + fmt(D.filas.pctSemFila, 1) + "%)"], ["Enfrentou fila", D.filas.sim + " (" + fmt(100 * D.filas.sim / (D.filas.sim + D.filas.nao), 1) + "%)"]]);
+  const origemAtencao = '<div class="po-tit">Avaliações nota ≤ 7 por quesito</div>' +
+    poLinhas(perguntasOrd.filter((p) => p.dist.le7 > 0).sort((a, b) => b.dist.le7 - a.dist.le7).map((p) => [p.label, p.dist.le7]));
+
   const kpis = [
-    { rotulo: "Média geral", valor: fmt(D.mediaGeral, 2), apoio: totalAval.toLocaleString("pt-BR") + " avaliações em " + D.perguntas.length + " quesitos", acc: "var(--navy)", ico: ICO.estrela },
-    { rotulo: "Recomendação", valor: fmt(D.recomendacao.media, 2), apoio: fmt(D.recomendacao.pctPromotores, 1) + "% deram nota 9 ou 10", acc: "var(--s2)", ico: ICO.polegar },
-    { rotulo: "Sem fila acima de 5 min", valor: fmt(D.filas.pctSemFila, 1) + "%", apoio: D.filas.sim + " relatos de fila em " + (D.filas.sim + D.filas.nao) + " respostas", acc: "var(--good)", ico: ICO.relogio },
-    { rotulo: "Avaliações nota ≤ 7", valor: fmt(100 * totalAtencao / totalAval, 1) + "%", apoio: totalAtencao + " avaliações: o ponto de atenção da edição", classe: "k-atencao", ico: ICO.alerta },
+    { rotulo: "Média geral", valor: fmt(D.mediaGeral, 2), apoio: totalAval.toLocaleString("pt-BR") + " avaliações em " + D.perguntas.length + " quesitos", acc: "var(--navy)", ico: ICO.estrela, origem: origemMediaGeral },
+    { rotulo: "Recomendação", valor: fmt(D.recomendacao.media, 2), apoio: fmt(D.recomendacao.pctPromotores, 1) + "% deram nota 9 ou 10", acc: "var(--s2)", ico: ICO.polegar, origem: origemRecomendacao },
+    { rotulo: "Sem fila acima de 5 min", valor: fmt(D.filas.pctSemFila, 1) + "%", apoio: D.filas.sim + " relatos de fila em " + (D.filas.sim + D.filas.nao) + " respostas", acc: "var(--good)", ico: ICO.relogio, origem: origemFila },
+    { rotulo: "Avaliações nota ≤ 7", valor: fmt(100 * totalAtencao / totalAval, 1) + "%", apoio: totalAtencao + " avaliações: o ponto de atenção da edição", classe: "k-atencao", ico: ICO.alerta, origem: origemAtencao },
   ];
+  const SETAK = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
   $("#kpis").innerHTML = kpis.map((k, i) =>
     '<div class="kpi ' + (k.classe || "") + '" style="--i:' + i + ';' + (k.acc ? "--acc:" + k.acc : "") + '">' +
     '<div class="ico">' + k.ico + '</div><div class="rotulo">' + k.rotulo +
-    '</div><div class="valor">' + k.valor + '</div><div class="apoio">' + k.apoio + "</div></div>").join("");
+    '</div><div class="valor">' + k.valor + '</div><div class="apoio">' + k.apoio + "</div>" +
+    '<div class="ver-kpi">De onde vem ' + SETAK + "</div>" +
+    '<div class="painel-origem"><div class="painel-origem-in-wrap"><div class="painel-origem-in">' + k.origem + "</div></div></div>" +
+    "</div>").join("");
+  function alternaCard(card, grupoSel) {
+    const abrindo = !card.classList.contains("aberto");
+    document.querySelectorAll(grupoSel + ".aberto").forEach((o) => {
+      if (o !== card) { o.classList.remove("aberto"); const p = o.querySelector(".painel-origem"); if (p) p.classList.remove("escancara"); }
+    });
+    card.classList.toggle("aberto", abrindo);
+    const painel = card.querySelector(".painel-origem");
+    if (painel) painel.classList.toggle("escancara", abrindo);
+  }
+  document.querySelectorAll("#kpis .kpi").forEach((card) => {
+    card.addEventListener("click", () => alternaCard(card, "#kpis .kpi"));
+  });
 
   /* ---------- médias por pergunta (barras 100% empilhadas) ---------- */
   const ordenadas = [...D.perguntas].sort((a, b) => b.media - a.media);
@@ -548,20 +622,34 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     "Playlist / músicas inadequadas": "Definir playlist infantil curada previamente e controlar o volume dos graves.",
     "Comida fria / crua / porção": "Controlar ponto e temperatura dos espetinhos e padronizar porções.",
   };
-  $("#prioridades").innerHTML = D.temas.slice(0, 3).map((t, i) =>
-    '<div class="pcard p' + (i + 1) + '"><div class="rank">' + (i + 1) + "</div>" +
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const SETA = '<svg class="seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+  const SETA2 = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+
+  $("#prioridades").innerHTML = D.temas.slice(0, 3).map((t, i) => {
+    const comentariosTema = D.comentarios.filter((c) => c.temas.includes(t.tema));
+    return '<div class="pcard p' + (i + 1) + '"><div class="rank">' + (i + 1) + "</div>" +
     '<div class="tema">' + t.tema + "</div>" +
     '<div class="mencoes">' + t.n + " menções nos comentários</div>" +
     '<div class="acao-rot">Ação recomendada</div>' +
     '<div class="acao">' + (acoes[t.tema] || "Tema recorrente nos comentários abertos.") + "</div>" +
     (citas[t.tema] ? '<div class="cita">' + citas[t.tema].replace(/^“/, "").replace(/”/g, "").replace(/“/g, "") + "</div>" : "") +
-    "</div>").join("");
+    '<div class="ver">De onde vem este dado ' + SETA2 + "</div>" +
+    '<div class="painel-origem"><div class="painel-origem-in-wrap"><div class="painel-origem-in">' +
+      '<div class="po-tit">' + comentariosTema.length + " comentários que citam este tema</div>" +
+      '<div class="po-lista">' +
+        comentariosTema.slice(0, 30).map((c) => '<div class="po-c">' + esc(c.t) + "<em>" + c.c + " · " + c.p + "</em></div>").join("") +
+      "</div></div></div></div>" +
+    "</div>";
+  }).join("");
+  // clique abre/fecha o painel de origem de cada prioridade
+  document.querySelectorAll("#prioridades .pcard").forEach((card) => {
+    card.addEventListener("click", () => alternaCard(card, "#prioridades .pcard"));
+  });
 
   /* ---------- temas recorrentes (acordeão com comentários) ---------- */
   const maxTema = Math.max(...D.temas.map((t) => t.n));
   const boxT = $("#temas");
-  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-  const SETA = '<svg class="seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
   D.temas.forEach((t) => {
     const comentariosTema = D.comentarios.filter((c) => c.temas.includes(t.tema));
     const item = document.createElement("div");
@@ -594,24 +682,39 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     boxT.appendChild(item);
   });
 
-  /* ---------- termômetro (limpo) ---------- */
+  /* ---------- termômetro (limpo, clicável) ---------- */
   const melhor = ordenadas[0]; const pior = ordenadas[ordenadas.length - 1];
   const icoBom = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const icoBaixo = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 3l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>';
   const icoComent = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M21 12a8 8 0 01-11.5 7.2L3 21l1.8-6.5A8 8 0 1121 12z" stroke-linejoin="round"/></svg>';
   const totalMencoes = D.temas.reduce((a, t) => a + t.n, 0);
+
+  // origem de um quesito: distribuição das notas
+  const origemQuesito = (p) => {
+    const linhas = [["Nota 10", p.dist["10"]], ["Nota 9", p.dist["9"]], ["Nota 8", p.dist["8"]], ["Nota ≤ 7", p.dist.le7]];
+    return '<div class="po-tit">Distribuição das ' + p.n + " notas de " + p.label + "</div><div class='po-lista'>" +
+      linhas.map(([rot, n]) => '<div class="po-linha"><span>' + rot + "</span><b>" + n + " (" + fmt(100 * n / p.n, 0) + "%)</b></div>").join("") +
+      "</div>";
+  };
+  // origem dos comentários: ranking de temas
+  const origemComentarios = '<div class="po-tit">Menções por tema de melhoria</div><div class="po-lista">' +
+    D.temas.map((t) => '<div class="po-linha"><span>' + t.tema + "</span><b>" + t.n + "</b></div>").join("") + "</div>";
+
+  function termoItem(cls, ico, rot, nome, det, val, origem) {
+    return '<div class="termo-item"><div class="termo-ico ' + cls + '">' + ico + "</div>" +
+      '<div class="termo-txt"><div class="rot">' + rot + '</div><div class="nome">' + nome +
+      '</div><div class="det">' + det + "</div></div>" +
+      (val !== null ? '<div class="termo-val">' + val + "</div>" : "") +
+      '<svg class="termo-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>' +
+      '<div class="painel-origem" style="flex-basis:100%"><div class="painel-origem-in-wrap"><div class="painel-origem-in">' + origem + "</div></div></div></div>";
+  }
   $("#termometro").innerHTML =
-    '<div class="termo-item"><div class="termo-ico bom">' + icoBom + "</div>" +
-      '<div class="termo-txt"><div class="rot">Mais bem avaliado</div><div class="nome">' + melhor.label +
-      '</div><div class="det">o quesito de maior aprovação</div></div>' +
-      '<div class="termo-val">' + fmt(melhor.media, 2) + "</div></div>" +
-    '<div class="termo-item"><div class="termo-ico baixo">' + icoBaixo + "</div>" +
-      '<div class="termo-txt"><div class="rot">Menor média da edição</div><div class="nome">' + pior.label +
-      '</div><div class="det">' + fmt(pior.pctAtencao, 1) + '% das notas ≤ 7</div></div>' +
-      '<div class="termo-val">' + fmt(pior.media, 2) + "</div></div>" +
-    '<div class="termo-item"><div class="termo-ico coment">' + icoComent + "</div>" +
-      '<div class="termo-txt"><div class="rot">Comentários registrados</div><div class="nome">' + D.comentarios.length +
-      ' respostas de texto</div><div class="det">' + totalMencoes + ' menções a temas de melhoria</div></div></div>';
+    termoItem("bom", icoBom, "Mais bem avaliado", melhor.label, "o quesito de maior aprovação", fmt(melhor.media, 2), origemQuesito(melhor)) +
+    termoItem("baixo", icoBaixo, "Menor média da edição", pior.label, fmt(pior.pctAtencao, 1) + "% das notas ≤ 7", fmt(pior.media, 2), origemQuesito(pior)) +
+    termoItem("coment", icoComent, "Comentários registrados", D.comentarios.length + " respostas de texto", totalMencoes + " menções a temas de melhoria", null, origemComentarios);
+  document.querySelectorAll("#termometro .termo-item").forEach((it) => {
+    it.addEventListener("click", () => alternaCard(it, "#termometro .termo-item"));
+  });
 
   /* ---------- caixa de comentários ---------- */
   const fBusca = $("#fBusca"), fCampo = $("#fCampo"), fTema = $("#fTema"), fPerfil = $("#fPerfil");
@@ -704,6 +807,15 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     // mostra o logo (~2,4s) e depois sobe a cortina revelando o painel
     setTimeout(() => { cortina.classList.add("subir"); }, 2400);
     cortina.addEventListener("transitionend", () => cortina.classList.add("fim"), { once: true });
+  }
+
+  /* ---------- botão voltar ao topo ---------- */
+  const aoTopo = $("#aoTopo");
+  if (aoTopo) {
+    addEventListener("scroll", () => {
+      aoTopo.classList.toggle("mostra", scrollY > 400);
+    }, { passive: true });
+    aoTopo.addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
   }
 })();
 </script>
