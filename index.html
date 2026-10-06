@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,17 +100,17 @@ body {
   background: radial-gradient(900px 600px at 50% 40%, #14788c 0%, var(--navy) 50%, #06313a 100%);
   display: flex; align-items: center; justify-content: center;
   clip-path: inset(0 0 0 0);
-  transition: clip-path 1s cubic-bezier(.76, 0, .24, 1);
+  transition: clip-path 1.3s cubic-bezier(.76, 0, .24, 1);
 }
 .cortina.subir { clip-path: inset(0 0 100% 0); }
 .cortina.fim { display: none; }
 .cortina img {
   width: min(70vw, 560px); height: auto; opacity: 0; transform: scale(1.12);
-  animation: cortinaLogo 1.5s cubic-bezier(.4, .05, .2, 1) .15s forwards;
+  animation: cortinaLogo 2.1s cubic-bezier(.4, .05, .2, 1) .2s forwards;
 }
 @keyframes cortinaLogo {
   0% { opacity: 0; transform: scale(1.14); }
-  30% { opacity: 1; }
+  35% { opacity: 1; }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -122,26 +122,18 @@ body {
   padding: 58px 0 62px;
   text-align: center;
 }
-.tema-btn {
-  position: absolute; top: 18px; right: 18px; z-index: 4;
-  border: 1px solid rgba(255,255,255,.28); background: rgba(255,255,255,.08); color: #fff;
-  border-radius: 999px; padding: 6px 15px; font: inherit; font-size: 12px; font-weight: 500; cursor: pointer;
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); transition: background .2s, border-color .2s;
-}
-.tema-btn:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.5); }
 .hero-logo { height: clamp(78px, 12vw, 112px); width: auto; margin-bottom: 22px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
 .hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .82; margin-bottom: 14px; }
 .hero h1 { font-size: clamp(28px, 4.6vw, 44px); font-weight: 800; letter-spacing: -.01em; line-height: 1.12; }
 .hero .sub { margin: 14px auto 0; font-size: 15.5px; font-weight: 400; opacity: .85; max-width: 640px; }
 
-/* ---------- animações de entrada em cascata ---------- */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-body.pronto .reveal { opacity: 1; transform: none; }
-body.pronto .reveal.r1 { transition-delay: .05s; }
-body.pronto .reveal.r2 { transition-delay: .13s; }
-body.pronto .reveal.r3 { transition-delay: .21s; }
-.kpi { opacity: 0; transform: translateY(22px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
-body.pronto .kpi { opacity: 1; transform: none; transition-delay: calc(.1s + var(--i,0) * .09s); }
+/* ---------- animações ao rolar (entra quando aparece na tela) ---------- */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+.reveal.visivel { opacity: 1; transform: none; }
+.reveal.r2 { transition-delay: .12s; }
+.reveal.r3 { transition-delay: .24s; }
+.kpi { opacity: 0; transform: translateY(28px); transition: opacity .85s cubic-bezier(.22,1,.36,1), transform .85s cubic-bezier(.22,1,.36,1); }
+.kpis.visivel .kpi { opacity: 1; transform: none; transition-delay: calc(.08s + var(--i,0) * .14s); }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .kpi { opacity: 1 !important; transform: none !important; transition: none !important; }
   .cortina { display: none !important; }
@@ -195,8 +187,8 @@ section { padding: 34px 0 6px; }
 .qrow .qlabel small { display: block; color: var(--ink-3); font-size: 11px; font-weight: 400; }
 .qbar-wrap { background: var(--surface-2); border-radius: 6px; padding: 3px; }
 .qbar { display: flex; height: 20px; border-radius: 4px; overflow: hidden; gap: 2px; background: transparent;
-  transform: scaleX(0); transform-origin: left; transition: transform 1s cubic-bezier(.22,1,.36,1); }
-body.pronto .qbar { transform: scaleX(1); }
+  transform: scaleX(0); transform-origin: left; transition: transform 1.3s cubic-bezier(.22,1,.36,1); }
+.reveal.visivel .qbar { transform: scaleX(1); }
 .seg { height: 100%; min-width: 2px; cursor: default; transition: filter .15s; }
 .seg:hover { filter: brightness(1.12); }
 .seg.s10 { background: var(--d10); border-radius: 4px 0 0 4px; }
@@ -216,15 +208,32 @@ body.pronto .qbar { transform: scaleX(1); }
 .donut-leg .item b { margin-left: auto; font-variant-numeric: tabular-nums; }
 .donut-leg .item small { color: var(--ink-2); }
 
-/* ---------- temas ---------- */
-.tema-row { display: grid; grid-template-columns: 250px 1fr 36px; gap: 12px; align-items: center; padding: 5px 0; cursor: pointer; border-radius: 6px; }
+/* ---------- temas (acordeão) ---------- */
+.tema-item { border-bottom: 1px solid var(--grid); }
+.tema-item:last-child { border-bottom: none; }
+.tema-row { display: grid; grid-template-columns: 230px 1fr 30px 18px; gap: 12px; align-items: center; padding: 10px 6px; cursor: pointer; border-radius: 8px; transition: background .15s; }
 .tema-row:hover { background: var(--surface-2); }
-.tema-row.ativo { background: var(--surface-2); outline: 1px solid var(--navy-2); }
-@media (max-width: 680px) { .tema-row { grid-template-columns: 1fr 36px; } .tema-row .tbar-out { grid-column: 1 / -1; } }
-.tema-row .tlabel { font-size: 13.5px; }
-.tbar-out { height: 18px; }
-.tbar { height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 3px; }
-.tema-row .tn { font-weight: 700; font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; }
+.tema-item.aberto .tema-row { background: var(--surface-2); }
+@media (max-width: 680px) { .tema-row { grid-template-columns: 1fr 30px 18px; } .tema-row .tbar-out { grid-column: 1 / -1; } }
+.tema-row .tlabel { font-size: 13.5px; font-weight: 600; }
+.tbar-out { height: 16px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.tema-item.aberto .tbar-out, .tema-row:hover .tbar-out { background: color-mix(in srgb, var(--navy) 10%, var(--surface)); }
+.tbar { height: 100%; background: var(--bar); border-radius: 999px; min-width: 4px; transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(.22,1,.36,1); }
+.reveal.visivel .tbar { transform: scaleX(1); }
+.tema-row .tn { font-weight: 800; font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; color: var(--navy); }
+.tema-row .seta { width: 16px; height: 16px; color: var(--ink-3); transition: transform .25s; justify-self: center; }
+.tema-item.aberto .tema-row .seta { transform: rotate(180deg); color: var(--navy-2); }
+.tema-painel { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.4,0,.2,1); }
+.tema-item.aberto .tema-painel { max-height: 420px; }
+.tema-painel-in { padding: 4px 6px 14px; }
+.tema-painel-in .resumo { font-size: 12px; color: var(--ink-2); margin-bottom: 10px; }
+.tema-painel-in .resumo a { color: var(--navy-2); font-weight: 600; cursor: pointer; text-decoration: none; }
+.tema-painel-in .resumo a:hover { text-decoration: underline; }
+.tema-coment { max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 7px; padding-right: 4px; }
+.tema-coment::-webkit-scrollbar { width: 6px; }
+.tema-coment::-webkit-scrollbar-thumb { background: var(--navy-2); border-radius: 999px; }
+.tema-coment .tc { font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--hairline); border-left: 3px solid var(--navy-2); border-radius: 8px; padding: 9px 12px; line-height: 1.45; }
+.tema-coment .tc span { display: block; margin-top: 4px; font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .04em; }
 
 /* ---------- prioridades (executivo) ---------- */
 .prio { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); gap: 16px; }
@@ -245,6 +254,21 @@ body.pronto .qbar { transform: scaleX(1); }
 .prio .pcard .acao { font-size: 13.5px; color: var(--ink); line-height: 1.5; font-weight: 500; }
 .prio .pcard .cita { margin-top: auto; padding-top: 14px; font-size: 12px; color: var(--ink-2); line-height: 1.5; border-top: 1px solid var(--hairline); margin-top: 16px; }
 .prio .pcard .cita::before { content: "\201C"; color: var(--navy-2); font-weight: 800; }
+
+/* ---------- termômetro (limpo) ---------- */
+.termo-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--grid); }
+.termo-item:last-child { border-bottom: none; padding-bottom: 0; }
+.termo-item:first-child { padding-top: 0; }
+.termo-ico { width: 42px; height: 42px; border-radius: 12px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
+.termo-ico svg { width: 21px; height: 21px; stroke-width: 2; fill: none; }
+.termo-ico.bom { background: color-mix(in srgb, var(--good) 14%, var(--surface)); color: var(--good); }
+.termo-ico.baixo { background: color-mix(in srgb, var(--d7) 14%, var(--surface)); color: var(--d7); }
+.termo-ico.coment { background: color-mix(in srgb, var(--navy-2) 14%, var(--surface)); color: var(--navy-2); }
+.termo-txt { min-width: 0; }
+.termo-txt .rot { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.termo-txt .nome { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.25; margin-top: 2px; }
+.termo-txt .det { font-size: 12.5px; color: var(--ink-2); margin-top: 1px; }
+.termo-val { margin-left: auto; font-size: 22px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; flex: 0 0 auto; }
 
 /* ---------- comentários ---------- */
 .filtros { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
@@ -300,7 +324,6 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
 </div>
 
 <div class="hero">
-  <button class="tema-btn" id="btnTema" type="button">Modo escuro</button>
   <div class="wrap">
     <img class="hero-logo" src="img/logo-branco.png" alt="Associação Volvo">
     <div class="overline" id="heroOverline">Pesquisa de Satisfação</div>
@@ -411,24 +434,6 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
   const $ = (s) => document.querySelector(s);
   const fmt = (x, c) => x.toLocaleString("pt-BR", { minimumFractionDigits: c, maximumFractionDigits: c });
 
-  /* ---------- tema claro/escuro ---------- */
-  const root = document.documentElement;
-  const btnTema = $("#btnTema");
-  function aplicaTema(t) {
-    if (t) root.setAttribute("data-theme", t); else root.removeAttribute("data-theme");
-    const escuro = t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches);
-    btnTema.textContent = escuro ? "Modo claro" : "Modo escuro";
-    try { if (t) localStorage.setItem("tema", t); } catch (e) {}
-  }
-  let temaSalvo = null;
-  try { temaSalvo = localStorage.getItem("tema"); } catch (e) {}
-  aplicaTema(temaSalvo);
-  btnTema.addEventListener("click", () => {
-    const atual = root.getAttribute("data-theme");
-    const escuro = atual === "dark" || (!atual && matchMedia("(prefers-color-scheme: dark)").matches);
-    aplicaTema(escuro ? "light" : "dark");
-  });
-
   /* ---------- tooltip ---------- */
   const tip = $("#tip");
   function tipOn(el, texto) {
@@ -514,17 +519,17 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     el.setAttribute("stroke-dashoffset", String(25 - acum));
     el.style.transition = "stroke-dasharray .9s cubic-bezier(.22,1,.36,1) " + (0.15 + i * 0.12) + "s";
     el.setAttribute("stroke-dasharray", "0 " + C); // começa vazio
+    el.style.transition = "stroke-dasharray 1.2s cubic-bezier(.22,1,.36,1) " + (0.2 + i * 0.18) + "s";
     tipOn(el, nome + ": " + n + " respostas (" + fmt(frac, 1) + "%)");
     svg.appendChild(el);
-    // anima quando o dashboard abre
-    requestAnimationFrame(() => {
-      const aplica = () => el.setAttribute("stroke-dasharray", visivel + " " + (C - visivel));
-      if (document.body.classList.contains("pronto")) aplica();
-      else {
-        const obs = new MutationObserver(() => { if (document.body.classList.contains("pronto")) { aplica(); obs.disconnect(); } });
-        obs.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-      }
-    });
+    // anima quando o card do donut aparece na tela (ao rolar)
+    const aplica = () => el.setAttribute("stroke-dasharray", visivel + " " + (C - visivel));
+    const cardDonut = svg.closest(".reveal") || document.body;
+    const checar = () => { if (cardDonut.classList.contains("visivel")) { aplica(); return true; } return false; };
+    if (!checar()) {
+      const obs = new MutationObserver(() => { if (checar()) obs.disconnect(); });
+      obs.observe(cardDonut, { attributes: true, attributeFilter: ["class"] });
+    }
     acum += frac;
   });
   $("#donutTotal").textContent = totalPerfil;
@@ -558,36 +563,61 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
     (citas[t.tema] ? '<div class="cita">' + citas[t.tema].replace(/^“/, "").replace(/”/g, "").replace(/“/g, "") + "</div>" : "") +
     "</div>").join("");
 
-  /* ---------- temas recorrentes ---------- */
+  /* ---------- temas recorrentes (acordeão com comentários) ---------- */
   const maxTema = Math.max(...D.temas.map((t) => t.n));
   const boxT = $("#temas");
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const SETA = '<svg class="seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
   D.temas.forEach((t) => {
-    const row = document.createElement("div");
-    row.className = "tema-row";
-    row.innerHTML = '<div class="tlabel">' + t.tema + '</div><div class="tbar-out"><div class="tbar" style="width:' +
-      (100 * t.n / maxTema) + '%"></div></div><div class="tn">' + t.n + "</div>";
+    const comentariosTema = D.comentarios.filter((c) => c.temas.includes(t.tema));
+    const item = document.createElement("div");
+    item.className = "tema-item";
+    item.innerHTML =
+      '<div class="tema-row">' +
+        '<div class="tlabel">' + t.tema + "</div>" +
+        '<div class="tbar-out"><div class="tbar" style="width:' + (100 * t.n / maxTema) + '%"></div></div>' +
+        '<div class="tn">' + t.n + "</div>" + SETA +
+      "</div>" +
+      '<div class="tema-painel"><div class="tema-painel-in">' +
+        '<div class="resumo">' + comentariosTema.length + " comentário(s) citam este tema. " +
+          '<a data-tema="' + t.tema + '">Ver na lista completa ↓</a></div>' +
+        '<div class="tema-coment">' +
+          comentariosTema.slice(0, 40).map((c) =>
+            '<div class="tc">' + esc(c.t) + "<span>" + c.c + " · " + c.p + "</span></div>").join("") +
+        "</div>" +
+      "</div></div>";
+    const row = item.querySelector(".tema-row");
     row.addEventListener("click", () => {
-      const ativo = row.classList.contains("ativo");
-      document.querySelectorAll(".tema-row").forEach((r) => r.classList.remove("ativo"));
-      if (!ativo) { row.classList.add("ativo"); fTema.value = t.tema; } else { fTema.value = ""; }
-      filtra();
-      $("#comentarios").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      const abrindo = !item.classList.contains("aberto");
+      document.querySelectorAll(".tema-item.aberto").forEach((o) => { if (o !== item) o.classList.remove("aberto"); });
+      item.classList.toggle("aberto", abrindo);
     });
-    tipOn(row, t.n + " comentários citam: " + t.tema);
-    boxT.appendChild(row);
+    item.querySelector(".resumo a").addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      fTema.value = t.tema; filtra();
+      $("#comentarios").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    boxT.appendChild(item);
   });
 
-  /* ---------- termômetro ---------- */
+  /* ---------- termômetro (limpo) ---------- */
   const melhor = ordenadas[0]; const pior = ordenadas[ordenadas.length - 1];
+  const icoBom = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const icoBaixo = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 3l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>';
+  const icoComent = '<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M21 12a8 8 0 01-11.5 7.2L3 21l1.8-6.5A8 8 0 1121 12z" stroke-linejoin="round"/></svg>';
+  const totalMencoes = D.temas.reduce((a, t) => a + t.n, 0);
   $("#termometro").innerHTML =
-    '<div class="kpi" style="border:none;padding:0 0 14px"><div class="rotulo">Quesito mais bem avaliado</div>' +
-    '<div class="valor" style="font-size:22px">' + melhor.label + '</div><div class="apoio">média ' + fmt(melhor.media, 2) + "</div></div>" +
-    '<div class="kpi" style="border:none;padding:0 0 14px"><div class="rotulo">Menor média da edição</div>' +
-    '<div class="valor" style="font-size:22px">' + pior.label + '</div><div class="apoio">média ' + fmt(pior.media, 2) +
-    " · " + fmt(pior.pctAtencao, 1) + "% das notas ≤ 7</div></div>" +
-    '<div class="kpi" style="border:none;padding:0"><div class="rotulo">Comentários registrados</div>' +
-    '<div class="valor" style="font-size:22px">' + D.comentarios.length + '</div><div class="apoio">' +
-    D.temas.reduce((a, t) => a + t.n, 0) + " menções a temas de melhoria</div></div>";
+    '<div class="termo-item"><div class="termo-ico bom">' + icoBom + "</div>" +
+      '<div class="termo-txt"><div class="rot">Mais bem avaliado</div><div class="nome">' + melhor.label +
+      '</div><div class="det">o quesito de maior aprovação</div></div>' +
+      '<div class="termo-val">' + fmt(melhor.media, 2) + "</div></div>" +
+    '<div class="termo-item"><div class="termo-ico baixo">' + icoBaixo + "</div>" +
+      '<div class="termo-txt"><div class="rot">Menor média da edição</div><div class="nome">' + pior.label +
+      '</div><div class="det">' + fmt(pior.pctAtencao, 1) + '% das notas ≤ 7</div></div>' +
+      '<div class="termo-val">' + fmt(pior.media, 2) + "</div></div>" +
+    '<div class="termo-item"><div class="termo-ico coment">' + icoComent + "</div>" +
+      '<div class="termo-txt"><div class="rot">Comentários registrados</div><div class="nome">' + D.comentarios.length +
+      ' respostas de texto</div><div class="det">' + totalMencoes + ' menções a temas de melhoria</div></div></div>';
 
   /* ---------- caixa de comentários ---------- */
   const fBusca = $("#fBusca"), fCampo = $("#fCampo"), fTema = $("#fTema"), fPerfil = $("#fPerfil");
@@ -635,40 +665,56 @@ footer { margin-top: 48px; border-top: 1px solid var(--hairline); padding: 28px 
 
   filtra();
 
-  /* ---------- count-up dos KPIs ---------- */
-  function countUp() {
-    document.querySelectorAll(".kpi .valor").forEach((el) => {
-      const txt = el.textContent.trim();
-      const m = txt.match(/^([\d.,]+)(%?)$/);
-      if (!m) return;
-      const casas = (m[1].split(",")[1] || "").length;
-      const alvo = parseFloat(m[1].replace(/\./g, "").replace(",", "."));
-      const suf = m[2];
-      const dur = 900; const t0 = performance.now();
-      function step(t) {
-        const p = Math.min((t - t0) / dur, 1);
-        const e = 1 - Math.pow(1 - p, 3);
-        el.textContent = fmt(alvo * e, casas) + suf;
-        if (p < 1) requestAnimationFrame(step);
-        else el.textContent = fmt(alvo, casas) + suf;
-      }
-      requestAnimationFrame(step);
-    });
+  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- count-up de um número (mais devagar) ---------- */
+  function countUpEl(el) {
+    if (el.dataset.feito) return;
+    el.dataset.feito = "1";
+    const txt = el.textContent.trim();
+    const m = txt.match(/^([\d.,]+)(%?)$/);
+    if (!m) return;
+    const casas = (m[1].split(",")[1] || "").length;
+    const alvo = parseFloat(m[1].replace(/\./g, "").replace(",", "."));
+    const suf = m[2];
+    if (reduz) { el.textContent = fmt(alvo, casas) + suf; return; }
+    const dur = 1400; const t0 = performance.now();
+    function step(t) {
+      const p = Math.min((t - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(alvo * e, casas) + suf;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = fmt(alvo, casas) + suf;
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- animar cada bloco quando entra na tela (ao rolar) ---------- */
+  const animaveis = document.querySelectorAll(".reveal, .kpis");
+  if (reduz || !("IntersectionObserver" in window)) {
+    animaveis.forEach((el) => el.classList.add("visivel"));
+    document.querySelectorAll(".kpi .valor").forEach(countUpEl);
+    document.querySelectorAll("#donut circle").forEach((c) => c.dispatchEvent(new Event("animar")));
+  } else {
+    const io = new IntersectionObserver((entradas) => {
+      entradas.forEach((ent) => {
+        if (!ent.isIntersecting) return;
+        const el = ent.target;
+        el.classList.add("visivel");
+        if (el.classList.contains("kpis")) el.querySelectorAll(".kpi .valor").forEach(countUpEl);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.18, rootMargin: "0px 0px -8% 0px" });
+    animaveis.forEach((el) => io.observe(el));
   }
 
   /* ---------- cortina de abertura ---------- */
   const cortina = $("#cortina");
-  const reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function abre() {
-    document.body.classList.add("pronto");
-    countUp();
-  }
   if (reduz || !cortina) {
     if (cortina) cortina.classList.add("fim");
-    abre();
   } else {
-    // sobe a cortina e revela o dashboard em cascata
-    setTimeout(() => { cortina.classList.add("subir"); abre(); }, 1850);
+    // mostra o logo (~2,4s) e depois sobe a cortina revelando o painel
+    setTimeout(() => { cortina.classList.add("subir"); }, 2400);
     cortina.addEventListener("transitionend", () => cortina.classList.add("fim"), { once: true });
   }
 })();
