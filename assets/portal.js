@@ -7,6 +7,21 @@ scrollTo(0, 0);
   const SETA = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   const nf = (n) => Number(n).toLocaleString("pt-BR");
 
+  // ícones de linha (SVG) para a capa do card — sóbrios e modernos
+  const ICONES = {
+    balao:  '<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 6 6c0 3.6-3 6.4-5.3 7.5-.4.2-.9.2-1.3 0C9 15.4 6 12.6 6 9a6 6 0 0 1 6-6z"/><path d="M12 16.5v2.2"/><path d="M11 20.7c.4.5 1.6.5 2 0"/></svg>',
+    festa:  '<svg viewBox="0 0 24 24"><path d="M3 21l5.5-13 5.5 5.5L3 21z"/><path d="M14 4.5l1 1M18 3l.5 1.5M20.5 7l-1.5.5M16 8l1 1"/><path d="M8.5 8l1.5 6"/></svg>',
+    evento: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M12 13l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9 15.2l2-.3z"/></svg>',
+    grafico:'<svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+    estrela:'<svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
+  };
+  // devolve o conteúdo do selo: ícone de linha (se o nome existir), senão o emoji, senão padrão
+  function conteudoSelo(icone) {
+    if (icone && ICONES[icone]) return '<span class="ico-linha">' + ICONES[icone] + '</span>';
+    if (icone && /\p{Emoji}/u.test(icone)) return '<span class="emoji">' + icone + '</span>';
+    return '<span class="ico-linha">' + ICONES.evento + '</span>';
+  }
+
   // faixa de resumo no hero
   const totalResp = EV.reduce((a, e) => a + (Number(e.respostas) || 0), 0);
   const stats = [
@@ -28,7 +43,7 @@ scrollTo(0, 0);
       if (e.media != null) mini.push('<div class="m"><div class="v">' + e.media + '</div><div class="r">Média geral</div></div>');
       return '<a class="ev-card" href="' + e.pasta + '/">' +
         '<div class="ev-capa">' + (e.ano ? '<span class="ano">' + e.ano + '</span>' : "") +
-          '<span class="selo"><span class="emoji">' + (e.icone || "📊") + '</span></span></div>' +
+          '<span class="selo">' + conteudoSelo(e.icone) + '</span></div>' +
         '<div class="ev-corpo">' +
           '<div class="tipo">Pesquisa de Satisfação</div>' +
           '<h3>' + e.titulo + '</h3>' +

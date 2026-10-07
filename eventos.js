@@ -8,7 +8,9 @@ window.EVENTOS = [
     data: "Outubro de 2026",
     respostas: 274,
     media: "9,69",
-    // emoji/ícone opcional exibido no card
-    icone: "🎈",
+    // Ícone do card. Use um nome de ícone de LINHA (sóbrio, combina com o site):
+    //   "balao" | "festa" | "evento" | "grafico" | "estrela"
+    // (também aceita um emoji, mas o padrão do portal são os ícones de linha)
+    icone: "balao",
   },
 ];

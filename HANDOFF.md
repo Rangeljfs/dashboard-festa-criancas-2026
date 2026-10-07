@@ -226,7 +226,7 @@ recente **no topo** da lista, para aparecer primeiro):
   data: "Junho de 2026",
   respostas: 312,               // total (bate com dados.js)
   media: "9,41",                // média geral (string com vírgula)
-  icone: "🎪",                  // emoji do card (balão 🎈, fogueira 🔥, festa 🎉, etc.)
+  icone: "festa",               // ícone de linha do card: "balao" | "festa" | "evento" | "grafico" | "estrela" (também aceita emoji)
 },
 ```
 > **ATENÇÃO ao campo `pasta`:** no portal atual o primeiro evento usa `pasta: "festa-criancas-2026"`
