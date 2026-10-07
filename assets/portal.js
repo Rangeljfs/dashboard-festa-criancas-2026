@@ -39,10 +39,29 @@ scrollTo(0, 0);
     }).join("");
   }
 
-  // animação de entrada dos cards em cascata, após a cortina subir
-  function entrarCards() {
+  // partículas flutuantes no hero (geradas uma vez)
+  (function criaParticulas() {
+    const box = document.getElementById("particulas");
+    if (!box) return;
+    const N = 18;
+    let html = "";
+    for (let i = 0; i < N; i++) {
+      const left = Math.round(Math.random() * 100);
+      const size = (Math.random() * 3 + 2).toFixed(1);     // 2–5 px
+      const dur = (Math.random() * 8 + 9).toFixed(1);        // 9–17 s
+      const delay = (Math.random() * 10).toFixed(1);         // 0–10 s
+      const op = (Math.random() * 0.35 + 0.25).toFixed(2);   // leve
+      html += '<i style="left:' + left + '%;width:' + size + 'px;height:' + size +
+        'px;animation-duration:' + dur + 's;animation-delay:-' + delay + 's;opacity:' + op + '"></i>';
+    }
+    box.innerHTML = html;
+  })();
+
+  // entrada em sequência do hero + cards, após a cortina subir
+  function revelarHero() {
+    document.body.classList.add("hero-in");
     document.querySelectorAll(".ev-card").forEach((c, i) => {
-      setTimeout(() => c.classList.add("entra"), 80 + i * 110);
+      setTimeout(() => c.classList.add("entra"), 120 + i * 110);
     });
   }
 
@@ -55,11 +74,11 @@ scrollTo(0, 0);
     setTimeout(() => {
       scrollTo(0, 0);
       cortina.classList.add("subir");
-      entrarCards();
+      revelarHero();
       setTimeout(encerra, 1600);
     }, 2400);
     cortina.addEventListener("transitionend", encerra, { once: true });
   } else {
-    entrarCards();
+    revelarHero();
   }
 })();

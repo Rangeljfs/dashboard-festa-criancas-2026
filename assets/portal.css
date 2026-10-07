@@ -48,20 +48,73 @@ body.cortina-ativa { overflow: hidden; }
 /* ---------- hero ---------- */
 .hero {
   position: relative; overflow: hidden;
-  background: radial-gradient(1100px 560px at 50% -140px, #1a8aa2 0%, var(--navy) 52%, #06313a 100%);
+  background: #06313a;
   color: #fff;
-  padding: 72px 0 80px;
+  padding: 88px 0 92px;
   text-align: center;
 }
-.hero::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+/* camada 1: aurora animada (brilhos teal que se movem devagar) */
+.hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-bg .aurora {
+  position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55;
+  will-change: transform;
 }
+.hero-bg .a1 { width: 620px; height: 620px; top: -260px; left: 50%; margin-left: -310px;
+  background: radial-gradient(circle, #1fa0bd 0%, transparent 70%); animation: aur1 16s ease-in-out infinite; }
+.hero-bg .a2 { width: 420px; height: 420px; top: -40px; left: 12%;
+  background: radial-gradient(circle, #0f6d80 0%, transparent 70%); animation: aur2 20s ease-in-out infinite; }
+.hero-bg .a3 { width: 460px; height: 460px; top: 40px; right: 8%;
+  background: radial-gradient(circle, #14788c 0%, transparent 70%); animation: aur3 18s ease-in-out infinite; }
+@keyframes aur1 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-30px,24px) scale(1.08); } }
+@keyframes aur2 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(40px,30px) scale(1.12); } }
+@keyframes aur3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-36px,20px) scale(1.1); } }
+/* camada 2: textura de pontos sutil */
+.hero-bg::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 22px 22px; opacity: .5;
+}
+/* camada 3: partículas que sobem devagar */
+.hero-particulas { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.hero-particulas i {
+  position: absolute; bottom: -12px; width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,.5); animation: subir linear infinite;
+}
+@keyframes subir {
+  0% { transform: translateY(0) scale(.6); opacity: 0; }
+  12% { opacity: .7; }
+  88% { opacity: .5; }
+  100% { transform: translateY(-460px) scale(1); opacity: 0; }
+}
+/* linha fina no fim do hero */
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+}
+.hero .wrap { position: relative; z-index: 3; }
+
+/* conteúdo do hero + entrada em sequência (após a cortina) */
+.hero-logo, .hero h1, .hero .filete, .hero .sub, .hero .stats {
+  opacity: 0; transform: translateY(16px);
+}
+body.hero-in .hero-logo, body.hero-in .hero h1, body.hero-in .hero .filete,
+body.hero-in .hero .sub, body.hero-in .hero .stats {
+  opacity: 1; transform: none;
+  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+}
+body.hero-in .hero-logo   { transition-delay: .05s; }
+body.hero-in .hero h1     { transition-delay: .20s; }
+body.hero-in .hero .filete{ transition-delay: .34s; }
+body.hero-in .hero .sub   { transition-delay: .44s; }
+body.hero-in .hero .stats { transition-delay: .56s; }
+
 .hero-logo { height: clamp(62px, 8vw, 84px); width: auto; margin-bottom: 48px; filter: drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
-.hero h1 { font-size: clamp(30px, 4.8vw, 48px); font-weight: 800; letter-spacing: -.015em; line-height: 1.1; }
-/* filete decorativo sob o título */
+.hero h1 { font-size: clamp(30px, 4.8vw, 48px); font-weight: 800; letter-spacing: -.015em; line-height: 1.1;
+  text-shadow: 0 2px 30px rgba(0,0,0,.25); }
+/* filete decorativo sob o título (brilha) */
 .hero .filete { width: 54px; height: 3px; margin: 18px auto 0; border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.85), rgba(255,255,255,.25)); }
+  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.9), rgba(255,255,255,.25));
+  box-shadow: 0 0 16px rgba(120,220,240,.5); }
 .hero .sub { margin: 20px auto 0; font-size: 15px; font-weight: 300; opacity: .82; max-width: 460px; line-height: 1.65; }
 
 /* faixa de resumo (stats) sobre o hero */
