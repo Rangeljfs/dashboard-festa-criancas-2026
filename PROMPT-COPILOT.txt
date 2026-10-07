@@ -1,0 +1,49 @@
+===========================================================================
+ PROMPT PRONTO PARA O GITHUB COPILOT (Copilot Chat no VS Code)
+===========================================================================
+
+COMO USAR:
+ 1. Salve a planilha da pesquisa dentro da pasta  planilhas/  do projeto.
+    Ex.: planilhas/arraia-2026.xlsx
+ 2. Abra o Copilot Chat no VS Code (com o projeto aberto).
+ 3. Copie o bloco abaixo, TROQUE os campos entre <...> e envie.
+
+---------------------------------------------------------------------------
+ COLE A PARTIR DAQUI (e troque os <...>):
+---------------------------------------------------------------------------
+
+#HANDOFF.md Leia este guia por completo antes de agir. Vou gerar o dashboard
+de uma pesquisa de satisfação nova e quero que você siga exatamente os passos
+da seção 3 do HANDOFF.
+
+Dados do evento:
+- Nome do evento: "<NOME DO EVENTO>"
+- Ano: <AAAA>
+- Mês/período: <ex: Junho de 2026>
+- Planilha (dentro do projeto): planilhas/<ARQUIVO>.xlsx
+- Emoji para o card (opcional): <ex: 🎪>
+
+Faça, na ordem:
+1. Inspecione a planilha e descubra o índice (0-based) de cada coluna
+   (notas, comentários, recomendação, fila, perfil). Ignore colunas de
+   dado pessoal (nome, matrícula, celular, e-mail) — NUNCA inclua.
+2. Adapte o bloco CONFIGURAÇÃO de scripts/gerar_dados.py (caminhos, título,
+   índices, temas) e rode  python scripts/gerar_dados.py  para gerar o
+   dados.js em eventos/<slug>/dados.js  (slug = nome em minúsculo, sem acento,
+   com hífens).
+3. Crie a pasta eventos/<slug>/ e copie eventos/festa-criancas-2026/index.html
+   para dentro, ajustando só o <title>, a <meta description> e o
+   <h1 id="heroTitulo">. Não mexa nos caminhos ../../assets/ nem no ../../
+   do botão "voltar".
+4. Adicione um objeto novo NO TOPO do array em eventos.js, com:
+   titulo, ano, pasta ("eventos/<slug>"), data, respostas, media, icone.
+5. Faça commit e push.
+6. Confira pelo checklist da seção 3, Passo 6 do HANDOFF (sem dado pessoal
+   no dados.js, card aparece, dashboard abre sem erro no console).
+
+===========================================================================
+ Observação: o Copilot lê arquivos DO PROJETO, não anexos de chat. Por isso
+ a planilha precisa estar salva na pasta planilhas/ (e não "colada" no chat).
+ Se a ferramenta que você usar não conseguir ler arquivos do repositório,
+ cole o conteúdo inteiro do HANDOFF.md no chat antes deste prompt.
+===========================================================================

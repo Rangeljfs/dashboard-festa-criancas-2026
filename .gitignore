@@ -1,6 +1,8 @@
 # Planilhas de pesquisa contêm dados pessoais (nome, matrícula, celular, e-mail).
-# NUNCA versionar. Coloque os .xlsx aqui para o Copilot processar e não serão commitados.
-planilhas/
+# NUNCA versionar. Coloque os .xlsx na pasta planilhas/ para o Copilot processar;
+# os arquivos de planilha não serão commitados, mas o README da pasta sim.
+planilhas/*
+!planilhas/README.md
 *.xlsx
 *.xls
 *.csv
