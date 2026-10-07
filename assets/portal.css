@@ -86,12 +86,10 @@ body.cortina-ativa { overflow: hidden; }
   88% { opacity: .5; }
   100% { transform: translateY(-460px) scale(1); opacity: 0; }
 }
-/* transição suave do hero (teal) para a área clara de baixo */
-.hero { padding-bottom: 150px; }
+/* linha fina no fim do hero */
 .hero::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 180px; z-index: 2;
-  background: linear-gradient(to bottom, transparent 0%, var(--page) 88%);
-  pointer-events: none;
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
 }
 .hero .wrap { position: relative; z-index: 3; }
 
@@ -130,8 +128,7 @@ body.hero-in .hero .stats { transition-delay: .56s; }
 .stats .s .r { font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .72; margin-top: 5px; }
 
 /* ---------- conteúdo ---------- */
-/* a seção começa já na área clara; a transição suave do hero fica logo acima */
-main { flex: 1; padding: 18px 0 20px; position: relative; z-index: 4; }
+main { flex: 1; padding: 48px 0 20px; }
 .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
 .sec-head h2 { font-size: 21px; font-weight: 800; letter-spacing: -.01em; }
 .sec-head .conta { font-size: 12.5px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
