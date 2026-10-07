@@ -1,0 +1,13 @@
+# Planilhas de pesquisa contêm dados pessoais (nome, matrícula, celular, e-mail).
+# NUNCA versionar. Coloque os .xlsx aqui para o Copilot processar e não serão commitados.
+planilhas/
+*.xlsx
+*.xls
+*.csv
+
+# Temporários do sistema / editores
+.DS_Store
+Thumbs.db
+*.tmp
+__pycache__/
+*.pyc

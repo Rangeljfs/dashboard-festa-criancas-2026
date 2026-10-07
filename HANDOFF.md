@@ -8,16 +8,61 @@
 
 ---
 
+## 0. Começando (primeira vez numa conta/PC novo)
+
+### 0.1 Publicar o projeto numa conta GitHub nova
+1. Crie um repositório novo na conta (ex.: `portal-pesquisas`). Pode ser público.
+2. Suba todos os arquivos deste projeto para a branch `main`.
+3. Em **Settings → Pages** do repositório, ative o GitHub Pages: Source = `Deploy from a branch`,
+   branch `main`, pasta `/ (root)`. Salve.
+4. Em 1-2 minutos o site estará em `https://<conta>.github.io/<repositorio>/`.
+   Nada no código precisa mudar — os caminhos são relativos.
+
+### 0.2 Como usar o GitHub Copilot para gerar um evento novo
+Abra o repositório no VS Code (com a extensão GitHub Copilot / Copilot Chat).
+No **Copilot Chat**, você **não precisa colar o HANDOFF inteiro** — ele já está no
+repositório e o Copilot consegue lê-lo. Faça assim:
+
+1. Garanta que o Copilot tem o projeto como contexto. No Copilot Chat, referencie o
+   guia com **`#HANDOFF.md`** (o `#` anexa o arquivo ao contexto). Um prompt bom:
+
+   > `#HANDOFF.md` Leia este guia por completo. Vou te enviar a planilha de uma
+   > pesquisa nova e quero que você gere o dashboard do evento e adicione o card no
+   > portal, seguindo exatamente os passos da seção 3. O nome do evento é "<NOME>",
+   > ano <AAAA>, aconteceu em <MÊS/AAAA>. A planilha está em <caminho do .xlsx no PC>.
+
+2. Se o Copilot não "enxergar" a planilha (ele lê arquivos do projeto, não anexos de
+   chat como um .xlsx externo), **coloque o arquivo .xlsx dentro de uma pasta do
+   projeto** (ex.: crie `planilhas/` e ponha lá) e aponte o caminho para ele. Assim o
+   Copilot consegue abrir e inspecionar as colunas. **Importante:** essa planilha tem
+   dados pessoais, então **não faça commit dela**. Adicione `planilhas/` ao `.gitignore`
+   (já incluído neste projeto) ou apague a planilha depois de gerar o `dados.js`.
+
+3. Deixe o Copilot seguir os passos da seção 3 (inspecionar colunas → adaptar e rodar
+   `scripts/gerar_dados.py` → criar `eventos/<slug>/` → editar `eventos.js` →
+   commit/push). Confira o resultado pelo checklist da seção 3, Passo 6.
+
+**Resumindo a sua pergunta "colo o HANDOFF inteiro?":** não precisa colar o texto todo;
+basta referenciar `#HANDOFF.md` no Copilot Chat e pedir para ele seguir o guia. Se a
+ferramenta que você usar **não** conseguir ler arquivos do repositório, aí sim cole o
+conteúdo do HANDOFF.md inteiro no chat antes de pedir.
+
+---
+
 ## 1. O que é este projeto
 
 Um **portal web estático** (hospedado no GitHub Pages) que reúne as pesquisas de
 satisfação dos eventos da **Associação Volvo**. A página inicial lista os eventos em
 cards; clicar em um card abre o **dashboard executivo** daquele evento.
 
-- **Site no ar:** https://rangeljfs.github.io/dashboard-festa-criancas-2026/
-- **Repositório:** github.com/Rangeljfs/dashboard-festa-criancas-2026
+- **Onde fica o site:** é publicado pelo **GitHub Pages**, no endereço
+  `https://<conta>.github.io/<repositorio>/`. O endereço muda conforme a conta e o
+  nome do repositório; o projeto **não depende de nenhum nome fixo** — todos os
+  caminhos internos são relativos, então ele funciona em qualquer conta/repositório.
 - Tudo é **HTML/CSS/JS puro** (sem build, sem framework, sem Node). O GitHub Pages
-  serve os arquivos como estão. Para publicar, basta `git push` na branch `main`.
+  serve os arquivos como estão. Para publicar, basta `git push` na branch `main`
+  (e ter o GitHub Pages ativado nas configurações do repositório, apontando para a
+  branch `main`, pasta raiz `/`).
 
 ### Identidade visual (sempre a mesma)
 - Fonte: **Montserrat** (via Google Fonts).

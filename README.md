@@ -2,7 +2,7 @@
 
 Portal web estático que reúne as pesquisas de satisfação dos eventos da Associação Volvo. A página inicial lista os eventos em cards; cada card abre o dashboard executivo daquele evento.
 
-**No ar:** https://rangeljfs.github.io/dashboard-festa-criancas-2026/
+O site é publicado pelo **GitHub Pages**. O endereço depende da conta e do nome do repositório onde ele estiver: `https://<sua-conta>.github.io/<nome-do-repositorio>/`. Todos os caminhos internos são relativos, então o projeto funciona em qualquer conta/repositório sem alterações.
 
 > **Para adicionar o dashboard de um evento novo a partir de uma planilha, leia o [HANDOFF.md](HANDOFF.md).** Ele tem o passo a passo completo.
 
