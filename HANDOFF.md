@@ -18,34 +18,34 @@
 4. Em 1-2 minutos o site estará em `https://<conta>.github.io/<repositorio>/`.
    Nada no código precisa mudar — os caminhos são relativos.
 
-### 0.2 Como usar o GitHub Copilot para gerar um evento novo
-Abra o repositório no VS Code (com a extensão GitHub Copilot / Copilot Chat).
-No **Copilot Chat**, você **não precisa colar o HANDOFF inteiro** — ele já está no
-repositório e o Copilot consegue lê-lo. Faça assim:
+### 0.2 Fluxo completo para gerar o dashboard de um evento novo (passo a passo)
 
-1. Garanta que o Copilot tem o projeto como contexto. No Copilot Chat, referencie o
-   guia com **`#HANDOFF.md`** (o `#` anexa o arquivo ao contexto). Um prompt bom:
+> O projeto já está no PC como uma **pasta local clonada do GitHub**, e o Copilot
+> acessa essa pasta e está ligado ao GitHub. Para cada evento novo:
 
-   > `#HANDOFF.md` Leia este guia por completo. Vou te enviar a planilha de uma
-   > pesquisa nova e quero que você gere o dashboard do evento e adicione o card no
-   > portal, seguindo exatamente os passos da seção 3. O nome do evento é "<NOME>",
-   > ano <AAAA>, aconteceu em <MÊS/AAAA>. A planilha está em <caminho do .xlsx no PC>.
+1. **Clonar o projeto** (só na primeira vez): peça ao Copilot/editor para clonar o
+   repositório para uma pasta local, informando a URL
+   `https://github.com/<conta>/<repositorio>`. (Ou use o GitHub Desktop → "Clone".)
+   Depois de clonado, a pasta já vem com tudo: `assets/`, `eventos/`, `planilhas/`,
+   `scripts/`, `HANDOFF.md` etc.
+2. **Colocar a planilha** do evento dentro da pasta `planilhas/` do projeto
+   (ex.: `planilhas/arraia-2026.xlsx`). Essa planilha fica **só no seu PC** — está no
+   `.gitignore` e nunca vai para o GitHub.
+3. **Pedir ao Copilot** para acessar a pasta do projeto e seguir o guia. Você **não
+   precisa colar o HANDOFF inteiro**: ele já está na pasta. Use o prompt pronto do
+   arquivo `PROMPT-COPILOT.txt` (copie, troque o nome do evento e o arquivo da
+   planilha). Resumidamente, o prompt manda ele:
+   referenciar o `HANDOFF.md`, ler a planilha em `planilhas/...`, gerar o
+   `eventos/<slug>/dados.js` (Caminho A do Passo 2, sem Python), criar a pasta do
+   evento, adicionar o card em `eventos.js` e fazer commit + push.
+4. **Conferir** pelo checklist da seção 3, Passo 6. Em especial: confirme que a
+   **planilha NÃO foi commitada** (só o `dados.js` e os arquivos do projeto sobem).
+5. Em 1-2 minutos o GitHub Pages publica; o card novo aparece no portal (Ctrl+F5).
 
-2. Se o Copilot não "enxergar" a planilha (ele lê arquivos do projeto, não anexos de
-   chat como um .xlsx externo), **coloque o arquivo .xlsx dentro de uma pasta do
-   projeto** (ex.: crie `planilhas/` e ponha lá) e aponte o caminho para ele. Assim o
-   Copilot consegue abrir e inspecionar as colunas. **Importante:** essa planilha tem
-   dados pessoais, então **não faça commit dela**. Adicione `planilhas/` ao `.gitignore`
-   (já incluído neste projeto) ou apague a planilha depois de gerar o `dados.js`.
-
-3. Deixe o Copilot seguir os passos da seção 3 (inspecionar colunas → adaptar e rodar
-   `scripts/gerar_dados.py` → criar `eventos/<slug>/` → editar `eventos.js` →
-   commit/push). Confira o resultado pelo checklist da seção 3, Passo 6.
-
-**Resumindo a sua pergunta "colo o HANDOFF inteiro?":** não precisa colar o texto todo;
-basta referenciar `#HANDOFF.md` no Copilot Chat e pedir para ele seguir o guia. Se a
-ferramenta que você usar **não** conseguir ler arquivos do repositório, aí sim cole o
-conteúdo do HANDOFF.md inteiro no chat antes de pedir.
+**Sua pergunta "colo o HANDOFF inteiro?":** não precisa; basta o Copilot ter a pasta
+como contexto e você pedir para ele seguir o `HANDOFF.md`. Só cole o conteúdo inteiro
+do HANDOFF no chat se a ferramenta que você usar **não** conseguir ler arquivos da
+pasta do projeto.
 
 ---
 
