@@ -109,7 +109,7 @@ body.cortina-ativa { overflow: hidden; }
   position: relative;
   background: radial-gradient(1200px 460px at 50% -120px, #14788c 0%, var(--navy) 48%, #06313a 100%);
   color: var(--hero-ink);
-  padding: 58px 0 62px;
+  padding: 72px 0 86px;
   text-align: center;
 }
 .voltar-portal {
@@ -122,10 +122,10 @@ body.cortina-ativa { overflow: hidden; }
 }
 .voltar-portal:hover { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.5); }
 .voltar-portal svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.4; }
-.hero-logo { height: clamp(78px, 12vw, 112px); width: auto; margin-bottom: 22px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
-.hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .82; margin-bottom: 14px; }
+.hero-logo { height: clamp(74px, 11vw, 104px); width: auto; margin-bottom: 34px; filter: drop-shadow(0 6px 18px rgba(0,0,0,.25)); }
+.hero .overline { font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .78; margin-bottom: 20px; }
 .hero h1 { font-size: clamp(28px, 4.6vw, 44px); font-weight: 800; letter-spacing: -.01em; line-height: 1.12; }
-.hero .sub { margin: 14px auto 0; font-size: 15.5px; font-weight: 400; opacity: .85; max-width: 640px; }
+.hero .sub { margin: 22px auto 0; font-size: 15px; font-weight: 400; opacity: .82; max-width: 640px; }
 
 /* ---------- animações ao rolar (entra quando aparece na tela) ---------- */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
@@ -149,7 +149,7 @@ section { padding: 34px 0 6px; }
 }
 
 /* ---------- KPIs ---------- */
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 16px; margin-top: -38px; position: relative; z-index: 5; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); gap: 16px; margin-top: -10px; position: relative; z-index: 5; }
 .kpi {
   --acc: var(--navy);
   background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px;
