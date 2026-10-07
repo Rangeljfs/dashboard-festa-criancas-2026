@@ -1,3 +1,15 @@
+// Ao ATUALIZAR (F5) dentro de um dashboard, volta sempre para o portal (tela inicial).
+// Quando se chega pelo clique no card (navegação normal), o dashboard abre normal.
+(function () {
+  try {
+    var nav = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+    var tipo = nav ? nav.type : (performance.navigation && performance.navigation.type === 1 ? "reload" : "");
+    if (tipo === "reload") {
+      location.replace("../../");  // volta ao portal
+    }
+  } catch (e) {}
+})();
+
 // começa sempre do topo, mesmo que o navegador tente restaurar o scroll anterior
 try { history.scrollRestoration = "manual"; } catch (e) {}
 scrollTo(0, 0);
