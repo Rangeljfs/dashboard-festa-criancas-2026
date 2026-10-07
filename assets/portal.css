@@ -1,0 +1,132 @@
+:root {
+  color-scheme: light;
+  --page: #fafbfc;
+  --surface: #ffffff;
+  --surface-2: #f4f5f8;
+  --ink: #1c1f2b;
+  --ink-2: #6b7183;
+  --ink-3: #a3a8b6;
+  --hairline: #e4e6ee;
+  --navy: #0c5868;   /* teal institucional Associação Volvo */
+  --navy-2: #157d93;
+  --sombra: 0 10px 34px rgba(12, 88, 104, .09);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; width: 100%; }
+
+/* ---------- cortina de abertura ---------- */
+body.cortina-ativa { overflow: hidden; }
+.cortina {
+  position: fixed; inset: 0; z-index: 9999;
+  background: radial-gradient(900px 600px at 50% 40%, #14788c 0%, var(--navy) 50%, #06313a 100%);
+  display: flex; align-items: center; justify-content: center;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.3s cubic-bezier(.76, 0, .24, 1);
+}
+.cortina.subir { clip-path: inset(0 0 100% 0); }
+.cortina.fim { display: none; }
+.cortina img {
+  width: min(70vw, 560px); height: auto; opacity: 0; transform: scale(1.12);
+  animation: cortinaLogo 2.1s cubic-bezier(.4, .05, .2, 1) .2s forwards;
+}
+@keyframes cortinaLogo {
+  0% { opacity: 0; transform: scale(1.14); }
+  35% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  background: radial-gradient(1100px 560px at 50% -140px, #1a8aa2 0%, var(--navy) 52%, #06313a 100%);
+  color: #fff;
+  padding: 72px 0 80px;
+  text-align: center;
+}
+.hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+}
+.hero-logo { height: clamp(62px, 8vw, 84px); width: auto; margin-bottom: 48px; filter: drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
+.hero h1 { font-size: clamp(30px, 4.8vw, 48px); font-weight: 800; letter-spacing: -.015em; line-height: 1.1; }
+/* filete decorativo sob o título */
+.hero .filete { width: 54px; height: 3px; margin: 18px auto 0; border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.85), rgba(255,255,255,.25)); }
+.hero .sub { margin: 20px auto 0; font-size: 15px; font-weight: 300; opacity: .82; max-width: 460px; line-height: 1.65; }
+
+/* faixa de resumo (stats) sobre o hero */
+.stats { max-width: 520px; margin: 42px auto 0; padding-top: 34px; position: relative;
+  display: flex; justify-content: center; align-items: stretch; gap: 0; }
+.stats::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 90px; height: 1px; background: rgba(255,255,255,.2); }
+.stats .s { flex: 1; padding: 0 24px; }
+.stats .s + .s { border-left: 1px solid rgba(255,255,255,.18); }
+.stats .s .v { font-size: 30px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.stats .s .r { font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .72; margin-top: 5px; }
+
+/* ---------- conteúdo ---------- */
+main { flex: 1; padding: 48px 0 20px; }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.sec-head h2 { font-size: 21px; font-weight: 800; letter-spacing: -.01em; }
+.sec-head .conta { font-size: 12.5px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
+
+.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
+
+/* ---------- card de evento ---------- */
+.ev-card {
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px;
+  box-shadow: var(--sombra); overflow: hidden; text-decoration: none; color: inherit;
+  transition: box-shadow .22s, transform .22s;
+  opacity: 0; transform: translateY(26px);
+}
+.ev-card.entra { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+.ev-card:hover { box-shadow: 0 18px 50px rgba(12,88,104,.18); transform: translateY(-5px); }
+.ev-capa {
+  position: relative; height: 128px; overflow: hidden;
+  background: radial-gradient(600px 300px at 30% -40%, #1a8aa2 0%, var(--navy) 60%, #06313a 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+/* textura sutil de pontos na capa */
+.ev-capa::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 16px 16px; opacity: .6;
+}
+/* selo circular atrás do ícone */
+.ev-capa .selo {
+  position: relative; width: 70px; height: 70px; border-radius: 50%;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22);
+  display: flex; align-items: center; justify-content: center;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  transition: transform .25s;
+}
+.ev-card:hover .ev-capa .selo { transform: scale(1.06); }
+.ev-capa .emoji { font-size: 34px; line-height: 1; filter: drop-shadow(0 3px 8px rgba(0,0,0,.35)); }
+.ev-capa .ano { position: absolute; top: 12px; right: 14px; z-index: 2; font-size: 11.5px; font-weight: 700; letter-spacing: .1em;
+  color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 3px 11px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.ev-corpo { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
+.ev-corpo .tipo { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-2); }
+.ev-corpo h3 { font-size: 19px; font-weight: 800; letter-spacing: -.01em; margin-top: 4px; line-height: 1.2; }
+.ev-corpo .data { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
+.ev-mini { display: flex; gap: 22px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+.ev-mini .m .v { font-size: 20px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
+.ev-mini .m .r { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-top: 1px; }
+.ev-abrir { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--navy-2); }
+.ev-abrir svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; transition: transform .2s; }
+.ev-card:hover .ev-abrir svg { transform: translateX(4px); }
+
+.vazio { grid-column: 1 / -1; text-align: center; color: var(--ink-2); padding: 40px 0; font-size: 14px; }
+
+footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align: center; margin-top: 40px; }
+.footer-logo { height: 38px; width: auto; opacity: .9; }

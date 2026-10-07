@@ -8,150 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root {
-  color-scheme: light;
-  --page: #fafbfc;
-  --surface: #ffffff;
-  --surface-2: #f4f5f8;
-  --ink: #1c1f2b;
-  --ink-2: #6b7183;
-  --ink-3: #a3a8b6;
-  --hairline: #e4e6ee;
-  --navy: #0c5868;   /* teal institucional Associação Volvo */
-  --navy-2: #157d93;
-  --sombra: 0 10px 34px rgba(12, 88, 104, .09);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: var(--page);
-  color: var(--ink);
-  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 14.5px;
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; width: 100%; }
-
-/* ---------- cortina de abertura ---------- */
-body.cortina-ativa { overflow: hidden; }
-.cortina {
-  position: fixed; inset: 0; z-index: 9999;
-  background: radial-gradient(900px 600px at 50% 40%, #14788c 0%, var(--navy) 50%, #06313a 100%);
-  display: flex; align-items: center; justify-content: center;
-  clip-path: inset(0 0 0 0);
-  transition: clip-path 1.3s cubic-bezier(.76, 0, .24, 1);
-}
-.cortina.subir { clip-path: inset(0 0 100% 0); }
-.cortina.fim { display: none; }
-.cortina img {
-  width: min(70vw, 560px); height: auto; opacity: 0; transform: scale(1.12);
-  animation: cortinaLogo 2.1s cubic-bezier(.4, .05, .2, 1) .2s forwards;
-}
-@keyframes cortinaLogo {
-  0% { opacity: 0; transform: scale(1.14); }
-  35% { opacity: 1; }
-  100% { opacity: 1; transform: scale(1); }
-}
-
-/* ---------- hero ---------- */
-.hero {
-  position: relative; overflow: hidden;
-  background: radial-gradient(1100px 560px at 50% -140px, #1a8aa2 0%, var(--navy) 52%, #06313a 100%);
-  color: #fff;
-  padding: 72px 0 80px;
-  text-align: center;
-}
-.hero::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
-}
-.hero-logo { height: clamp(62px, 8vw, 84px); width: auto; margin-bottom: 48px; filter: drop-shadow(0 8px 22px rgba(0,0,0,.28)); }
-.hero h1 { font-size: clamp(30px, 4.8vw, 48px); font-weight: 800; letter-spacing: -.015em; line-height: 1.1; }
-/* filete decorativo sob o título */
-.hero .filete { width: 54px; height: 3px; margin: 18px auto 0; border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,.85), rgba(255,255,255,.25)); }
-.hero .sub { margin: 20px auto 0; font-size: 15px; font-weight: 300; opacity: .82; max-width: 460px; line-height: 1.65; }
-
-/* faixa de resumo (stats) sobre o hero */
-.stats { max-width: 520px; margin: 42px auto 0; padding-top: 34px; position: relative;
-  display: flex; justify-content: center; align-items: stretch; gap: 0; }
-.stats::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 90px; height: 1px; background: rgba(255,255,255,.2); }
-.stats .s { flex: 1; padding: 0 24px; }
-.stats .s + .s { border-left: 1px solid rgba(255,255,255,.18); }
-.stats .s .v { font-size: 30px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
-.stats .s .r { font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; opacity: .72; margin-top: 5px; }
-
-/* ---------- conteúdo ---------- */
-main { flex: 1; padding: 48px 0 20px; }
-.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
-.sec-head h2 { font-size: 21px; font-weight: 800; letter-spacing: -.01em; }
-.sec-head .conta { font-size: 12.5px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
-
-.grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
-
-/* ---------- card de evento ---------- */
-.ev-card {
-  display: flex; flex-direction: column;
-  background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px;
-  box-shadow: var(--sombra); overflow: hidden; text-decoration: none; color: inherit;
-  transition: box-shadow .22s, transform .22s;
-  opacity: 0; transform: translateY(26px);
-}
-.ev-card.entra { opacity: 1; transform: none; transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
-.ev-card:hover { box-shadow: 0 18px 50px rgba(12,88,104,.18); transform: translateY(-5px); }
-.ev-capa {
-  position: relative; height: 128px; overflow: hidden;
-  background: radial-gradient(600px 300px at 30% -40%, #1a8aa2 0%, var(--navy) 60%, #06313a 100%);
-  display: flex; align-items: center; justify-content: center;
-}
-/* textura sutil de pontos na capa */
-.ev-capa::before {
-  content: ""; position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
-  background-size: 16px 16px; opacity: .6;
-}
-/* selo circular atrás do ícone */
-.ev-capa .selo {
-  position: relative; width: 70px; height: 70px; border-radius: 50%;
-  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22);
-  display: flex; align-items: center; justify-content: center;
-  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
-  transition: transform .25s;
-}
-.ev-card:hover .ev-capa .selo { transform: scale(1.06); }
-.ev-capa .emoji { font-size: 34px; line-height: 1; filter: drop-shadow(0 3px 8px rgba(0,0,0,.35)); }
-.ev-capa .ano { position: absolute; top: 12px; right: 14px; z-index: 2; font-size: 11.5px; font-weight: 700; letter-spacing: .1em;
-  color: #fff; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 3px 11px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
-.ev-corpo { padding: 18px 20px 20px; display: flex; flex-direction: column; flex: 1; }
-.ev-corpo .tipo { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-2); }
-.ev-corpo h3 { font-size: 19px; font-weight: 800; letter-spacing: -.01em; margin-top: 4px; line-height: 1.2; }
-.ev-corpo .data { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; }
-.ev-mini { display: flex; gap: 22px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--hairline); }
-.ev-mini .m .v { font-size: 20px; font-weight: 800; color: var(--navy); font-variant-numeric: tabular-nums; }
-.ev-mini .m .r { font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-top: 1px; }
-.ev-abrir { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--navy-2); }
-.ev-abrir svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2.3; transition: transform .2s; }
-.ev-card:hover .ev-abrir svg { transform: translateX(4px); }
-
-.vazio { grid-column: 1 / -1; text-align: center; color: var(--ink-2); padding: 40px 0; font-size: 14px; }
-
-footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align: center; margin-top: 40px; }
-.footer-logo { height: 38px; width: auto; opacity: .9; }
-</style>
+<link rel="stylesheet" href="assets/portal.css">
 </head>
 <body>
 
 <div class="cortina" id="cortina">
-  <img src="img/logo-branco.png" alt="Associação Volvo">
+  <img src="assets/img/logo-branco.png" alt="Associação Volvo">
 </div>
 
 <div class="hero">
   <div class="wrap">
-    <img class="hero-logo" src="img/logo-branco.png" alt="Associação Volvo">
+    <img class="hero-logo" src="assets/img/logo-branco.png" alt="Associação Volvo">
     <h1>Pesquisas de Satisfação</h1>
     <div class="filete"></div>
     <p class="sub">A opinião dos nossos associados sobre cada evento, reunida em um só lugar.</p>
@@ -171,77 +38,11 @@ footer { border-top: 1px solid var(--hairline); padding: 26px 0 34px; text-align
 
 <footer>
   <div class="wrap">
-    <img class="footer-logo" src="img/logo-teal.png" alt="Associação Volvo">
+    <img class="footer-logo" src="assets/img/logo-teal.png" alt="Associação Volvo">
   </div>
 </footer>
 
 <script src="eventos.js"></script>
-<script>
-// começa sempre do topo
-try { history.scrollRestoration = "manual"; } catch (e) {}
-scrollTo(0, 0);
-(function () {
-  const EV = window.EVENTOS || [];
-  const grade = document.getElementById("grade");
-  const SETA = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-  const nf = (n) => Number(n).toLocaleString("pt-BR");
-
-  // faixa de resumo no hero
-  const totalResp = EV.reduce((a, e) => a + (Number(e.respostas) || 0), 0);
-  const stats = [
-    { v: nf(EV.length), r: EV.length === 1 ? "Pesquisa" : "Pesquisas" },
-    { v: nf(totalResp), r: "Respostas" },
-  ];
-  document.getElementById("stats").innerHTML = stats.map((s) =>
-    '<div class="s"><div class="v">' + s.v + '</div><div class="r">' + s.r + "</div></div>").join("");
-  document.getElementById("conta").textContent = EV.length + (EV.length === 1 ? " evento" : " eventos");
-
-  if (!EV.length) {
-    grade.innerHTML = '<div class="vazio">Nenhuma pesquisa publicada ainda.</div>';
-    document.getElementById("stats").style.display = "none";
-  } else {
-    grade.innerHTML = EV.map((e) => {
-      const nome = e.titulo + (e.ano ? " " + e.ano : "");
-      const mini = [];
-      if (e.respostas != null) mini.push('<div class="m"><div class="v">' + Number(e.respostas).toLocaleString("pt-BR") + '</div><div class="r">Respostas</div></div>');
-      if (e.media != null) mini.push('<div class="m"><div class="v">' + e.media + '</div><div class="r">Média geral</div></div>');
-      return '<a class="ev-card" href="' + e.pasta + '/">' +
-        '<div class="ev-capa">' + (e.ano ? '<span class="ano">' + e.ano + '</span>' : "") +
-          '<span class="selo"><span class="emoji">' + (e.icone || "📊") + '</span></span></div>' +
-        '<div class="ev-corpo">' +
-          '<div class="tipo">Pesquisa de Satisfação</div>' +
-          '<h3>' + e.titulo + '</h3>' +
-          '<div class="data">' + (e.data || "") + '</div>' +
-          (mini.length ? '<div class="ev-mini">' + mini.join("") + '</div>' : "") +
-          '<div class="ev-abrir">Ver dashboard ' + SETA + '</div>' +
-        '</div></a>';
-    }).join("");
-  }
-
-  // animação de entrada dos cards em cascata, após a cortina subir
-  function entrarCards() {
-    document.querySelectorAll(".ev-card").forEach((c, i) => {
-      setTimeout(() => c.classList.add("entra"), 80 + i * 110);
-    });
-  }
-
-  // cortina
-  const cortina = document.getElementById("cortina");
-  if (cortina) {
-    document.body.classList.add("cortina-ativa");
-    scrollTo(0, 0);
-    const encerra = () => { cortina.classList.add("fim"); document.body.classList.remove("cortina-ativa"); };
-    setTimeout(() => {
-      scrollTo(0, 0);
-      cortina.classList.add("subir");
-      entrarCards();
-      setTimeout(encerra, 1600);
-    }, 2400);
-    cortina.addEventListener("transitionend", encerra, { once: true });
-  } else {
-    entrarCards();
-  }
-})();
-</script>
+<script src="assets/portal.js"></script>
 </body>
 </html>

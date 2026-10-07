@@ -4,7 +4,7 @@ window.EVENTOS = [
   {
     titulo: "Festa das Crianças",
     ano: "2026",
-    pasta: "festa-criancas-2026",
+    pasta: "eventos/festa-criancas-2026",
     data: "Outubro de 2026",
     respostas: 274,
     media: "9,69",
