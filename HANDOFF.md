@@ -115,18 +115,19 @@ O slug é o nome da pasta: minúsculo, sem acento, com hífens. Ex.:
 "Arraiá 2026" → `arraia-2026`; "Festa de Fim de Ano 2026" → `festa-fim-ano-2026`.
 
 ### Passo 1 — Inspecionar a planilha
-Abra a planilha e descubra **o índice (0-based) de cada coluna** e o que ela contém.
-Rode algo como (ajuste o caminho do arquivo):
+Abra/leia a planilha (`planilhas/<arquivo>.xlsx`) e descubra **o índice (0-based) de
+cada coluna** e o que ela contém. A primeira linha é o cabeçalho; os dados começam na
+linha 2. Liste os cabeçalhos com seus índices e olhe uma linha de exemplo.
 
+(Se tiver Python à mão, dá para listar assim; se não, leia a planilha de outro jeito —
+o importante é mapear as colunas:)
 ```python
 import openpyxl
-wb = openpyxl.load_workbook(r"CAMINHO_DA_PLANILHA.xlsx", read_only=True, data_only=True)
-ws = wb.worksheets[0]
-ws.reset_dimensions()
+wb = openpyxl.load_workbook(r"planilhas/ARQUIVO.xlsx", read_only=True, data_only=True)
+ws = wb.worksheets[0]; ws.reset_dimensions()
 rows = list(ws.iter_rows(values_only=True))
 print("linhas:", len(rows))
-for j, h in enumerate(rows[0]):
-    print(j, repr(h))
+for j, h in enumerate(rows[0]): print(j, repr(h))
 print("exemplo linha 2:", rows[1])
 ```
 
@@ -139,19 +140,56 @@ Identifique, pelas perguntas do cabeçalho:
 - A coluna de **perfil** ("Você é:" — Funcionário/Dependente/Convidado etc.).
 - **IGNORE e NUNCA inclua** colunas de **nome, matrícula, celular, e-mail** (dados pessoais).
 
-### Passo 2 — Adaptar e rodar o script de agregação
-1. Copie `scripts/gerar_dados.py` (ou edite direto) e ajuste no topo:
-   - `ORIGEM` = caminho da planilha nova.
-   - `DESTINO` = `eventos/<slug>/dados.js`.
-   - `NOTAS` = lista de `(indice_coluna, "Rótulo da pergunta")` para cada pergunta de nota.
-   - `COMENTARIOS` = lista de `(indice_coluna, "Rótulo do campo")` para cada campo de texto.
-   - os índices de **recomendação, fila, perfil** nas funções correspondentes.
-   - `TEMAS` = palavras-chave para agrupar críticas/sugestões recorrentes (adaptar ao evento).
-   - no dicionário final (`out`): `titulo` = nome do evento.
-2. Garanta que o Python tem `openpyxl` (`pip install openpyxl`).
-3. Rode: `python scripts/gerar_dados.py`. Ele cria o `eventos/<slug>/dados.js`.
-   O arquivo começa com `window.DADOS = {...};` e contém **só agregados + comentários
-   anonimizados** (nunca dados pessoais).
+### Passo 2 — Gerar o `eventos/<slug>/dados.js` (ESCOLHA UM CAMINHO)
+
+Há dois jeitos de produzir o `dados.js`. **O Caminho A (sem Python) é o preferido** —
+funciona mesmo que o PC não tenha Python instalado.
+
+#### Caminho A — A IA lê a planilha e escreve o dados.js (SEM Python) ← preferido
+Você (IA) abre/lê a planilha, calcula os agregados e **escreve o arquivo
+`eventos/<slug>/dados.js`** diretamente, no formato exato da seção abaixo. Regras de
+cálculo (siga exatamente, para o resultado bater com os outros eventos):
+
+- **Notas:** para cada coluna de NOTA, considere só valores numéricos entre 0 e 10
+  (troque vírgula por ponto). Para cada pergunta:
+  - `media` = média dessas notas, arredondada a 2 casas.
+  - `n` = quantas respostas válidas.
+  - `dist` = contagem por faixa: `"10"` (nota = 10), `"9"` (9 ≤ nota < 10),
+    `"8"` (8 ≤ nota < 9), `le7` (nota < 8).
+  - `pctAtencao` = `100 * dist.le7 / n`, 1 casa.
+- `mediaGeral` = média de **todas** as notas de **todas** as perguntas juntas, 2 casas.
+- `respostas` = número de linhas de dados (total de respostas; a planilha tem 1 linha
+  de cabeçalho, então é (linhas − 1)).
+- **recomendacao:** da coluna de recomendação (notas 5-10): `media` (2 casas),
+  `pctPromotores` = % de notas ≥ 9 (1 casa), `n` = respostas válidas. Se não houver
+  coluna de recomendação, use `media` = mediaGeral, `pctPromotores` 0, `n` 0.
+- **filas:** da coluna "enfrentou fila >5min?": `sim` = respostas que começam com "sim",
+  `nao` = começam com "n", `pctSemFila` = `100 * nao / (sim+nao)` (1 casa). Sem a coluna,
+  use `{sim:0, nao:0, pctSemFila:0}`.
+- **perfil:** contagem por valor da coluna "Você é:" (ex. `{"Funcionário(a)": 110, ...}`).
+  Sem a coluna, use `{}`.
+- **comentarios:** para cada campo de COMENTÁRIO e cada linha com texto (≥ 3 caracteres),
+  um objeto `{ t: "texto", c: "<rótulo do campo>", p: "<perfil ou 'Não informado'>",
+  temas: [<temas que o texto cita>] }`. Troque quebras de linha por espaço.
+- **temas:** defina uma lista de temas recorrentes (nome + palavras-chave sem acento),
+  adequada a ESTE evento. Para cada comentário, marque em `temas` os temas cujas
+  palavras-chave aparecem no texto (comparando sem acento e em minúsculas). O array
+  `temas` do dados.js é `[{tema, n}]` ordenado do mais citado para o menos, só com n>0.
+- **titulo** = nome do evento. **entidade** = "Associação Volvo".
+- **NUNCA** inclua nome, matrícula, celular ou e-mail.
+
+> Veja `scripts/exemplos/gerar_dados_festa-criancas-2026.py` para um exemplo real de
+> quais colunas viram o quê e de como foram definidos os temas.
+
+#### Caminho B — Rodar o script Python (alternativa, se tiver Python)
+1. Edite o bloco CONFIGURAÇÃO de `scripts/gerar_dados.py`: `ORIGEM`, `DESTINO`
+   (`eventos/<slug>/dados.js`), `TITULO_EVENTO`, `NOTAS`, `COMENTARIOS`,
+   `COL_RECOMENDACAO`, `COL_FILA`, `COL_PERFIL`, `TEMAS`.
+2. `pip install openpyxl` (uma vez).
+3. `python scripts/gerar_dados.py` — ele cria o `dados.js`.
+
+Nos dois caminhos, o arquivo final começa com `window.DADOS = {...};` e contém
+**só agregados + comentários anonimizados** (nunca dados pessoais).
 
 **Formato do `dados.js`** (o `dashboard.js` espera exatamente estas chaves):
 ```js
