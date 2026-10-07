@@ -12,16 +12,17 @@
   --navy: #0c5868;   /* teal institucional Associação Volvo */
   --navy-2: #157d93;
   --hero-ink: #ffffff;
+  /* paleta sóbria, monocromática teal com acentos contidos */
   --s1: #0c5868; /* categórico 1 (teal da marca) */
-  --s2: #eb6834; /* categórico 2 */
+  --s2: #c0894c; /* categórico 2 (âmbar dessaturado, no lugar do laranja vivo) */
   --s3: #7fb3bf; /* categórico 3 (teal claro) */
-  --s-neutro: #a3a8b6;
+  --s-neutro: #b2b7c2;
   --d10: #0c5868; /* distribuição nota 10 */
-  --d9:  #157d93;
-  --d8:  #8fc4d1;
-  --d7:  #d03b3b; /* status crítico: notas <= 7 */
+  --d9:  #2f7f91;
+  --d8:  #9ec7d1;
+  --d7:  #b06a5e; /* atenção (terracota sóbrio, no lugar do vermelho berrante) */
   --bar: #0c5868;
-  --good: #0ca30c;
+  --good: #3f8f6e; /* verde-sálvia contido */
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -161,8 +162,8 @@ section { padding: 34px 0 6px; }
 .kpi .rotulo { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
 .kpi .valor { font-size: 40px; font-weight: 800; line-height: 1.12; margin-top: 8px; color: var(--acc); font-variant-numeric: tabular-nums; }
 .kpi .apoio { font-size: 12.5px; color: var(--ink-2); margin-top: 3px; position: relative; }
-.kpi .ico { position: absolute; top: 18px; right: 18px; width: 30px; height: 30px; opacity: .9; color: var(--acc); }
-.kpi .ico svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.9; }
+.kpi .ico { position: absolute; top: 18px; right: 18px; width: 26px; height: 26px; opacity: .32; color: var(--acc); }
+.kpi .ico svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.5; }
 .kpi.k-atencao .valor { color: var(--d7); }
 .kpi.k-atencao { --acc: var(--d7); }
 .kpi { cursor: pointer; transition: box-shadow .2s, transform .2s; }
@@ -245,8 +246,8 @@ section { padding: 34px 0 6px; }
   font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 16px;
   background: linear-gradient(145deg, var(--navy-2), var(--navy));
 }
-.prio .pcard.p2 .rank { background: linear-gradient(145deg, #e88a4f, var(--s2)); }
-.prio .pcard.p3 .rank { background: linear-gradient(145deg, #9bc6d0, #5c97a4); }
+.prio .pcard.p2 .rank { background: linear-gradient(145deg, #2f8294, #0c5868); }
+.prio .pcard.p3 .rank { background: linear-gradient(145deg, #5ba0b0, #2f7f91); }
 .prio .pcard .tema { font-size: 16px; font-weight: 800; letter-spacing: -.01em; line-height: 1.25; }
 .prio .pcard .mencoes { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-top: 3px; }
 .prio .pcard .acao-rot { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-2); margin: 15px 0 5px; }
