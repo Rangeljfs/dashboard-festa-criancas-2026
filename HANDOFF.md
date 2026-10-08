@@ -171,6 +171,9 @@ cálculo (siga exatamente, para o resultado bater com os outros eventos):
 - **comentarios:** para cada campo de COMENTÁRIO e cada linha com texto (≥ 3 caracteres),
   um objeto `{ t: "texto", c: "<rótulo do campo>", p: "<perfil ou 'Não informado'>",
   temas: [<temas que o texto cita>] }`. Troque quebras de linha por espaço.
+  **DESCARTE comentários sem conteúdo** (não os inclua): "N/A", "n/a", "na", "nada",
+  "nada a declarar", "nenhuma", "ok", "x", "-", "...", ou qualquer texto que não tenha
+  letra/número. Eles não ajudam na caixa de comentários.
 - **temas:** defina uma lista de temas recorrentes (nome + palavras-chave sem acento),
   adequada a ESTE evento. Para cada comentário, marque em `temas` os temas cujas
   palavras-chave aparecem no texto (comparando sem acento e em minúsculas). O array

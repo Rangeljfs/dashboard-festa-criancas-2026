@@ -57,6 +57,18 @@ TEMAS = [
 def norm(t):
     return unicodedata.normalize("NFKD", str(t).lower()).encode("ascii", "ignore").decode()
 
+# comentários SEM conteúdo (N/A, nada, ok, x, -, ...) não vão para a caixa de comentários
+_SEM_CONTEUDO = {
+    "na", "n a", "n/a", "nd", "nada", "nada a declarar", "nada a acrescentar",
+    "nada a dizer", "nada consta", "nenhum", "nenhuma", "nenhuma observacao",
+    "sem", "sem comentario", "sem comentarios", "sem observacoes", "sem mais",
+    "ok", "okay", "x", "xx", "-", "--", "---", ".", "..", "...", "no", "nao",
+    "n", "nenhuma sugestao", "nehuma", "nada mais", "0", "00",
+}
+def sem_conteudo(t):
+    n = re.sub(r"[\s.!?\-/]+", " ", norm(t)).strip()
+    return n in _SEM_CONTEUDO or not re.search(r"[a-z0-9]", n)
+
 def nota(v):
     if v is None:
         return None
@@ -149,7 +161,7 @@ for r in data:
         if not v:
             continue
         t = str(v).strip()
-        if len(t) < 3:
+        if len(t) < 3 or sem_conteudo(t):
             continue
         ntxt = norm(t).strip()
         temas_hit = [tema for tema, kws in TEMAS if any(k in ntxt for k in kws)]
