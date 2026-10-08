@@ -2,7 +2,9 @@
 try { history.scrollRestoration = "manual"; } catch (e) {}
 scrollTo(0, 0);
 (function () {
-  const EV = window.EVENTOS || [];
+  // ordena os eventos pela data (campo "ordem" = AAAAMM), do mais recente p/ o mais antigo.
+  // Sem "ordem", mantém a posição em que está na lista.
+  const EV = (window.EVENTOS || []).slice().sort((a, b) => (b.ordem || 0) - (a.ordem || 0));
   const grade = document.getElementById("grade");
   const SETA = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   const nf = (n) => Number(n).toLocaleString("pt-BR");
