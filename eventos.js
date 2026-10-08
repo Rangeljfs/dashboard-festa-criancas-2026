@@ -1,6 +1,18 @@
 // Lista de eventos do portal de Pesquisas de Satisfação da Associação Volvo.
 // Para adicionar um evento novo: criar a pasta do dashboard e incluir um objeto aqui.
+// Dica: mantenha a lista em ordem do evento mais recente para o mais antigo.
+// Ícone do card: nome de ícone de LINHA (sóbrio): "balao" | "festa" | "evento" | "grafico" | "estrela"
+// (também aceita um emoji, mas o padrão do portal são os ícones de linha).
 window.EVENTOS = [
+  {
+    titulo: "Festa das Crianças",
+    ano: "2026",
+    pasta: "eventos/festa-criancas-2026",
+    data: "Outubro de 2026",
+    respostas: 274,
+    media: "9,69",
+    icone: "balao",
+  },
   {
     titulo: "Arraiá AV",
     ano: "2026",
@@ -11,15 +23,12 @@ window.EVENTOS = [
     icone: "festa",
   },
   {
-    titulo: "Festa das Crianças",
+    titulo: "Colônia de Férias Verão",
     ano: "2026",
-    pasta: "eventos/festa-criancas-2026",
-    data: "Outubro de 2026",
-    respostas: 274,
-    media: "9,69",
-    // Ícone do card. Use um nome de ícone de LINHA (sóbrio, combina com o site):
-    //   "balao" | "festa" | "evento" | "grafico" | "estrela"
-    // (também aceita um emoji, mas o padrão do portal são os ícones de linha)
-    icone: "balao",
+    pasta: "eventos/colonia-ferias-verao-2026",
+    data: "Janeiro de 2026",
+    respostas: 132,
+    media: "9,53",
+    icone: "estrela",
   },
 ];

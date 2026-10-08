@@ -200,12 +200,19 @@ window.DADOS = {
   mediaGeral: <float>,
   perguntas: [ { label, media, n, dist:{ "10":n, "9":n, "8":n, le7:n }, pctAtencao } , ... ],
   recomendacao: { media, pctPromotores, n },
-  filas: { sim, nao, pctSemFila },
-  perfil: { "Funcionário(a)": n, "Dependente": n, ... },
+  filas: { sim, nao, pctSemFila },           // se o evento NÃO tem pergunta de fila, use { sim:0, nao:0, pctSemFila:0 }
+  satisfacao: { media, pctAlta, n },         // OPCIONAL — só quando NÃO há fila e existe uma pergunta de satisfação (ex.: Colônia). Vira o 3º KPI no lugar da fila.
+  perfil: { "Funcionário(a)": n, "Dependente": n, ... },   // a "segmentação" do evento: funcionário/dependente/convidado, OU turma/faixa etária, etc.
   temas: [ { tema, n }, ... ],               // ordenado do mais citado p/ o menos
   comentarios: [ { t:"texto", c:"campo", p:"perfil", temas:[...] }, ... ]
 };
 ```
+
+> **3º KPI flexível:** o dashboard mostra "Sem fila acima de 5 min" quando há dados de fila
+> (`filas.sim + filas.nao > 0`). Quando não há fila mas existe `satisfacao`, mostra
+> "Satisfação das crianças". Quando não há nenhum dos dois, esse KPI simplesmente não aparece.
+> O "Perfil dos respondentes" (donut) mostra até 4 categorias direto; com 5+ agrupa o excedente
+> em "Outros". Para a Colônia, o perfil foi a **turma** (faixa etária), não funcionário/dependente.
 
 ### Passo 3 — Criar a pasta e o index.html do evento
 1. Crie a pasta `eventos/<slug>/`.

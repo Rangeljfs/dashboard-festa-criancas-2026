@@ -43,6 +43,7 @@ addEventListener("load", () => scrollTo(0, 0));
     polegar: '<svg viewBox="0 0 24 24"><path d="M7 10v10H4V10zM7 10l4-7c1.3 0 2 .9 2 2l-.7 4H19c1.1 0 2 .9 2 2l-1.6 6.5c-.2.9-1 1.5-1.9 1.5H7" stroke-linejoin="round"/></svg>',
     relogio: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg>',
     alerta: '<svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z" stroke-linejoin="round"/><path d="M12 10v4M12 17v.5" stroke-linecap="round"/></svg>',
+    sorriso: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14c.8 1.2 2 2 3.5 2s2.7-.8 3.5-2" stroke-linecap="round"/><path d="M9 9.5v.01M15 9.5v.01" stroke-linecap="round"/></svg>',
   };
   const poLinhas = (pares) => '<div class="po-lista">' +
     pares.map(([rot, val]) => '<div class="po-linha"><span>' + rot + "</span><b>" + val + "</b></div>").join("") + "</div>";
@@ -51,17 +52,29 @@ addEventListener("load", () => scrollTo(0, 0));
     poLinhas(perguntasOrd.map((p) => [p.label, fmt(p.media, 2)]));
   const origemRecomendacao = '<div class="po-tit">Como se calcula a recomendação</div>' +
     poLinhas([["Média das notas (5 a 10)", fmt(D.recomendacao.media, 2)], ["Deram nota 9 ou 10", fmt(D.recomendacao.pctPromotores, 1) + "%"], ["Total de respostas", D.recomendacao.n]]);
-  const origemFila = '<div class="po-tit">Enfrentou fila acima de 5 minutos?</div>' +
-    poLinhas([["Não enfrentou fila", D.filas.nao + " (" + fmt(D.filas.pctSemFila, 1) + "%)"], ["Enfrentou fila", D.filas.sim + " (" + fmt(100 * D.filas.sim / (D.filas.sim + D.filas.nao), 1) + "%)"]]);
   const origemAtencao = '<div class="po-tit">Avaliações nota ≤ 7 por quesito</div>' +
     poLinhas(perguntasOrd.filter((p) => p.dist.le7 > 0).sort((a, b) => b.dist.le7 - a.dist.le7).map((p) => [p.label, p.dist.le7]));
 
   const kpis = [
     { rotulo: "Média geral", valor: fmt(D.mediaGeral, 2), apoio: totalAval.toLocaleString("pt-BR") + " avaliações em " + D.perguntas.length + " quesitos", acc: "var(--navy)", ico: ICO.estrela, origem: origemMediaGeral },
     { rotulo: "Recomendação", valor: fmt(D.recomendacao.media, 2), apoio: fmt(D.recomendacao.pctPromotores, 1) + "% deram nota 9 ou 10", acc: "var(--s2)", ico: ICO.polegar, origem: origemRecomendacao },
-    { rotulo: "Sem fila acima de 5 min", valor: fmt(D.filas.pctSemFila, 1) + "%", apoio: D.filas.sim + " relatos de fila em " + (D.filas.sim + D.filas.nao) + " respostas", acc: "var(--good)", ico: ICO.relogio, origem: origemFila },
-    { rotulo: "Avaliações nota ≤ 7", valor: fmt(100 * totalAtencao / totalAval, 1) + "%", apoio: totalAtencao + " avaliações: o ponto de atenção da edição", classe: "k-atencao", ico: ICO.alerta, origem: origemAtencao },
   ];
+
+  // 3º KPI é flexível conforme o evento:
+  // - se houver dados de fila -> "Sem fila acima de 5 min"
+  // - senão, se houver satisfação (ex.: Colônia) -> "Satisfação das crianças"
+  const temFila = D.filas && (D.filas.sim + D.filas.nao) > 0;
+  if (temFila) {
+    const origemFila = '<div class="po-tit">Enfrentou fila acima de 5 minutos?</div>' +
+      poLinhas([["Não enfrentou fila", D.filas.nao + " (" + fmt(D.filas.pctSemFila, 1) + "%)"], ["Enfrentou fila", D.filas.sim + " (" + fmt(100 * D.filas.sim / (D.filas.sim + D.filas.nao), 1) + "%)"]]);
+    kpis.push({ rotulo: "Sem fila acima de 5 min", valor: fmt(D.filas.pctSemFila, 1) + "%", apoio: D.filas.sim + " relatos de fila em " + (D.filas.sim + D.filas.nao) + " respostas", acc: "var(--good)", ico: ICO.relogio, origem: origemFila });
+  } else if (D.satisfacao && D.satisfacao.n) {
+    const origemSat = '<div class="po-tit">Satisfação das crianças</div>' +
+      poLinhas([["Nota média", fmt(D.satisfacao.media, 2)], ["Deram nota 9 ou 10", fmt(D.satisfacao.pctAlta, 1) + "%"], ["Total de respostas", D.satisfacao.n]]);
+    kpis.push({ rotulo: "Satisfação das crianças", valor: fmt(D.satisfacao.media, 2), apoio: fmt(D.satisfacao.pctAlta, 1) + "% com nota 9 ou 10", acc: "var(--good)", ico: ICO.sorriso, origem: origemSat });
+  }
+
+  kpis.push({ rotulo: "Avaliações nota ≤ 7", valor: fmt(100 * totalAtencao / totalAval, 1) + "%", apoio: totalAtencao + " avaliações: o ponto de atenção da edição", classe: "k-atencao", ico: ICO.alerta, origem: origemAtencao });
   const SETAK = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
   $("#kpis").innerHTML = kpis.map((k, i) =>
     '<div class="kpi ' + (k.classe || "") + '" style="--i:' + i + ';' + (k.acc ? "--acc:" + k.acc : "") + '">' +
@@ -110,10 +123,12 @@ addEventListener("load", () => scrollTo(0, 0));
       "</td><td class='num'>" + p.dist.le7 + "</td></tr>").join("");
 
   /* ---------- donut perfil ---------- */
-  const paleta = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s-neutro)"];
+  const paleta = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--d9)", "var(--s-neutro)"];
   const perfilPares = Object.entries(D.perfil).sort((a, b) => b[1] - a[1]);
-  const principais = perfilPares.slice(0, 3);
-  const resto = perfilPares.slice(3).reduce((a, p) => a + p[1], 0);
+  // mostra até 4 categorias direto; só agrupa em "Outros" se houver 5+ ou respostas sem perfil
+  const nDiretas = perfilPares.length <= 4 ? perfilPares.length : 3;
+  const principais = perfilPares.slice(0, nDiretas);
+  const resto = perfilPares.slice(nDiretas).reduce((a, p) => a + p[1], 0);
   const semPerfil = D.respostas - perfilPares.reduce((a, p) => a + p[1], 0);
   const fatias = [...principais];
   if (resto + semPerfil > 0) fatias.push(["Outros / não informado", resto + semPerfil]);
