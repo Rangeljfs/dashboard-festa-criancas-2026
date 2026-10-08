@@ -16,12 +16,12 @@ scrollTo(0, 0);
     evento: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M12 13l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9 15.2l2-.3z"/></svg>',
     grafico:'<svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
     estrela:'<svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
-    // bandeirinha de festa junina (varal com 3 bandeiras)
-    bandeira: '<svg viewBox="0 0 24 24"><path d="M3 5c3-1.6 5-1.6 8 0s5 1.6 10 0"/><path d="M5.5 5.6l1.5 3 1.5-3zM11 6.2l1.5 3 1.5-3zM16.5 5.6l1.5 3 1.5-3z"/><path d="M3 5v14"/></svg>',
-    // sol (verão)
-    sol: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>',
-    // floco de neve (inverno)
-    floco: '<svg viewBox="0 0 24 24"><path d="M12 2.5v19M3.8 7.2l16.4 9.6M20.2 7.2L3.8 16.8"/><path d="M12 5.5l2-2M12 5.5l-2-2M12 18.5l2 2M12 18.5l-2 2M6.6 8.7l-2.8.1M6.6 8.7l-1-2.6M17.4 15.3l2.8-.1M17.4 15.3l1 2.6M6.6 15.3l-1 2.6M6.6 15.3l-2.8-.1M17.4 8.7l1-2.6M17.4 8.7l2.8.1"/></svg>',
+    // varal de bandeirinhas de festa junina (fio reto, 4 bandeiras triangulares penduradas)
+    bandeira: '<svg viewBox="0 0 24 24"><path d="M2 7h20"/><path d="M3 7l2 4 2-4zM8 7l2 4 2-4zM13 7l2 4 2-4zM18 7l2 4 2-4z"/></svg>',
+    // criança com um sol acima (Colônia de Verão)
+    sol: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5.6" r="2.2"/><path d="M18 1.2v1.6M18 8.4v1.6M13.6 5.6h1.6M20.8 5.6h1.6M14.9 2.5l1.1 1.1M21.1 2.5l-1.1 1.1M14.9 8.7l1.1-1.1M21.1 8.7l-1.1-1.1"/><circle cx="9" cy="8" r="2.6"/><path d="M9 10.6v6.4M5.5 13h7M9 17l-2.6 4.4M9 17l2.6 4.4"/></svg>',
+    // criança com um floco de neve acima (Colônia de Inverno)
+    floco: '<svg viewBox="0 0 24 24"><path d="M18 2.4v6.8M15.1 3.7l5.8 4.2M20.9 3.7l-5.8 4.2M18 4.1l1-1M18 4.1l-1-1M18 7.5l1 1M18 7.5l-1 1"/><circle cx="9" cy="8" r="2.6"/><path d="M9 10.6v6.4M5.5 13h7M9 17l-2.6 4.4M9 17l2.6 4.4"/></svg>',
   };
   // devolve o conteúdo do selo: ícone de linha (se o nome existir), senão o emoji, senão padrão
   function conteudoSelo(icone) {
