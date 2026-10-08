@@ -23,6 +23,15 @@ window.EVENTOS = [
     icone: "festa",
   },
   {
+    titulo: "Colônia de Férias Inverno",
+    ano: "2026",
+    pasta: "eventos/colonia-ferias-inverno-2026",
+    data: "Julho de 2026",
+    respostas: 71,
+    media: "9,66",
+    icone: "evento",
+  },
+  {
     titulo: "Colônia de Férias Verão",
     ano: "2026",
     pasta: "eventos/colonia-ferias-verao-2026",

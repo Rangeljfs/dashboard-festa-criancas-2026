@@ -175,6 +175,10 @@ cálculo (siga exatamente, para o resultado bater com os outros eventos):
   adequada a ESTE evento. Para cada comentário, marque em `temas` os temas cujas
   palavras-chave aparecem no texto (comparando sem acento e em minúsculas). O array
   `temas` do dados.js é `[{tema, n}]` ordenado do mais citado para o menos, só com n>0.
+  **IMPORTANTE:** crie temas só de **crítica/sugestão/assunto** (ex.: "Filas", "Alimentação",
+  "Comunicação"). NÃO crie um tema de "elogios gerais" — as "Prioridades para a próxima
+  edição" mostram os 3 temas mais citados como pontos a melhorar, então um tema de elogio
+  viraria uma falsa prioridade.
 - **titulo** = nome do evento. **entidade** = "Associação Volvo".
 - **NUNCA** inclua nome, matrícula, celular ou e-mail.
 
