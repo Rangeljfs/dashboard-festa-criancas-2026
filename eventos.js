@@ -2,6 +2,15 @@
 // Para adicionar um evento novo: criar a pasta do dashboard e incluir um objeto aqui.
 window.EVENTOS = [
   {
+    titulo: "Arraiá AV",
+    ano: "2026",
+    pasta: "eventos/arraia-2026",
+    data: "Agosto de 2026",
+    respostas: 317,
+    media: "9,49",
+    icone: "festa",
+  },
+  {
     titulo: "Festa das Crianças",
     ano: "2026",
     pasta: "eventos/festa-criancas-2026",
