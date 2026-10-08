@@ -5,7 +5,9 @@
 // Campos de cada evento:
 //   titulo, ano, pasta, data (texto exibido), respostas, media, icone
 //   ordem: número AAAAMM da data do evento (ex.: outubro/2026 = 202610). Serve só p/ ordenar.
-// Ícone do card: nome de ícone de LINHA (sóbrio): "balao" | "festa" | "evento" | "grafico" | "estrela"
+// Ícone do card: nome de ícone de LINHA (sóbrio). Opções:
+//   "balao" (festa das crianças) | "bandeira" (arraiá/junina) | "sol" (verão) |
+//   "floco" (inverno) | "festa" | "evento" | "grafico" | "estrela"
 // (também aceita um emoji, mas o padrão do portal são os ícones de linha).
 window.EVENTOS = [
   {
@@ -26,7 +28,7 @@ window.EVENTOS = [
     ordem: 202608,
     respostas: 317,
     media: "9,49",
-    icone: "festa",
+    icone: "bandeira",
   },
   {
     titulo: "Colônia de Férias Inverno",
@@ -36,7 +38,7 @@ window.EVENTOS = [
     ordem: 202607,
     respostas: 71,
     media: "9,66",
-    icone: "evento",
+    icone: "floco",
   },
   {
     titulo: "Colônia de Férias Verão",
@@ -46,6 +48,6 @@ window.EVENTOS = [
     ordem: 202601,
     respostas: 132,
     media: "9,53",
-    icone: "estrela",
+    icone: "sol",
   },
 ];

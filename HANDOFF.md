@@ -242,7 +242,7 @@ recente para o mais antigo. Objeto:
   ordem: 202606,                // AAAAMM da data do evento (junho/2026 = 202606). Só p/ ordenar.
   respostas: 312,               // total (bate com dados.js)
   media: "9,41",                // média geral (string com vírgula)
-  icone: "festa",               // ícone de linha do card: "balao" | "festa" | "evento" | "grafico" | "estrela" (também aceita emoji)
+  icone: "festa",               // ícone de linha do card: "balao" | "bandeira" | "sol" | "floco" | "festa" | "evento" | "grafico" | "estrela" (também aceita emoji)
 },
 ```
 > **ATENÇÃO ao campo `pasta`:** no portal atual o primeiro evento usa `pasta: "festa-criancas-2026"`
