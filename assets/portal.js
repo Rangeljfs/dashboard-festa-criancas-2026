@@ -9,19 +9,23 @@ scrollTo(0, 0);
   const SETA = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   const nf = (n) => Number(n).toLocaleString("pt-BR");
 
-  // ícones de linha (SVG) para a capa do card — sóbrios e modernos
+  // ícones de linha (SVG) — biblioteca Lucide (lucide.dev), desenhados por profissionais
   const ICONES = {
-    balao:  '<svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 6 6c0 3.6-3 6.4-5.3 7.5-.4.2-.9.2-1.3 0C9 15.4 6 12.6 6 9a6 6 0 0 1 6-6z"/><path d="M12 16.5v2.2"/><path d="M11 20.7c.4.5 1.6.5 2 0"/></svg>',
+    // balão de festa (lucide: party-popper)
+    balao:  '<svg viewBox="0 0 24 24"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L12 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/></svg>',
+    // tenda / barraca de festa (lucide: tent) — para o Arraiá
+    bandeira: '<svg viewBox="0 0 24 24"><path d="M3.5 21 14 3"/><path d="M20.5 21 10 3"/><path d="M15.5 21 12 15l-3.5 6"/><path d="M2 21h20"/></svg>',
+    // sol (lucide: sun) — Colônia de Verão
+    sol: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>',
+    // floco de neve (lucide: snowflake) — Colônia de Inverno
+    floco: '<svg viewBox="0 0 24 24"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg>',
+    // criança (lucide: baby) — alternativa p/ colônia
+    crianca: '<svg viewBox="0 0 24 24"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></svg>',
+    // eventos genéricos
     festa:  '<svg viewBox="0 0 24 24"><path d="M3 21l5.5-13 5.5 5.5L3 21z"/><path d="M14 4.5l1 1M18 3l.5 1.5M20.5 7l-1.5.5M16 8l1 1"/><path d="M8.5 8l1.5 6"/></svg>',
     evento: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M12 13l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9 15.2l2-.3z"/></svg>',
     grafico:'<svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
     estrela:'<svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>',
-    // varal de bandeirinhas de festa junina (fio reto, 4 bandeiras triangulares penduradas)
-    bandeira: '<svg viewBox="0 0 24 24"><path d="M2 7h20"/><path d="M3 7l2 4 2-4zM8 7l2 4 2-4zM13 7l2 4 2-4zM18 7l2 4 2-4z"/></svg>',
-    // criança com um sol acima (Colônia de Verão)
-    sol: '<svg viewBox="0 0 24 24"><circle cx="18" cy="5.6" r="2.2"/><path d="M18 1.2v1.6M18 8.4v1.6M13.6 5.6h1.6M20.8 5.6h1.6M14.9 2.5l1.1 1.1M21.1 2.5l-1.1 1.1M14.9 8.7l1.1-1.1M21.1 8.7l-1.1-1.1"/><circle cx="9" cy="8" r="2.6"/><path d="M9 10.6v6.4M5.5 13h7M9 17l-2.6 4.4M9 17l2.6 4.4"/></svg>',
-    // criança com um floco de neve acima (Colônia de Inverno)
-    floco: '<svg viewBox="0 0 24 24"><path d="M18 2.4v6.8M15.1 3.7l5.8 4.2M20.9 3.7l-5.8 4.2M18 4.1l1-1M18 4.1l-1-1M18 7.5l1 1M18 7.5l-1 1"/><circle cx="9" cy="8" r="2.6"/><path d="M9 10.6v6.4M5.5 13h7M9 17l-2.6 4.4M9 17l2.6 4.4"/></svg>',
   };
   // devolve o conteúdo do selo: ícone de linha (se o nome existir), senão o emoji, senão padrão
   function conteudoSelo(icone) {
