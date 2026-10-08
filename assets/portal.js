@@ -8,6 +8,7 @@ scrollTo(0, 0);
   const grade = document.getElementById("grade");
   const SETA = '<svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   const nf = (n) => Number(n).toLocaleString("pt-BR");
+  const norm = (t) => String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
   // ícones de linha (SVG) — biblioteca Lucide (lucide.dev), desenhados por profissionais
   const ICONES = {
@@ -53,7 +54,8 @@ scrollTo(0, 0);
       const mini = [];
       if (e.respostas != null) mini.push('<div class="m"><div class="v">' + Number(e.respostas).toLocaleString("pt-BR") + '</div><div class="r">Respostas</div></div>');
       if (e.media != null) mini.push('<div class="m"><div class="v">' + e.media + '</div><div class="r">Média geral</div></div>');
-      return '<a class="ev-card" href="' + e.pasta + '/">' +
+      const txtBusca = norm([e.titulo, e.ano, e.data].filter(Boolean).join(" "));
+      return '<a class="ev-card" href="' + e.pasta + '/" data-busca="' + txtBusca + '">' +
         '<div class="ev-capa">' + (e.ano ? '<span class="ano">' + e.ano + '</span>' : "") +
           '<span class="selo">' + conteudoSelo(e.icone) + '</span></div>' +
         '<div class="ev-corpo">' +
@@ -64,6 +66,30 @@ scrollTo(0, 0);
           '<div class="ev-abrir">Ver dashboard ' + SETA + '</div>' +
         '</div></a>';
     }).join("");
+  }
+
+  // ---- campo de busca de eventos (filtra os cards por nome, mês ou ano) ----
+  const busca = document.getElementById("buscaEvento");
+  const buscaWrap = document.querySelector(".busca-wrap");
+  const semResultado = document.getElementById("semResultado");
+  const conta = document.getElementById("conta");
+  // só mostra a busca quando há 3+ eventos (com poucos não faz falta)
+  if (buscaWrap) buscaWrap.style.display = EV.length >= 3 ? "" : "none";
+  if (busca) {
+    busca.addEventListener("input", () => {
+      const q = norm(busca.value.trim());
+      const cards = [...document.querySelectorAll(".ev-card")];
+      let visiveis = 0;
+      cards.forEach((c) => {
+        const bate = !q || (c.getAttribute("data-busca") || "").includes(q);
+        c.style.display = bate ? "" : "none";
+        if (bate) visiveis++;
+      });
+      if (semResultado) semResultado.hidden = visiveis !== 0;
+      if (conta) conta.textContent = q
+        ? visiveis + (visiveis === 1 ? " evento" : " eventos")
+        : EV.length + (EV.length === 1 ? " evento" : " eventos");
+    });
   }
 
   // partículas flutuantes no hero (geradas uma vez)

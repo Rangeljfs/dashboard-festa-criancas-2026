@@ -133,6 +133,18 @@ main { flex: 1; padding: 48px 0 20px; }
 .sec-head h2 { font-size: 21px; font-weight: 800; letter-spacing: -.01em; }
 .sec-head .conta { font-size: 12.5px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--hairline); border-radius: 999px; padding: 5px 13px; white-space: nowrap; }
 
+/* ---------- campo de busca de eventos ---------- */
+.busca-wrap { position: relative; margin-bottom: 24px; max-width: 420px; }
+.busca-ico { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--ink-3); pointer-events: none; }
+#buscaEvento {
+  width: 100%; font: inherit; font-size: 14px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px;
+  padding: 11px 14px 11px 44px; box-shadow: var(--sombra); transition: border-color .18s, box-shadow .18s;
+}
+#buscaEvento::placeholder { color: var(--ink-3); }
+#buscaEvento:focus { outline: none; border-color: var(--navy-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--navy-2) 16%, transparent); }
+.sem-resultado { color: var(--ink-2); font-size: 14px; padding: 8px 2px; }
+
 .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
 
 /* ---------- card de evento ---------- */

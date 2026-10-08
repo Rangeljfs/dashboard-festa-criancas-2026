@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/portal.css?v=9">
+<link rel="stylesheet" href="assets/portal.css?v=10">
 </head>
 <body>
 
@@ -39,7 +39,12 @@
       <h2>Eventos</h2>
       <span class="conta" id="conta"></span>
     </div>
+    <div class="busca-wrap">
+      <svg class="busca-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="buscaEvento" placeholder="Buscar evento por nome, mês ou ano…" aria-label="Buscar evento">
+    </div>
     <div class="grade" id="grade"></div>
+    <div class="sem-resultado" id="semResultado" hidden>Nenhum evento encontrado para a busca.</div>
   </div>
 </main>
 
@@ -49,7 +54,7 @@
   </div>
 </footer>
 
-<script src="eventos.js?v=9"></script>
-<script src="assets/portal.js?v=9"></script>
+<script src="eventos.js?v=10"></script>
+<script src="assets/portal.js?v=10"></script>
 </body>
 </html>
